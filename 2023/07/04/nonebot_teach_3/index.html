@@ -1,0 +1,833 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.ico">
+  <link rel="icon" href="/img/fluid.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#36d984">
+  <meta name="author" content="bingyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前言相信经过前面的学习 大家已经学会启动nonebot了 和 加载插件 那今天我们写一个插件 认识Nonebot文件结构在上一篇中 我们创建了一个nb项目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nonebot2 二编写基础插件">
+<meta property="og:url" content="http://blog.bingyue.top/2023/07/04/nonebot_teach_3/index.html">
+<meta property="og:site_name" content="bingyue">
+<meta property="og:description" content="前言相信经过前面的学习 大家已经学会启动nonebot了 和 加载插件 那今天我们写一个插件 认识Nonebot文件结构在上一篇中 我们创建了一个nb项目">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s1.ax1x.com/2023/06/29/pCwQ0YR.png">
+<meta property="article:published_time" content="2023-07-04T04:35:42.000Z">
+<meta property="article:modified_time" content="2023-07-17T12:50:55.236Z">
+<meta property="article:author" content="bingyue">
+<meta property="article:tag" content="bot">
+<meta property="article:tag" content="qq机器人">
+<meta property="article:tag" content="code">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s1.ax1x.com/2023/06/29/pCwQ0YR.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>nonebot2 二编写基础插件 - bingyue</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.bingyue.top","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"9131fe860a885c0940adedd1ec2cdd85","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?9131fe860a885c0940adedd1ec2cdd85";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>bingyue</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/link/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/7777.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="nonebot2 二编写基础插件"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-07-04 12:35" pubdate>
+          2023年7月4日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">nonebot2 二编写基础插件</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年7月17日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>相信经过前面的学习 大家已经学会启动nonebot了 和 加载插件 那今天我们写一个插件</p>
+<h2 id="认识Nonebot文件结构"><a href="#认识Nonebot文件结构" class="headerlink" title="认识Nonebot文件结构"></a>认识Nonebot文件结构</h2><p>在上一篇中 我们创建了一个nb项目</p>
+<span id="more"></span>
+<p>以下是该文件结构</p>
+<p><img src="https://s1.ax1x.com/2023/06/30/pC0g00O.png" srcset="/img/loading.gif" lazyload></p>
+<p>我们先打开<code>pyproject.toml</code></p>
+<p>内容如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">[project]<br>name = <span class="hljs-string">&quot;test&quot;</span> <span class="hljs-comment"># 插件名字</span><br>version = <span class="hljs-string">&quot;0.1.0&quot;</span> <span class="hljs-comment"># 插件版本</span><br>description = <span class="hljs-string">&quot;test&quot;</span> <span class="hljs-comment"># 插件介绍</span><br>readme = <span class="hljs-string">&quot;README.md&quot;</span> <span class="hljs-comment"># 插件文档</span><br>requires-python = <span class="hljs-string">&quot;&gt;=3.8, &lt;4.0&quot;</span> <span class="hljs-comment"># 适用py版本 (勿动)</span><br><br>[tool.nonebot]<br>adapters = [<br>    &#123; name = <span class="hljs-string">&quot;OneBot V11&quot;</span>, module_name = <span class="hljs-string">&quot;nonebot.adapters.onebot.v11&quot;</span> &#125;<br>] <span class="hljs-comment"># 勿动</span><br>plugins = []<br>plugin_dirs = [<span class="hljs-string">&quot;src/plugins&quot;</span>]<br>builtin_plugins = [<span class="hljs-string">&quot;echo&quot;</span>]<br></code></pre></td></tr></table></figure>
+
+<p>看到</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">plugins = []<br>plugin_dirs = [<span class="hljs-string">&quot;src/plugins&quot;</span>]<br>builtin_plugins = [<span class="hljs-string">&quot;echo&quot;</span>]<br></code></pre></td></tr></table></figure>
+
+<p>plugins是加载成品的加载 也就是你从nb官网下载的插件</p>
+<p>一般以这种形式开头</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">plugins = [<span class="hljs-string">&quot;nonebot_plugin_xxxx&quot;</span>]<br></code></pre></td></tr></table></figure>
+
+<p>plugin_dirs 则是加载文件夹里的插件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">plugin_dirs = [<span class="hljs-string">&quot;src/plugins&quot;</span>] <span class="hljs-comment"># 加载scr文件夹里的plugin文件夹下的插件</span><br></code></pre></td></tr></table></figure>
+
+<p>builtin_plugins 则是加载官方内置的插件 一般用不到 可以改为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">builtin_plugins = []<br></code></pre></td></tr></table></figure>
+
+<p>改好之后保存即可</p>
+<p>打开<code>.env.dev</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">LOG_LEVEL=DEBUG<br></code></pre></td></tr></table></figure>
+
+<p>我们删除这句话 并添加如下内容</p>
+<p>注意 这里不要使用系统自带记事本取修改 否则会报如下错误</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">UnicodeDecodeError: <span class="hljs-string">&#x27;utf-8&#x27;</span> codec can<span class="hljs-string">&#x27;t decode byte 0xc5 in position 16: invalid continuation byte</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">HOST=0.0.0.0  <span class="hljs-comment"># 配置 NoneBot 监听的 IP / 主机名 默认127.0.0.1</span><br>PORT=8080  <span class="hljs-comment"># 配置 NoneBot 监听的端口 这里设置成你的cq对接的端口号</span><br>COMMAND_START=[<span class="hljs-string">&quot;/&quot;</span>]  <span class="hljs-comment"># 配置命令起始字符</span><br>COMMAND_SEP=[<span class="hljs-string">&quot;.&quot;</span>]  <span class="hljs-comment"># 配置命令分割字符</span><br>SUPERUSERS=[<span class="hljs-string">&quot;你的qq号&quot;</span>] <span class="hljs-comment"># nb超级管理员 输入你的qq号</span><br><br></code></pre></td></tr></table></figure>
+
+<p>这样配置基础就做好了</p>
+<h2 id="开启环境"><a href="#开启环境" class="headerlink" title="开启环境"></a>开启环境</h2><p>在你的<code>scr/plugins</code> 创建一个py文件 名字随意</p>
+<p><img src="https://s1.ax1x.com/2023/06/30/pC028Df.png" srcset="/img/loading.gif" lazyload></p>
+<p>用vscode打开他</p>
+<p>编写如下内容</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> nonebot <span class="hljs-keyword">import</span> on_command<br><br>a = on_command(<span class="hljs-string">&quot;你好&quot;</span>) <span class="hljs-comment"># 设置一个消息指令</span><br><br><span class="hljs-meta">@a.handle()</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">_</span>(): <span class="hljs-comment"># 当触发这个消息的时候 async def里的代码会被执行</span><br>    <span class="hljs-keyword">await</span> a.finish(<span class="hljs-string">&quot;hello world&quot;</span>) <span class="hljs-comment"># 结束事件返回一句 hello world</span><br></code></pre></td></tr></table></figure>
+
+<p>保存</p>
+<p>启动你的nb和cq</p>
+<p>向你的机器人回复一句<code>你好</code> 你便会收到一句<code>hello world</code></p>
+<h2 id="插件编写"><a href="#插件编写" class="headerlink" title="插件编写"></a>插件编写</h2><table>
+<thead>
+<tr>
+<th>函数</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>on_command</td>
+<td align="left">设置消息关键字 当消息开头包含关键字即触发</td>
+</tr>
+<tr>
+<td>on_fullmatch</td>
+<td align="left">设置消息关键字 当关键字与消息完全一致时触发</td>
+</tr>
+<tr>
+<td>on_keyword</td>
+<td align="left">设置消息关键字 当消息包含关键字时触发</td>
+</tr>
+<tr>
+<td>random.randint(0,7)</td>
+<td align="left">生成一个0~7的随机数 可以随意更改</td>
+</tr>
+<tr>
+<td>random.choice(a)</td>
+<td align="left">从a列表里随机挑一个出来</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> nonebot <span class="hljs-keyword">import</span> on_fullmatch<br><span class="hljs-keyword">import</span> random<br><br>a = on_fullmatch(<span class="hljs-string">&quot;随机人生&quot;</span>)<br><br><span class="hljs-meta">@a.handle()</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">_</span>():<br>    name = [<span class="hljs-string">&quot;大音希声&quot;</span>,<span class="hljs-string">&quot;恬静可人&quot;</span>,<span class="hljs-string">&quot;珞珞如石&quot;</span>] <span class="hljs-comment"># 姓名</span><br>    age = random.randint(<span class="hljs-number">19</span>,<span class="hljs-number">27</span>) <span class="hljs-comment"># 随机年龄</span><br>    job = [<span class="hljs-string">&quot;行政主管&quot;</span>,<span class="hljs-string">&quot;企业主管&quot;</span>,<span class="hljs-string">&quot;经理人&quot;</span>,<span class="hljs-string">&quot;土木营造监工&quot;</span>] <span class="hljs-comment"># 职业</span><br><br>    name_ = random.choice(name) <span class="hljs-comment"># 随机姓名</span><br>    job_ = random.choice(job)<br><br>    <span class="hljs-keyword">await</span> a.finish(<span class="hljs-string">f&quot;姓名:<span class="hljs-subst">&#123;name_&#125;</span>\n年龄:<span class="hljs-subst">&#123;age&#125;</span>\n职业:<span class="hljs-subst">&#123;job_&#125;</span>&quot;</span>) <span class="hljs-comment"># 结束事件并发送消息</span><br></code></pre></td></tr></table></figure>
+
+<p>以上为一个基础的插件 如不出意外 你会收到机器人回复</p>
+<p>我们可以进一步的改进一下 例如加一些等待</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> nonebot <span class="hljs-keyword">import</span> on_fullmatch<br><span class="hljs-keyword">import</span> random<br><span class="hljs-keyword">import</span> asyncio<br><br>a = on_fullmatch(<span class="hljs-string">&quot;随机人生&quot;</span>)<br><br><span class="hljs-meta">@a.handle()</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">_</span>():<br>    name = [<span class="hljs-string">&quot;大音希声&quot;</span>,<span class="hljs-string">&quot;恬静可人&quot;</span>,<span class="hljs-string">&quot;珞珞如石&quot;</span>] <span class="hljs-comment"># 姓名</span><br>    age = random.randint(<span class="hljs-number">19</span>,<span class="hljs-number">27</span>) <span class="hljs-comment"># 随机年龄</span><br>    job = [<span class="hljs-string">&quot;行政主管&quot;</span>,<span class="hljs-string">&quot;企业主管&quot;</span>,<span class="hljs-string">&quot;经理人&quot;</span>,<span class="hljs-string">&quot;土木营造监工&quot;</span>] <span class="hljs-comment"># 职业</span><br><br>    <span class="hljs-keyword">await</span> a.send(<span class="hljs-string">&quot;请稍等，正在生成中&quot;</span>) <span class="hljs-comment"># 发送一条消息</span><br>    <span class="hljs-keyword">await</span> asyncio.sleep(<span class="hljs-number">3</span>) <span class="hljs-comment"># 冷却3秒</span><br><br>    name_ = random.choice(name) <span class="hljs-comment"># 随机姓名</span><br>    job_ = random.choice(job)<br><br>    <span class="hljs-keyword">await</span> a.finish(<span class="hljs-string">f&quot;姓名:<span class="hljs-subst">&#123;name_&#125;</span>\n年龄:<span class="hljs-subst">&#123;age&#125;</span>\n职业:<span class="hljs-subst">&#123;job_&#125;</span>&quot;</span>) <span class="hljs-comment"># 结束事件并发送消息</span><br></code></pre></td></tr></table></figure>
+
+<p>这样更完美了 当然你也可以加一些数据进去</p>
+<p>这算是个基础插件编写了</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>下一篇 我会讲解如何去调用管理员权限 以及 写连续对话的插件</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/qq%E6%9C%BA%E5%99%A8%E4%BA%BA/" class="category-chain-item">qq机器人</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/qq%E6%9C%BA%E5%99%A8%E4%BA%BA/nonebot%E6%95%99%E7%A8%8B/" class="category-chain-item">nonebot教程</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/bot/">#bot</a>
+      
+        <a href="/tags/qq%E6%9C%BA%E5%99%A8%E4%BA%BA/">#qq机器人</a>
+      
+        <a href="/tags/code/">#code</a>
+      
+        <a href="/tags/%E7%BC%96%E7%A8%8B/">#编程</a>
+      
+        <a href="/tags/python/">#python</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>nonebot2 二编写基础插件</div>
+      <div>http://blog.bingyue.top/2023/07/04/nonebot_teach_3/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>bingyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年7月4日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/07/12/oppo_realme_bl/" title="oppo/真我解锁bl (仅限mtk)">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">oppo/真我解锁bl (仅限mtk)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/07/03/leetcode445/" title="Leetcode 445.两数相加 II">
+                        <span class="hidden-mobile">Leetcode 445.两数相加 II</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"0f4c0af04f4a74a28ef8","clientSecret":"603e436965f1a09c74e485733b6b3593d6514a46","repo":"bingqiu456.github.io","owner":"bingqiu456","admin":["bingqiu456"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: 'e939aaa3cf248cb08c04e669ae4f416a'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
