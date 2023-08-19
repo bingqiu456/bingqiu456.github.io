@@ -4,6 +4,39 @@
   
   
   <entry>
+    <title>nonebot双向聊天插件</title>
+    <link href="/2023/08/20/nonebot_plugin_send_message/"/>
+    <url>/2023/08/20/nonebot_plugin_send_message/</url>
+    
+    <content type="html"><![CDATA[<div align="center">  <a href="https://v2.nonebot.dev/store"><img src="https://github.com/A-kirami/nonebot-plugin-template/blob/resources/nbp_logo.png" width="180" height="180" alt="NoneBotPluginLogo"></a><h1 id="NoneBot-Plugin-Send-Message"><a href="#NoneBot-Plugin-Send-Message" class="headerlink" title="NoneBot-Plugin-Send-Message"></a>NoneBot-Plugin-Send-Message</h1><p><em>✨ 一个可以群昵称显示现在时间的插件 ✨</em><br>    <br></br></p></div><h2 id="如何安装？如何下载？"><a href="#如何安装？如何下载？" class="headerlink" title="如何安装？如何下载？"></a>如何安装？如何下载？</h2><p>你可以使用 python中的pip</p><span id="more"></span><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install nonebot-plugin-send-message<br></code></pre></td></tr></table></figure><p>   或者nonebot里的</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nb plugin install nonebot-plugin-send-message<br></code></pre></td></tr></table></figure><hr><h2 id="如何使用？"><a href="#如何使用？" class="headerlink" title="如何使用？"></a>如何使用？</h2><p>先打开你的<code>.env.dev</code>或者<code>.env.prod</code>文件 添加如下内容</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">send_message=[<span class="hljs-string">&quot;10001&quot;</span>] <span class="hljs-comment"># 输入你的qq号记得带双引号</span><br>welcome = <span class="hljs-string">&quot;欢迎你添加我为好友\n我是一个传话机器人\n直接把你需要传递的信息发给我&quot;</span> <span class="hljs-comment"># 欢迎添加好友的信息 发送图片表情请手动cq码</span><br>SUPERUSERS=[<span class="hljs-string">&quot;123123123&quot;</span>] <span class="hljs-comment"># nonebot超级管理员配置</span><br></code></pre></td></tr></table></figure><p><code>send_message</code>是发送给传话的主人 就是对方发送消息传达的对象</p><p><code>welcome</code>为欢迎语</p><h3 id="这是主人发送对话用的"><a href="#这是主人发送对话用的" class="headerlink" title="这是主人发送对话用的"></a>这是主人发送对话用的</h3><p><code>/传话 [QQ] [内容]</code> <code>#传话给指定的用户</code></p><p>注意此命令使用nonebot超级管理员才可以触发 如果你配置文件有<code>SUPERUSERS</code>直接添加你的qq号就行，没有的可以抄上面，有就忽略吧</p><hr><h2 id="有bug？-无法使用？"><a href="#有bug？-无法使用？" class="headerlink" title="有bug？ 无法使用？"></a>有bug？ 无法使用？</h2><p>请发issues给我</p><hr><h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="https://s1.ax1x.com/2023/08/12/pPuDEPH.png"></p><p><img src="https://s1.ax1x.com/2023/08/12/pPuDVGd.png"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>qq机器人</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>bot</tag>
+      
+      <tag>qq机器人</tag>
+      
+      <tag>code</tag>
+      
+      <tag>编程</tag>
+      
+      <tag>python</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>使用hexo搭建个人博客并推送git</title>
     <link href="/2023/08/16/jiao_cheng_hexo/"/>
     <url>/2023/08/16/jiao_cheng_hexo/</url>
