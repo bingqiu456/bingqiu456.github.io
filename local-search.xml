@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>如何用3.6元搭建一个私人图床</title>
+    <link href="/2023/08/29/teng_xun_yun_cos/"/>
+    <url>/2023/08/29/teng_xun_yun_cos/</url>
+    
+    <content type="html"><![CDATA[<h2 id="前"><a href="#前" class="headerlink" title="前"></a>前</h2><p>因为快开学了,截至到目前还有两天时间开学了，nonebot的教程将放在开学的第一个周末，同时最后一期放在国庆节</p><p>今天主要是讲如何用<code>3.6</code>元，搭建一个私人图床 准备如下</p><ul><li> 一个实名好的账号(腾讯云)</li><li><code>3.6</code>元</li><li>确保你的账号第一次使用<code>cos存储服务</code><span id="more"></span><h2 id="Go"><a href="#Go" class="headerlink" title="Go"></a>Go</h2></li></ul><p>打开<a href="https://console.cloud.tencent.com/cos/bucket">网址</a> 登录你的腾讯云账号 这里我用邮箱登录</p><p><img src="https://s1.ax1x.com/2023/08/29/pPdanWn.png"></p><p>登录之后 会看到有新人提示 选择领取存储容量<code>6个月50g</code> 我这里已经领取过了 因此无法提供图片</p><p>找到<code>资源包管理</code>点击<code>自助资源包</code></p><p><img src="https://s1.ax1x.com/2023/08/29/pPdaQyV.png"></p><p>购买资源包</p><p><img src="https://s1.ax1x.com/2023/08/29/pPdaGo4.png"></p><p>选择中国大陆</p><p>选择流量</p><p>选择外网下载流量</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">注:我这里选择了一个月10g 这里根据你的使用情况来选择 也就是说我一个月可以下载10g左右 超出了就要按0.5/g算<br></code></pre></td></tr></table></figure><p>购买</p><p><img src="https://s1.ax1x.com/2023/08/29/pPdaYFJ.png"></p><p>购买之后返回自助资源包 查看结果</p><p><img src="https://s1.ax1x.com/2023/08/29/pPdatY9.png"></p><p>我这里提前买好了</p><p>然后去上传文件吧</p><h2 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h2><p>返回存储桶管理 找到创建存储桶</p><p><img src="https://s1.ax1x.com/2023/08/29/pPdaaS1.png"></p><p>选择地区 <code>注意:不要选择香港 因为我们买的流量是大陆的</code></p><p>输入一个名字 这里顺便吧 然后勾选同意</p><p><img src="https://s1.ax1x.com/2023/08/29/pPdawy6.png"></p><p>下一步</p><p>然后继续下一步</p><p>最后点击创建</p><p>他会帮你跳转到创建好的存储桶</p><p>点击上传文件</p><p><img src="https://s1.ax1x.com/2023/08/29/pPda0OK.png"></p><p>我这里就身边拿一张图片做演示了</p><p><img src="https://s1.ax1x.com/2023/08/29/pPda6FH.png"></p><p>点击详情</p><p><img src="https://s1.ax1x.com/2023/08/29/pPdacYd.png"></p><p>这个对象地址就是我们上传的图片的了</p><p>复制到浏览器 打开查看一下</p><p><img src="https://s1.ax1x.com/2023/08/29/pPdaWlt.png"></p><p>我们的私人图床就做好了 想添加内容就去上传文件 然后查看对象地址</p><h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>对于一些访问量大的网站，最好给cos存储套个cdn，避免被ddos产生高额账单<code>毕竟0.5/g</code></p><p>希望能帮到你 </p>]]></content>
+    
+    
+    <categories>
+      
+      <category>生活</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>日常</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>随身wifi玩机篇3 配置debian(完结篇)</title>
     <link href="/2023/08/21/wifi_td_3/"/>
     <url>/2023/08/21/wifi_td_3/</url>
