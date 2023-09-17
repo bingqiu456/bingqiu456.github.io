@@ -23,15 +23,15 @@
 <meta property="og:site_name" content="冰月博客">
 <meta property="og:description" content="题目详情两数相加 II">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s1.ax1x.com/2023/06/29/pCwQfkd.png">
+<meta property="og:image" content="https://z1.ax1x.com/2023/06/29/pCwQfkd.png">
 <meta property="article:published_time" content="2023-07-03T15:22:40.000Z">
-<meta property="article:modified_time" content="2023-07-17T12:50:37.739Z">
+<meta property="article:modified_time" content="2023-09-17T07:19:52.776Z">
 <meta property="article:author" content="bingyue">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="code">
 <meta property="article:tag" content="栈">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s1.ax1x.com/2023/06/29/pCwQfkd.png">
+<meta name="twitter:image" content="https://z1.ax1x.com/2023/06/29/pCwQfkd.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -328,7 +328,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年7月17日 晚上
+                    本文最后更新于：2023年9月17日 下午
                   
                 
               </p>
@@ -343,19 +343,19 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">输入：l1 = [7,2,4,3], l2 = [5,6,4]<br>输出：[7,8,0,7]<br><br>输入：l1 = [2,4,3], l2 = [5,6,4]<br>输出：[8,0,7]<br><br>输入：l1 = [0], l2 = [0]<br>输出：[0]<br><br></code></pre></td></tr></table></figure>
 
 <h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>本题需要逆向运算，因此容易想到栈的性质<code>后进来的先出</code>，这和我之前20题的讲的栈是一样的,建立a和b两个栈</p>
-<p><img src="https://s1.ax1x.com/2023/07/03/pCspfiT.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/07/03/pCspfiT.png" srcset="/img/loading.gif" lazyload></p>
 <p>从示例1开始，依次把数字放进去</p>
-<p><img src="https://s1.ax1x.com/2023/07/03/pCspqdx.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/07/03/pCspqdx.png" srcset="/img/loading.gif" lazyload></p>
 <p>先弹出<code>3</code>和<code>4</code> 3+4=7 新链表第一哥节点为7</p>
-<p><img src="https://s1.ax1x.com/2023/07/03/pCspvWD.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/07/03/pCspvWD.png" srcset="/img/loading.gif" lazyload></p>
 <p>再到6+4=10 这时出现两位数了 我们要进1位 然后取除10的余数为当前的节点</p>
 <p>因此节点第二位是0</p>
-<p><img src="https://s1.ax1x.com/2023/07/03/pCs9FTP.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/07/03/pCs9FTP.png" srcset="/img/loading.gif" lazyload></p>
 <p>再到5+2=7 但别忘了之前的进位 所以是 5+2+1=8 第三个节点为8</p>
-<p><img src="https://s1.ax1x.com/2023/07/03/pCs93kV.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/07/03/pCs93kV.png" srcset="/img/loading.gif" lazyload></p>
 <p>这里b栈的数字已经全部用完了 这里取出来的数为0 所以是7+0 =7</p>
 <p>最后一个节点为5</p>
-<p><img src="https://s1.ax1x.com/2023/07/03/pCs9N6J.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/07/03/pCs9N6J.png" srcset="/img/loading.gif" lazyload></p>
 <p>到这里还没完 因为题目要求是翻转的链表 因此我们再把链表反转一下即可</p>
 <p>那现在开始写代码吧</p>
 <p>先把数字放进去栈</p>
@@ -383,7 +383,7 @@
 <p>PHP</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">// 时间复杂度: O(max(m,n))</span><br><span class="hljs-comment">// 空间复杂度: O(m+n)</span><br><span class="hljs-comment">// 本代码来自 https://leetcode.cn/problems/add-two-numbers-ii/solution/phpjian-ji-jie-fa-by-mek1986/</span><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a singly-linked list.</span><br><span class="hljs-comment"> * class ListNode &#123;</span><br><span class="hljs-comment"> *     public $val = 0;</span><br><span class="hljs-comment"> *     public $next = null;</span><br><span class="hljs-comment"> *     function __construct($val) &#123; $this-&gt;val = $val; &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> ListNode $l1</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> ListNode $l2</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> ListNode</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addTwoNumbers</span>(<span class="hljs-params"><span class="hljs-variable">$l1</span>, <span class="hljs-variable">$l2</span></span>) </span>&#123;<br>        <span class="hljs-variable">$num1</span>=<span class="hljs-string">&#x27;&#x27;</span>;<span class="hljs-comment">//链表1表示的数字</span><br>        <span class="hljs-variable">$num2</span>=<span class="hljs-string">&#x27;&#x27;</span>;<span class="hljs-comment">//链表2表示的数字</span><br>        <span class="hljs-keyword">while</span>(<span class="hljs-variable">$l1</span>!=<span class="hljs-literal">null</span>)&#123;<br>            <span class="hljs-variable">$num1</span>.=<span class="hljs-variable">$l1</span>-&gt;val;<br>            <span class="hljs-variable">$l1</span>=<span class="hljs-variable">$l1</span>-&gt;next;<br>        &#125;<br><br>        <span class="hljs-keyword">while</span>(<span class="hljs-variable">$l2</span>!=<span class="hljs-literal">null</span>)&#123;<br>            <span class="hljs-variable">$num2</span>.=<span class="hljs-variable">$l2</span>-&gt;val;<br>            <span class="hljs-variable">$l2</span>=<span class="hljs-variable">$l2</span>-&gt;next;<br>        &#125;<br><br>        <span class="hljs-variable">$sum</span>=<span class="hljs-title function_ invoke__">bcadd</span>(<span class="hljs-variable">$num1</span>,<span class="hljs-variable">$num2</span>,<span class="hljs-number">0</span>);<span class="hljs-comment">//求和,得到结果字符串</span><br>        <span class="hljs-variable">$newList</span>=<span class="hljs-literal">null</span>;<br>        <span class="hljs-variable">$len</span>=<span class="hljs-title function_ invoke__">strlen</span>(<span class="hljs-variable">$sum</span>);        <br>        <span class="hljs-keyword">for</span>(<span class="hljs-variable">$i</span>=<span class="hljs-number">0</span>;<span class="hljs-variable">$i</span>&lt;<span class="hljs-variable">$len</span>;<span class="hljs-variable">$i</span>++)&#123;<span class="hljs-comment">//循环结果字符串，就可以构建出链表</span><br>            <span class="hljs-keyword">if</span>(<span class="hljs-variable">$newList</span>==<span class="hljs-literal">null</span>)&#123;<br>                <span class="hljs-variable">$newList</span>=<span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-variable">$sum</span>[<span class="hljs-variable">$i</span>]);<br>                <span class="hljs-variable">$head</span>=<span class="hljs-variable">$newList</span>;<br>            &#125;<span class="hljs-keyword">else</span>&#123;<br>                <span class="hljs-variable">$newList</span>-&gt;next=<span class="hljs-keyword">new</span> <span class="hljs-title class_">ListNode</span>(<span class="hljs-variable">$sum</span>[<span class="hljs-variable">$i</span>]);<br>                <span class="hljs-variable">$newList</span>=<span class="hljs-variable">$newList</span>-&gt;next;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable">$head</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h2 id="感谢收看"><a href="#感谢收看" class="headerlink" title="感谢收看"></a>感谢收看</h2><p><img src="https://s1.ax1x.com/2023/07/03/pCs9H1g.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="感谢收看"><a href="#感谢收看" class="headerlink" title="感谢收看"></a>感谢收看</h2><p><img src="https://z1.ax1x.com/2023/07/03/pCs9H1g.png" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>

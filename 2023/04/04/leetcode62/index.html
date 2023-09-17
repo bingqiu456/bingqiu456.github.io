@@ -23,15 +23,15 @@
 <meta property="og:site_name" content="冰月博客">
 <meta property="og:description" content="题目描述一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。 机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s1.ax1x.com/2023/06/29/pCwQfkd.png">
+<meta property="og:image" content="https://z1.ax1x.com/2023/06/29/pCwQfkd.png">
 <meta property="article:published_time" content="2023-04-04T14:58:25.000Z">
-<meta property="article:modified_time" content="2023-07-17T12:50:30.252Z">
+<meta property="article:modified_time" content="2023-09-17T07:19:52.777Z">
 <meta property="article:author" content="bingyue">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="code">
 <meta property="article:tag" content="动态规划">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s1.ax1x.com/2023/06/29/pCwQfkd.png">
+<meta name="twitter:image" content="https://z1.ax1x.com/2023/06/29/pCwQfkd.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -328,7 +328,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年7月17日 晚上
+                    本文最后更新于：2023年9月17日 下午
                   
                 
               </p>
@@ -369,7 +369,7 @@
 
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 时间复杂度：O(m * n)</span><br><span class="hljs-comment">// 空间复杂度: O(m * n)</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-type">int</span> dp[<span class="hljs-number">230</span>][<span class="hljs-number">230</span>];<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">uniquePaths</span><span class="hljs-params">(<span class="hljs-type">int</span> m, <span class="hljs-type">int</span> n)</span> </span>&#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++)&#123;<br>                <span class="hljs-keyword">if</span>(i == <span class="hljs-number">0</span> || j == <span class="hljs-number">0</span>)&#123;<br>                    dp[i][j] = <span class="hljs-number">1</span>;<br>                &#125;<span class="hljs-keyword">else</span>&#123;<br>                    dp[i][j] = dp[i<span class="hljs-number">-1</span>][j] + dp[i][j<span class="hljs-number">-1</span>];<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[m<span class="hljs-number">-1</span>][n<span class="hljs-number">-1</span>];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://s1.ax1x.com/2023/04/04/pp5nSrd.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/04/04/pp5nSrd.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="感谢收看"><a href="#感谢收看" class="headerlink" title="感谢收看"></a>感谢收看</h2>
                 
               </div>

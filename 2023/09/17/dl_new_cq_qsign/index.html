@@ -16,27 +16,26 @@
   <meta name="author" content="bingyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="题目描述题目:拿硬币 桌上有 n 堆力扣币，每堆的数量保存在数组 coins 中。我们每次可以选择任意一堆，拿走其中的一枚或者两枚，求拿完所有力扣币的最少次数。">
+    <meta name="description" content="最新go-cqhttpdev版">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Leetcode LCP06.拿硬币">
-<meta property="og:url" content="http://blog.bingyue.top/2023/03/31/LCP06/index.html">
+<meta property="og:title" content="最新的gocq开发版和签名下载">
+<meta property="og:url" content="http://blog.bingyue.top/2023/09/17/dl_new_cq_qsign/index.html">
 <meta property="og:site_name" content="冰月博客">
-<meta property="og:description" content="题目描述题目:拿硬币 桌上有 n 堆力扣币，每堆的数量保存在数组 coins 中。我们每次可以选择任意一堆，拿走其中的一枚或者两枚，求拿完所有力扣币的最少次数。">
+<meta property="og:description" content="最新go-cqhttpdev版">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://z1.ax1x.com/2023/06/29/pCwQfkd.png">
-<meta property="article:published_time" content="2023-03-31T14:08:25.000Z">
-<meta property="article:modified_time" content="2023-09-17T07:19:52.771Z">
+<meta property="og:image" content="https://z1.ax1x.com/2023/09/17/pPhkFYj.png">
+<meta property="article:published_time" content="2023-09-17T07:04:23.000Z">
+<meta property="article:modified_time" content="2023-09-17T07:19:52.769Z">
 <meta property="article:author" content="bingyue">
-<meta property="article:tag" content="leetcode">
-<meta property="article:tag" content="lcp">
+<meta property="article:tag" content="bot">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://z1.ax1x.com/2023/06/29/pCwQfkd.png">
+<meta name="twitter:image" content="https://z1.ax1x.com/2023/09/17/pPhkFYj.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Leetcode LCP06.拿硬币 - 冰月博客</title>
+  <title>最新的gocq开发版和签名下载 - 冰月博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -242,7 +241,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Leetcode LCP06.拿硬币"></span>
+            <span id="subtitle" data-typed-text="最新的gocq开发版和签名下载"></span>
           
         </div>
 
@@ -253,8 +252,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-31 22:08" pubdate>
-          2023年3月31日 晚上
+        <time datetime="2023-09-17 15:04" pubdate>
+          2023年9月17日 下午
         </time>
       </span>
     
@@ -265,7 +264,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          631 字
+          57 字
         
       </span>
     
@@ -276,7 +275,7 @@
         
         
         
-          6 分钟
+          1 分钟
         
       </span>
     
@@ -322,7 +321,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Leetcode LCP06.拿硬币</h1>
+            <h1 style="display: none">最新的gocq开发版和签名下载</h1>
             
               <p class="note note-info">
                 
@@ -335,26 +334,14 @@
             
               <div class="markdown-body">
                 
-                <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>题目:<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/na-ying-bi/">拿硬币</a></p>
-<p>桌上有 n 堆力扣币，每堆的数量保存在数组 coins 中。我们每次可以选择任意一堆，拿走其中的一枚或者两枚，求拿完所有力扣币的最少次数。</p>
+                <p>最新go-cqhttp<code>dev</code>版</p>
 <span id="more"></span>
-<p>示例 1：</p>
-<p>输入：<code>[4,2,1]</code></p>
-<p>输出：<code>4</code></p>
-<p>解释：第一堆力扣币最少需要拿 2 次，第二堆最少需要拿 1 次，第三堆最少需要拿 1 次，总共 4 次即可拿完。</p>
-<p>示例 2：</p>
-<p>输入：<code>[2,3,10]</code></p>
-<p>输出：<code>8</code></p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>这时候得分开两种情况讨论</p>
-<p>如果<code>f[i]&lt;2</code> 则算1次</p>
-<p>如果<code>f[i]&gt;=2</code>则算 <code>f[i] / 2 + f[i] % 2</code></p>
-<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p><strong>Python3</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">minCount</span>(<span class="hljs-params">self, coins: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:<br>        ans = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,<span class="hljs-built_in">len</span>(coins)):<br>            <span class="hljs-keyword">if</span> coins[i] &lt; <span class="hljs-number">2</span>:<br>                ans+=<span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:<br>                ans += coins[i] // <span class="hljs-number">2</span> + coins[i] % <span class="hljs-number">2</span><br>        <span class="hljs-keyword">return</span> ans<br></code></pre></td></tr></table></figure>
-
-<p><strong>C++</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">minCount</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; coins)</span> </span>&#123;<br>        <span class="hljs-type">int</span> a = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; coins.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            <span class="hljs-keyword">if</span>(coins[i] &lt; <span class="hljs-number">2</span>)&#123;<br>                a++;<br>            &#125;<span class="hljs-keyword">else</span>&#123;<br>                a+=(coins[i]/<span class="hljs-number">2</span> + coins[i] % <span class="hljs-number">2</span>);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> a;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-
-<p><img src="https://z1.ax1x.com/2023/03/31/ppRImee.png" srcset="/img/loading.gif" lazyload alt="w"></p>
+<p> 👇 👇 👇 👇</p>
+<p><a target="_blank" rel="noopener" href="https://cdn.bingyue.top/go-cqhttp-windows-new.zip">Windows传送门</a></p>
+<p><a target="_blank" rel="noopener" href="https://cdn.bingyue.top/go-cqhttp-linux-new.zip">Linux传送门</a></p>
+<p>最新签名服务器</p>
+<p> 👇 👇 👇</p>
+<p><a target="_blank" rel="noopener" href="https://cdn.bingyue.top/unidbg-fetch-qsign-1.2.1.zip">传送门</a></p>
 
                 
               </div>
@@ -373,7 +360,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/leetcode/" class="category-chain-item">leetcode</a>
+  <a href="/categories/qq%E6%9C%BA%E5%99%A8%E4%BA%BA/" class="category-chain-item">qq机器人</a>
   
   
 
@@ -388,9 +375,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/leetcode/">#leetcode</a>
-      
-        <a href="/tags/lcp/">#lcp</a>
+        <a href="/tags/bot/">#bot</a>
       
     </div>
   
@@ -402,8 +387,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Leetcode LCP06.拿硬币</div>
-      <div>http://blog.bingyue.top/2023/03/31/LCP06/</div>
+      <div>最新的gocq开发版和签名下载</div>
+      <div>http://blog.bingyue.top/2023/09/17/dl_new_cq_qsign/</div>
     </div>
     <div class="license-meta">
       
@@ -415,7 +400,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年3月31日</div>
+          <div>2023年9月17日</div>
         </div>
       
       
@@ -447,18 +432,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/31/LCP01/" title="Leetcode LCP01.猜数字">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Leetcode LCP01.猜数字</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/28/leetcode1/" title="Leetcode 1.两数之和">
-                        <span class="hidden-mobile">Leetcode 1.两数之和</span>
+                      <a href="/2023/08/29/teng_xun_yun_cos/" title="如何用3.6元搭建一个私人图床">
+                        <span class="hidden-mobile">如何用3.6元搭建一个私人图床</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -481,7 +460,7 @@
         var options = Object.assign(
           {"clientID":"0f4c0af04f4a74a28ef8","clientSecret":"603e436965f1a09c74e485733b6b3593d6514a46","repo":"bingqiu456.github.io","owner":"bingqiu456","admin":["bingqiu456"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
           {
-            id: 'ff017dbdd7c2ab09e51d9db14f97290f'
+            id: '7c2021655733b19193204b3c50b8bd8a'
           }
         )
         var gitalk = new Gitalk(options);

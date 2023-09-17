@@ -23,15 +23,15 @@
 <meta property="og:site_name" content="冰月博客">
 <meta property="og:description" content="题目详情原题链接点我给定一个只包括&#39;(&#39;，&#39;)&#39;，&#39;&amp;#123;&#39;，&#39;&amp;#125;&#39;，&#39;[&#39;，&#39;]&#39;的字符串 s ，判断字符串是否有效。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s1.ax1x.com/2023/06/29/pCwQfkd.png">
+<meta property="og:image" content="https://z1.ax1x.com/2023/06/29/pCwQfkd.png">
 <meta property="article:published_time" content="2023-06-29T01:45:37.000Z">
-<meta property="article:modified_time" content="2023-07-17T12:50:22.324Z">
+<meta property="article:modified_time" content="2023-09-17T07:19:52.775Z">
 <meta property="article:author" content="bingyue">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="code">
 <meta property="article:tag" content="栈">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s1.ax1x.com/2023/06/29/pCwQfkd.png">
+<meta name="twitter:image" content="https://z1.ax1x.com/2023/06/29/pCwQfkd.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -328,7 +328,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年7月17日 晚上
+                    本文最后更新于：2023年9月17日 下午
                   
                 
               </p>
@@ -344,23 +344,23 @@
 
 <h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>这里要用到栈的性质了</p>
 <p>现在我们有一个数组</p>
-<p><img src="https://s1.ax1x.com/2023/06/29/pCwJpef.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/06/29/pCwJpef.png" srcset="/img/loading.gif" lazyload></p>
 <p>但栈的性质是先进来的先出</p>
 <p>有两种操作 进栈和出栈</p>
 <p>也就是 我添加了数字<code>1,2,3</code> 我出栈是3 刚才进来的被踢出去了 所以这个也能拿来检验有效的括号</p>
 <p>现在我们来模拟一下</p>
-<p><img src="https://s1.ax1x.com/2023/06/29/pCwJQkF.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/06/29/pCwJQkF.png" srcset="/img/loading.gif" lazyload></p>
 <p>添加一个左(小)括号 进栈</p>
 <p>轮到右小括号的时候 这个时候我们出栈</p>
 <p>如果是右小括号对应的左小括号 则是一个合理的括号</p>
-<p><img src="https://s1.ax1x.com/2023/06/29/pCwJR78.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/06/29/pCwJR78.png" srcset="/img/loading.gif" lazyload></p>
 <p>再继续模拟一下<code>错误</code>情况</p>
 <p>进来了一个左<code>小括号</code>和左<code>中括号</code></p>
-<p><img src="https://s1.ax1x.com/2023/06/29/pCwJjNF.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/06/29/pCwJjNF.png" srcset="/img/loading.gif" lazyload></p>
 <p>这时候来一个右小括号<code>)</code></p>
 <p>出栈</p>
 <p>但发现是<code>[</code></p>
-<p><img src="https://s1.ax1x.com/2023/06/29/pCwYS39.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/06/29/pCwYS39.png" srcset="/img/loading.gif" lazyload></p>
 <p>所以这不是一个合理的括号</p>
 <p>那接下来可以开始写代码了 先创建一个数组 和 字典 <code>(查询括号对应的另一半)</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">a = []<br>i = &#123;<span class="hljs-string">&quot;)&quot;</span>:<span class="hljs-string">&quot;(&quot;</span>,<span class="hljs-string">&quot;&#125;&quot;</span>:<span class="hljs-string">&quot;&#123;&quot;</span>,<span class="hljs-string">&quot;]&quot;</span>,<span class="hljs-string">&quot;[&quot;</span>&#125;<br></code></pre></td></tr></table></figure>
@@ -368,7 +368,7 @@
 <p>开始遍历for循环 左括号进栈 右括号出栈 以及判断</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">for</span> q <span class="hljs-keyword">in</span> s:<br>    <span class="hljs-keyword">if</span> q <span class="hljs-keyword">in</span> [<span class="hljs-string">&quot;(&quot;</span>,<span class="hljs-string">&quot;[&quot;</span>,<span class="hljs-string">&quot;&#123;&quot;</span>]: <span class="hljs-comment"># 左括号进栈</span><br>        a.append(q)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">if</span> a.pop() != i[q]: <span class="hljs-comment"># 如果出栈了不是对应的另一半</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><span class="hljs-keyword">return</span> <span class="hljs-literal">True</span> <span class="hljs-comment"># 否则返回True</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="https://s1.ax1x.com/2023/06/29/pCwYngA.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/06/29/pCwYngA.png" srcset="/img/loading.gif" lazyload></p>
 <p>但题目数据范围还有1 也就意味着有 一个字符的测试示例</p>
 <p>一个字符是构不成括号 因此要特殊判断</p>
 <p>最终代码为</p>
@@ -388,7 +388,7 @@
 
 
 
-<h2 id="感谢观看"><a href="#感谢观看" class="headerlink" title="感谢观看"></a>感谢观看</h2><p><img src="https://s1.ax1x.com/2023/06/29/pCwtdRH.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="感谢观看"><a href="#感谢观看" class="headerlink" title="感谢观看"></a>感谢观看</h2><p><img src="https://z1.ax1x.com/2023/06/29/pCwtdRH.png" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>

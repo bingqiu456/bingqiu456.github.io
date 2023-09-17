@@ -23,15 +23,15 @@
 <meta property="og:site_name" content="冰月博客">
 <meta property="og:description" content="开始今天教大家搭建一个hexo框架的博客，我现在用的就是这个框架的博客，使用起码挺方便的 本教程分为七步  安装nodejs">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s1.ax1x.com/2023/08/16/pPlnX01.png">
+<meta property="og:image" content="https://z1.ax1x.com/2023/08/16/pPlnX01.png">
 <meta property="article:published_time" content="2023-08-16T09:21:05.000Z">
-<meta property="article:modified_time" content="2023-08-17T05:40:11.381Z">
+<meta property="article:modified_time" content="2023-09-17T07:19:52.769Z">
 <meta property="article:author" content="bingyue">
 <meta property="article:tag" content="code">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="nodejs">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s1.ax1x.com/2023/08/16/pPlnX01.png">
+<meta name="twitter:image" content="https://z1.ax1x.com/2023/08/16/pPlnX01.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -328,7 +328,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年8月17日 下午
+                    本文最后更新于：2023年9月17日 下午
                   
                 
               </p>
@@ -356,14 +356,14 @@
 </li>
 </ul>
 <h2 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node_js"></a>安装node_js</h2><p>第一步打开<a target="_blank" rel="noopener" href="https://nodejs.org/en">官网</a></p>
-<p><img src="https://s1.ax1x.com/2023/08/16/pPlkbVO.png" srcset="/img/loading.gif" lazyload alt="官网"></p>
+<p><img src="https://z1.ax1x.com/2023/08/16/pPlkbVO.png" srcset="/img/loading.gif" lazyload alt="官网"></p>
 <p>这里有两个版本 分别是<code>lts</code>版和<code>current</code>版 随便选择一个即可 我这里下的是<code>lts</code>版</p>
 <p>如果你下载速度慢可以选择国内源 <code>这里下面是传送门</code></p>
 <p><a target="_blank" rel="noopener" href="https://npmmirror.com/mirrors/node/v18.16.1/node-v18.16.1-x64.msi">国内源lts</a></p>
 <p><a target="_blank" rel="noopener" href="https://npmmirror.com/mirrors/node/v20.4.0/node-v20.4.0-x64.msi">国内源current</a></p>
-<p><img src="https://s1.ax1x.com/2023/08/16/pPlAns0.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/08/16/pPlAns0.png" srcset="/img/loading.gif" lazyload></p>
 <p>按着步骤安装就行了</p>
-<p><img src="https://s1.ax1x.com/2023/08/16/pPlAQdU.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/08/16/pPlAQdU.png" srcset="/img/loading.gif" lazyload></p>
 <p>等待进度条跑完，关闭即可</p>
 <hr>
 <h2 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h2><p><a target="_blank" rel="noopener" href="https://github.com/git-for-windows/git/releases/download/v2.41.0.windows.3/Git-2.41.0.3-64-bit.exe">点击我</a>即可下载 如果速度慢请开vpn</p>
@@ -372,20 +372,20 @@
 <hr>
 <h2 id="安装-amp-配置hexo"><a href="#安装-amp-配置hexo" class="headerlink" title="安装&amp;配置hexo"></a>安装&amp;配置hexo</h2><p>在你的桌面或者任意一处地方，创建一个博客文件夹，用来存放博客的代码</p>
 <p>我这里以桌面进行</p>
-<p><img src="https://s1.ax1x.com/2023/08/16/pPlAXwT.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/08/16/pPlAXwT.png" srcset="/img/loading.gif" lazyload></p>
 <p>在该文件夹下按住鼠标右键+shift键 打开<code>open git bash here</code></p>
 <p>然后弹出一个窗口 </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">node -v<br></code></pre></td></tr></table></figure>
 
 <p>输入以上命令 检查nodejs是否安装好</p>
 <p>不出意外会显示一个版本号 如果报错了请检查<code>环境变量</code></p>
-<p><img src="https://s1.ax1x.com/2023/08/16/pPlE9p9.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/08/16/pPlE9p9.png" srcset="/img/loading.gif" lazyload></p>
 <p>接下来输入这三个命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install -g hexo-cli<br>hexo init<br>npm install --save hexo-deployer-git<br></code></pre></td></tr></table></figure>
 
 <p>此处如果卡住开科学上网</p>
-<p><img src="https://s1.ax1x.com/2023/08/16/pPlEyAU.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://s1.ax1x.com/2023/08/16/pPlE6NF.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/08/16/pPlEyAU.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/08/16/pPlE6NF.png" srcset="/img/loading.gif" lazyload></p>
 <p>然后文件夹会多出很多文件</p>
 <p>打开<code>_config.yml</code>文件 按如下说明更改博客配置</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># Site</span><br>title: Hexo <span class="hljs-comment"># 博客标题</span><br>subtitle: <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-comment"># 小标题</span><br>description: <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-comment"># 描述</span><br>keywords: <span class="hljs-comment">#关键字</span><br>author: John Doe <span class="hljs-comment"># 作者名字</span><br>language: en <span class="hljs-comment"># 语言 改成zh-cn</span><br>timezone: <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-comment"># 时区 默认不填</span><br></code></pre></td></tr></table></figure>
@@ -400,16 +400,16 @@
 
 <p>如果想取消按住你键盘上的<code>Ctrl</code>+<code>C</code>键</p>
 <p>打开你的浏览器输入<code>localhost:4000</code> 访问一下</p>
-<p><img src="https://s1.ax1x.com/2023/08/16/pPlVyrt.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/08/16/pPlVyrt.png" srcset="/img/loading.gif" lazyload></p>
 <p>这样我们的博客就能在内网访问了</p>
 <hr>
 <h2 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h2><p>没错 hexo有个主题商店 里面有好多不错的博客主题</p>
 <p><a target="_blank" rel="noopener" href="https://hexo.io/themes/">传送门</a></p>
 <p>由于每种主题配置方法不一样 我这里就以<code>claudia</code>主题为例子</p>
-<p><img src="https://s1.ax1x.com/2023/08/16/pPlV7q0.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/08/16/pPlV7q0.png" srcset="/img/loading.gif" lazyload></p>
 <p>点击蓝色字体 跳转到他的<a target="_blank" rel="noopener" href="https://github.com/Haojen/hexo-theme-Claudia">GitHub仓库</a></p>
 <p>然后查看下面的文档 我这里的文档说要命令安装依赖 我们照着做就行了</p>
-<p><img src="https://s1.ax1x.com/2023/08/16/pPlZVRH.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/08/16/pPlZVRH.png" srcset="/img/loading.gif" lazyload></p>
 <p>安装完依赖后开始下载代码放入博客<code>themes</code>文件夹</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> themes<br><span class="hljs-built_in">mkdir</span> Claudia<br><span class="hljs-built_in">cd</span> Claudia<br>git <span class="hljs-built_in">clone</span> https://github.com/Haojen/hexo-theme-Claudia<br></code></pre></td></tr></table></figure>
 

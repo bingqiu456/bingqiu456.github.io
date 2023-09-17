@@ -23,15 +23,15 @@
 <meta property="og:site_name" content="冰月博客">
 <meta property="og:description" content="题目描述假设你正在爬楼梯。需要 n 阶你才能到达楼顶。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s1.ax1x.com/2023/06/29/pCwQfkd.png">
+<meta property="og:image" content="https://z1.ax1x.com/2023/06/29/pCwQfkd.png">
 <meta property="article:published_time" content="2023-04-04T14:05:25.000Z">
-<meta property="article:modified_time" content="2023-07-17T12:50:33.250Z">
+<meta property="article:modified_time" content="2023-09-17T07:19:52.778Z">
 <meta property="article:author" content="bingyue">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="code">
 <meta property="article:tag" content="动态规划">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s1.ax1x.com/2023/06/29/pCwQfkd.png">
+<meta name="twitter:image" content="https://z1.ax1x.com/2023/06/29/pCwQfkd.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -328,7 +328,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年7月17日 晚上
+                    本文最后更新于：2023年9月17日 下午
                   
                 
               </p>
@@ -382,7 +382,7 @@
 
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 时间复杂度:O(n)</span><br><span class="hljs-comment">// 空间复杂度:O(1)</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">climbStairs</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(n&lt;=<span class="hljs-number">2</span>)&#123;<span class="hljs-keyword">return</span> n;&#125;<br>        <span class="hljs-type">int</span> a = <span class="hljs-number">1</span>, b = <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt; n; i++)&#123;<br>            <span class="hljs-type">int</span> nxt = b;<br>            b+=a;<br>            a = nxt;<br>        &#125;<br>        <span class="hljs-keyword">return</span> b;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-<p><img src="https://s1.ax1x.com/2023/04/04/pp5VU4U.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/04/04/pp5VU4U.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="感谢收看"><a href="#感谢收看" class="headerlink" title="感谢收看"></a>感谢收看</h2>
                 
               </div>
