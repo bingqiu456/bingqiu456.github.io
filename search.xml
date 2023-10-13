@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>目前可用的QQ机器人hook框架-Chronocat教程 (未完结)</title>
+      <link href="/2023/10/14/chronocat_1/"/>
+      <url>/2023/10/14/chronocat_1/</url>
+      
+        <content type="html"><![CDATA[<p>最近<code>go-cqhttp</code>发表了一个重要通知，就是因为<code>txsb</code>频繁的去修改加密签名，<code>go-cqhttp</code>开发组已无力去维护本项目，协议库的时代已成为过去，陪伴了我们三年的时间</p><p>我们可以在<code>gocq</code>的<code>GitHub</code><a href="https://github.com/Mrs4s/go-cqhttp">仓库</a>看到这样的一句话</p><span id="more"></span><p><img src="https://z1.ax1x.com/2023/10/13/pipcjQx.png"></p><p>因为本人在学校里住宿，平时只能节假日或者周末上线，所以得知消息来晚了一点<code>(以下是官方原话自行看吧)</code></p><p><img src="https://pic.imgdb.cn/item/652965b5c458853aefb0e53a.png"></p><p>所以本期教程就使用推荐的框架<code>Chronocat</code></p><h2 id="配置客户端"><a href="#配置客户端" class="headerlink" title="配置客户端"></a>配置客户端</h2><p>首先是安装<code>QQNT</code>版官方客户端  这里<code>Chronocat推荐了</code>了三个版本 选择对应的系统下载👇 👇</p><p><a href="https://dldir1.qq.com/qqfile/qq/QQNT/8ebcccd2/QQ9.9.0.14619_x64.exe">Windows</a></p><p><a href="https://dldir1.qq.com/qqfile/qq/QQNT/5333e29d/QQ_v6.9.12-10951.dmg">macOS</a></p><p><a href="https://dldir1.qq.com/qqfile/qq/QQNT/ad5b5393/linuxqq_3.1.2-13107_amd64.deb">Linux</a></p><p>本期教程以Windows系统演示</p><p>这里博主已经安装好了</p><p><img src="https://pic.imgdb.cn/item/652966e9c458853aefb4ee4a.png"></p><p>登录之后 <code>左下角的三条横线-&gt;设置-&gt;登录设置</code></p><p><img src="https://pic.imgdb.cn/item/6529673ac458853aefb64a3c.png"></p><p>把第一个和第二个打开 然后关掉设置</p><p>客户端已经配置好了 接下来去下载框架本体</p><h2 id="安装Liteloader"><a href="#安装Liteloader" class="headerlink" title="安装Liteloader"></a>安装Liteloader</h2><p>因为Chronocat需要liteloader来启动 所以还要下一个liteloader 下载链接已经准备好了</p><p><a href="https://github.com/LiteLoaderQQNT/LiteLoaderQQNT/releases/download/0.5.3/LiteLoaderQQNT-Launcher_x86.exe">Windows 32位</a></p><p><a href="https://github.com/LiteLoaderQQNT/LiteLoaderQQNT/releases/download/0.5.3/LiteLoaderQQNT-Launcher_x64.exe">Windows 64位</a></p><p><a href="https://github.com/LiteLoaderQQNT/LiteLoaderQQNT/releases/download/0.5.3/LiteLoaderQQNT.zip">补丁(必须)</a></p><p>把补丁解压 放到你的qqnt安装目录下的 <code>resources-&gt;app</code>文件夹</p><p><img src="https://pic.imgdb.cn/item/6529690ac458853aefbd36b4.png"></p><p>打开下面的<code>package.json</code>文件 修改如下</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">  &#123;<br>   ...<br>   <span class="hljs-string">&quot;homepage&quot;</span>: <span class="hljs-string">&quot;https://im.qq.com&quot;</span>,<br>   <span class="hljs-string">&quot;sideEffects&quot;</span>: <span class="hljs-literal">true</span>,<br>-  <span class="hljs-string">&quot;main&quot;</span>: <span class="hljs-string">&quot;./app_launcher/index.js&quot;</span>,<br>+  <span class="hljs-string">&quot;main&quot;</span>: <span class="hljs-string">&quot;./LiteLoader&quot;</span>,<br>   ...<br>  &#125;<br></code></pre></td></tr></table></figure><p>保存关闭 退出你的qq 重新登录</p><p>打开设置</p><p><img src="https://chronocat.vercel.app/assets/images/settings1-0075a1e4e22c2a9fecd66caf33f89d3f.png"></p><p><img src="https://pic.imgdb.cn/item/652969e8c458853aefc002f9.png"></p><p>出现这两个说明安装成功了</p><h2 id="安装Chronocat"><a href="#安装Chronocat" class="headerlink" title="安装Chronocat"></a>安装Chronocat</h2><p>下载最新版的插件</p><p><a href="https://github.com/chrononeko/chronocat/releases/download/v0.0.52/chronocat-llqqnt-v0.0.52.zip">chronocat-llqqnt-v0.0.52.zip</a></p><p>解压 打开你电脑上的文档文件夹 找到<code>LiteLoaderQQNT</code>文件夹</p><p><img src="https://pic.imgdb.cn/item/65296af3c458853aefc39619.png"></p><p>打开该文件夹 进入plugins文件夹 把解压好的<code>chronocat-llqqnt-v0.0.52</code>复制进去</p><p><img src="https://pic.imgdb.cn/item/65296b5ec458853aefc50b36.png"></p><p>重启一下QQ 确保插件正确加载</p><p><img src="https://pic.imgdb.cn/item/65296bd4c458853aefc6b676.png"></p><p>已经安装好了</p><h2 id="对接Nonebot"><a href="#对接Nonebot" class="headerlink" title="对接Nonebot"></a>对接Nonebot</h2><p>详情看<code>https://github.com/nonebot/adapter-red</code></p><p>因为今晚时间有限 具体的nonebot对接教程…留到下面再说</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> code </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> bot </tag>
+            
+            <tag> qq机器人 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>最新的gocq开发版和签名下载</title>
       <link href="/2023/09/17/dl_new_cq_qsign/"/>
       <url>/2023/09/17/dl_new_cq_qsign/</url>
