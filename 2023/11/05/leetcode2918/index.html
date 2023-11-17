@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://z1.ax1x.com/2023/06/29/pCwQfkd.png">
 <meta property="article:published_time" content="2023-11-05T02:09:32.000Z">
-<meta property="article:modified_time" content="2023-11-05T02:08:47.745Z">
+<meta property="article:modified_time" content="2023-11-17T15:19:34.932Z">
 <meta property="article:author" content="bingyue">
 <meta property="article:tag" content="leetcode">
 <meta property="article:tag" content="code">
@@ -267,7 +267,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.1k 字
+          5.3k 字
         
       </span>
     
@@ -278,7 +278,7 @@
         
         
         
-          43 分钟
+          44 分钟
         
       </span>
     
@@ -329,7 +329,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年11月5日 上午
+                    本文最后更新于：2023年11月17日 晚上
                   
                 
               </p>
@@ -353,34 +353,29 @@
 </ul>
 <h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>我们可以分成<strong>五种</strong>情况讨论</p>
 <ul>
-<li><p>假设数组的和相等</p>
-</li>
-<li><p>假设<code>nums1</code>有<strong>0</strong> <code>nums2</code>没<strong>0</strong></p>
-</li>
-<li><p>假设<code>nums1</code>没<strong>0</strong> <code>nums2</code>有<strong>0</strong></p>
-</li>
-<li><p>两个数组都有<strong>0</strong></p>
-</li>
-<li><p>两个数组都没<strong>0</strong></p>
-</li>
+<li>假设数组的和相等</li>
+<li>假设<code>nums1</code>有<strong>0</strong> <code>nums2</code>没<strong>0</strong></li>
+<li>假设<code>nums1</code>没<strong>0</strong> <code>nums2</code>有<strong>0</strong></li>
+<li>两个数组都有<strong>0</strong></li>
+<li>两个数组都没<strong>0</strong></li>
 </ul>
-<p>先来看看第一种情况 如果两个数组和相等 我们需要判断<code>nums1不包含0 == nums2不包含0</code> ,如果符合条件则直接返回<strong>任意一个数组和</strong></p>
-<p>第二种情况 设<code>i</code>为<code>nums2</code>的数组和，<code>j</code>为<code>nums1</code>数组中的0个数，<code>k</code>为<code>nums1</code>的数组和 如果<code>k &gt;= i or (i-k)//j == 0</code>则返回**-1**,否返回<strong>sum(nums2)</strong></p>
-<p>第三种情况 设<code>i</code>为<code>nums1</code>的数组和，<code>j</code>为<code>nums2</code>数组中的0个数，<code>k</code>为<code>nums2</code>的数组和 如果<code>k &gt;= i or (i-k)//j == 0</code>则返回**-1**,否返回<strong>sum(nums1)</strong></p>
+<p>先来看看第一种情况 如果两个数组和相等 我们需要判断<code>nums1不包含0 == nums2不包含0</code> ,如果符合条件则直接返回<strong>任意一个数组和</strong><br>$$<br>i = nums2[i]+nums2[i+1]+nums2[i+2] ….<br>$$</p>
+<p>第二种情况 设$$ i = nums2[n]+nums2[n+1]+nums2[n+2] ….  $$，$$j$$为<code>nums1</code>数组中的0个数，$$k = nums1[n] + nums1[n+1] ….$$ 如果$$k &gt;= i \mid (i-k)//j == 0$$则返回$-1$,否返回$nums2$的数组和</p>
+<p>第三种情况 设$$ i = nums1[n]+nums1[n+1]+nums1[n+2] ….  $$，$j$为<code>nums2</code>数组中的0个数， $$k = nums2[n] + nums2[n+1] ….$$ 如果$$k &gt;= i \mid (i-k)//j == 0$$则返回$-1$,否返回$nums1$的数组和</p>
 <p>关于这条公式的到来 我这里解释一下</p>
-<p><strong>假设</strong><code>nums1 = [3,2,0,1,0], nums2 = [6,5,1]</code> 可以看到<strong>第二个数组是没0的 第一个有两个零</strong></p>
-<p><strong>第一个条件</strong><code>k&gt;=i</code> <strong>则说明 如果第一个数组还是0的情况 它的和已经大于第二个数组 显然是无法修改的 只能返回-1</strong></p>
-<p><strong>在满足第一个条件之下 我们还要继续判断</strong><code>(i-k)//</code><strong>意思是 求出两个数组的差 然后除于第一个数组的0的个数 校验一下是否能把第一个数组的所有0均匀分配 如果除出来是0说明第一个数组和第二个数组的和无法相等</strong></p>
-<p>第四种情况 先把<code>nums1</code>的<strong>0</strong>全部改成<strong>1</strong> 代入第二种情况 再反过来重复即可</p>
+<p><strong>假设</strong>$$nums1 = [3,2,0,1,0], nums2 = [6,5,1]$$ 可以看到<strong>第二个数组是没0的 第一个有两个零</strong></p>
+<p><strong>第一个条件</strong>$$k&gt;=i$$ <strong>则说明 如果第一个数组还是0的情况 它的和已经大于第二个数组 显然是无法修改的 只能返回-1</strong></p>
+<p><strong>在满足第一个条件之下 我们还要继续判断</strong>$$(i-k)//j$$<strong>意思是 求出两个数组的差 然后除于第一个数组的0的个数 校验一下是否能把第一个数组的所有0均匀分配 如果除出来是0说明第一个数组和第二个数组的和无法相等</strong></p>
+<p>第四种情况 先把$$nums1$$的<strong>0</strong>全部改成<strong>1</strong> 代入第二种情况 再反过来重复即可</p>
 <p><strong>注意:第四种情况 如果无法满足条件 不要返回-1 而是原始的答案 具体看下面的代码</strong></p>
-<p>第五种情况 直接判断和是否相等 相等返回其中一个<code>nums</code>的和 没则返回**-1**</p>
+<p>第五种情况 直接判断和是否相等 相等返回其中一个$$nums$$的和 没则返回**-1**</p>
 <p><strong>现在看看代码怎么写</strong></p>
 <p>首先定义四个函数<code>i,j,i_,j_</code></p>
 <ul>
-<li><code>i</code>是<code>nums1</code>的和</li>
-<li><code>j</code>是<code>nums2</code>的和</li>
-<li><code>i_</code>是<code>nums1</code><strong>0</strong>的个数</li>
-<li><code>j_</code>是<code>nums2</code><strong>0</strong>的个数</li>
+<li>$$i$$是$$nums1$$的和</li>
+<li>$$j$$是$$nums2$$的和</li>
+<li>$i_$是$nums1$<strong>0</strong>的个数</li>
+<li>$j_$是$nums2$<strong>0</strong>的个数</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">minSum</span>(<span class="hljs-params">self, nums1: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>], nums2: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:<br>        i,j,i_,j_ = <span class="hljs-built_in">sum</span>(nums1),<span class="hljs-built_in">sum</span>(nums2),<span class="hljs-number">0</span>,<span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,<span class="hljs-built_in">len</span>(nums1)):<br>            <span class="hljs-keyword">if</span> nums1[k] == <span class="hljs-number">0</span>:<br>                i_+=<span class="hljs-number">1</span><br>        <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,<span class="hljs-built_in">len</span>(nums2)):<br>            <span class="hljs-keyword">if</span> nums2[k] == <span class="hljs-number">0</span>:<br>                j_+=<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
 
