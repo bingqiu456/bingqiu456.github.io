@@ -16,12 +16,12 @@
   <meta name="author" content="bingyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言这是七月份最后一篇博客，这几天家里一直有事，所以没怎么写，然后我朋友找我有没有办法搞一个验证QQ号是否本人的东西，我第一时间想到了扫码登录 所以本期教程来写一个封装的扫码登录">
+    <meta name="description" content="前言 这是七月份最后一篇博客，这几天家里一直有事，所以没怎么写，然后我朋友找我有没有办法搞一个验证QQ号是否本人的东西，我第一时间想到了扫码登录 所以本期教程来写一个封装的扫码登录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="QQ扫码登录抓取分析">
 <meta property="og:url" content="http://blog.bingyue.top/2023/07/31/qq_sao_ma/index.html">
 <meta property="og:site_name" content="冰月博客">
-<meta property="og:description" content="前言这是七月份最后一篇博客，这几天家里一直有事，所以没怎么写，然后我朋友找我有没有办法搞一个验证QQ号是否本人的东西，我第一时间想到了扫码登录 所以本期教程来写一个封装的扫码登录">
+<meta property="og:description" content="前言 这是七月份最后一篇博客，这几天家里一直有事，所以没怎么写，然后我朋友找我有没有办法搞一个验证QQ号是否本人的东西，我第一时间想到了扫码登录 所以本期教程来写一个封装的扫码登录">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://z1.ax1x.com/2023/08/01/pP9zvEq.png">
 <meta property="article:published_time" content="2023-07-31T15:59:59.000Z">
@@ -48,6 +48,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
 
 
 
@@ -336,102 +338,97 @@
             
               <div class="markdown-body">
                 
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这是七月份最后一篇博客，这几天家里一直有事，所以没怎么写，然后我朋友找我有没有办法搞一个验证QQ号是否本人的东西，我第一时间想到了扫码登录</p>
+                <h2 id="前言">前言</h2>
+<p>这是七月份最后一篇博客，这几天家里一直有事，所以没怎么写，然后我朋友找我有没有办法搞一个验证QQ号是否本人的东西，我第一时间想到了扫码登录</p>
 <p>所以本期教程来写一个封装的扫码登录</p>
 <span id="more"></span>
-
 <p>因为我很久不写php了 已经快忘光了 所以本期教程使用python</p>
-<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>这里我选择<a target="_blank" rel="noopener" href="https://xw.qq.com/?f=c_news">腾讯网</a> 点右上角头像，就是我们想要的扫码登录了</p>
-<p><img src="https://z1.ax1x.com/2023/08/01/pP9qsyt.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://z1.ax1x.com/2023/08/01/pP9qyOP.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="开始">开始</h2>
+<p>这里我选择<a target="_blank" rel="noopener" href="https://xw.qq.com/?f=c_news">腾讯网</a> 点右上角头像，就是我们想要的扫码登录了</p>
+<p><img src="https://z1.ax1x.com/2023/08/01/pP9qsyt.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://z1.ax1x.com/2023/08/01/pP9qyOP.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>这里就是二维码登录了</p>
 <p>我们<code>右键鼠标-&gt;检查-&gt;网络</code> 然后<code>刷新页面</code></p>
-<p><img src="https://z1.ax1x.com/2023/08/01/pP9qgw8.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/08/01/pP9qgw8.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>可以看到多了很多数据包</p>
-<h2 id="申请二维码登录"><a href="#申请二维码登录" class="headerlink" title="申请二维码登录"></a>申请二维码登录</h2><p>往下寻找 可以看到有个请求二维码的接口</p>
-<p><img src="https://z1.ax1x.com/2023/08/01/pP9q2TS.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://z1.ax1x.com/2023/08/01/pP9qWFg.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="申请二维码登录">申请二维码登录</h2>
+<p>往下寻找 可以看到有个请求二维码的接口</p>
+<p><img src="https://z1.ax1x.com/2023/08/01/pP9q2TS.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://z1.ax1x.com/2023/08/01/pP9qWFg.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>再看看 请求头 我们可以看到它 返回一个<code>qrsig的cookie</code> 这个应该是签名密钥了 标记二维码信息</p>
 <p>这个api的信息是固定的 直接请求即可</p>
-<p><img src="https://z1.ax1x.com/2023/08/01/pP9qfYQ.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/08/01/pP9qfYQ.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>我们目前得到了申请端的原理</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">url : <br>https://ssl.ptlogin2.qq.com/ptqrshow?appid=716027609&amp;e=2&amp;l=M&amp;s=3&amp;d=72&amp;v=4&amp;t=0.9719602746914588&amp;daid=383&amp;pt_3rd_aid=100383922&amp;u1=https%3A%2F%2Fgraph.qq.com%2Foauth2.0%2Flogin_jump<br>cookie: qrsig<br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="心跳包"><a href="#心跳包" class="headerlink" title="心跳包"></a>心跳包</h2><p>我们可以看到它请求了很多次这个链接 无非这个链接就是获取二维码状态了</p>
-<p><img src="https://z1.ax1x.com/2023/08/01/pP9qhWj.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="心跳包">心跳包</h2>
+<p>我们可以看到它请求了很多次这个链接 无非这个链接就是获取二维码状态了</p>
+<p><img src="https://z1.ax1x.com/2023/08/01/pP9qhWj.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>看看返回内容 果然是</p>
-<p><img src="https://z1.ax1x.com/2023/08/01/pP9q5Ss.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/08/01/pP9q5Ss.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>再来看看它请求的参数 (我这边申请了两次二维码) 来看看有何不同</p>
-<p><img src="https://z1.ax1x.com/2023/08/01/pP9qIln.png" srcset="/img/loading.gif" lazyload></p>
-<p>可以看到<code>ptqrtoken</code>和<code>action</code>发生了变化 </p>
+<p><img src="https://z1.ax1x.com/2023/08/01/pP9qIln.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>可以看到<code>ptqrtoken</code>和<code>action</code>发生了变化</p>
 <p>所以我们只需要解决这两个参数就能获取二维码状态了</p>
-<p> 经过我在<code>fidder</code>的调试 发现<code>login_sig</code>不会影响结果 所以可以删掉<code>login_sig</code>这个参数 因此该api为</p>
+<p>经过我在<code>fidder</code>的调试 发现<code>login_sig</code>不会影响结果 所以可以删掉<code>login_sig</code>这个参数 因此该api为</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">https://ssl.ptlogin2.qq.com/ptqrlogin?u1=https%3A%2F%2Fgraph.qq.com%2Foauth2.0%2Flogin_jump&amp;ptqrtoken=&#123;&#125;&amp;ptredirect=0&amp;h=1&amp;t=1&amp;g=1&amp;from_ui=1&amp;ptlang=2052&amp;action=0-0-&#123;&#125;&amp;js_ver=23071715&amp;js_type=1&amp;pt_uistyle=40&amp;aid=716027609&amp;daid=383&amp;pt_3rd_aid=100383922&amp;has_onekey=1&amp;&amp;o1vId=271f9cd6edb6fcd5b0cdbfea4b2646a0&amp;pt_js_version=v1.46.0<br></code></pre></td></tr></table></figure>
-
 <p>这里的action不难看出 是一个13位的时间戳<code>0-0-&#123;13位时间戳&#125;</code></p>
 <p>那<code>ptqrtoken</code>呢 这个时候需要<code>js逆向</code>了 因为找遍了所有请求</p>
-<h2 id="解密ptqrtoken"><a href="#解密ptqrtoken" class="headerlink" title="解密ptqrtoken"></a>解密ptqrtoken</h2><p>切进去 这里就是js文件了</p>
-<p><img src="https://z1.ax1x.com/2023/08/01/pP9qoyq.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="解密ptqrtoken">解密ptqrtoken</h2>
+<p>切进去 这里就是js文件了</p>
+<p><img src="https://z1.ax1x.com/2023/08/01/pP9qoyq.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>全局搜索一下<code>ptqrtoken</code></p>
-<p><img src="https://pic.imgdb.cn/item/64c7fe141ddac507cca42800.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://pic.imgdb.cn/item/64c7fe141ddac507cca42800.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>发现只有一处 先打个断点调试一下</p>
-<p><img src="https://pic.imgdb.cn/item/64c7febb1ddac507cca50121.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://pic.imgdb.cn/item/64c7febb1ddac507cca50121.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>由上面图片得到 这里的i是一个链接 但是它后面调用一个叫<code>hash33</code>的函数 并且带上了<code>qrsig</code> 那就在<code>hash33</code>打个断点 跳转进去</p>
-<p><img src="https://pic.imgdb.cn/item/64c7ffb01ddac507cca6563c.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://pic.imgdb.cn/item/64c7ffb01ddac507cca6563c.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>在返回结果继续打个断点 看看是不是我们想要的<code>ptqrtoken</code></p>
-<p><img src="https://pic.imgdb.cn/item/64c800221ddac507cca6eb20.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://pic.imgdb.cn/item/64c800221ddac507cca6eb20.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>嗯 这就是我们想要的<code>ptqrtoken</code> 同时t函数是<code>qrsig</code> 将以下代码翻译为<code>python</code> 示例如下</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_ptqrtoken</span>(<span class="hljs-params">qsing: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">int</span>:<br>    a = <span class="hljs-built_in">len</span>(qsing)<br>    <span class="hljs-built_in">hash</span> = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,a):<br>        <span class="hljs-built_in">hash</span> += ((<span class="hljs-built_in">hash</span> &lt;&lt; <span class="hljs-number">5</span>) &amp; <span class="hljs-number">2147483647</span>) + <span class="hljs-built_in">ord</span>(qsing[i]) &amp; <span class="hljs-number">2147483647</span><br>        <span class="hljs-built_in">hash</span> &amp;= <span class="hljs-number">2147483647</span><br>		<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">hash</span> &amp; <span class="hljs-number">2147483647</span><br></code></pre></td></tr></table></figure>
-
 <p>但是你会发现 即使解开了加密 还是访问不了二维码状态的api</p>
-<h2 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h2><p>这里你如果没安装<code>httpx</code>模块 可以通过以下命令安装</p>
+<h2 id="遇到问题">遇到问题</h2>
+<p>这里你如果没安装<code>httpx</code>模块 可以通过以下命令安装</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install httpx<br></code></pre></td></tr></table></figure>
-
-
-
 <p>这里笔者通过以下python代码进行了简单 封装</p>
 <p><code>这里为申请二维码的</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> httpx<br><br>a = httpx.get(<span class="hljs-string">&quot;https://ssl.ptlogin2.qq.com/ptqrshow?appid=716027609&amp;e=2&amp;l=M&amp;s=3&amp;d=72&amp;v=4&amp;t=0.9719602746914588&amp;daid=383&amp;pt_3rd_aid=100383922&amp;u1=https%3A%2F%2Fgraph.qq.com%2Foauth2.0%2Flogin_jump&quot;</span>)<br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;./qrcode.jpg&quot;</span>,<span class="hljs-string">&quot;wb&quot;</span>) <span class="hljs-keyword">as</span> f:<br>    f.write(a.content)<br>    f.close()<br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;qrsig&quot;</span>,<span class="hljs-string">&quot;w&quot;</span>,encoding=<span class="hljs-string">&quot;utf_8&quot;</span>) <span class="hljs-keyword">as</span> s:<br>    s.write(a.cookies[<span class="hljs-string">&quot;qrsig&quot;</span>])<br>    s.close()<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;获取二维码成功&quot;</span>)<br></code></pre></td></tr></table></figure>
-
 <p>获取<code>心跳包</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> httpx<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> time<br><br><span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.isfile(<span class="hljs-string">&quot;qrsig&quot;</span>) <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> os.path.isfile(<span class="hljs-string">&quot;qrcode.jpg&quot;</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;二维码信息读取失败,请打开get.py获取二维码&quot;</span>)<br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;qrsig&quot;</span>,<span class="hljs-string">&quot;r&quot;</span>,encoding=<span class="hljs-string">&quot;utf_8&quot;</span>) <span class="hljs-keyword">as</span> f:<br>    qrsig = f.read().strip()<br>    f.close()<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_ptqrtoken</span>(<span class="hljs-params">qsing: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">int</span>:<br>    a = <span class="hljs-built_in">len</span>(qsing)<br>    <span class="hljs-built_in">hash</span> = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,a):<br>        <span class="hljs-built_in">hash</span> += ((<span class="hljs-built_in">hash</span> &lt;&lt; <span class="hljs-number">5</span>) &amp; <span class="hljs-number">2147483647</span>) + <span class="hljs-built_in">ord</span>(qsing[i]) &amp; <span class="hljs-number">2147483647</span><br>        <span class="hljs-built_in">hash</span> &amp;= <span class="hljs-number">2147483647</span><br>		<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">hash</span> &amp; <span class="hljs-number">2147483647</span><br><br>time_ = <span class="hljs-built_in">int</span>(time.time() * <span class="hljs-number">1000</span>)<br>h = httpx.get(<span class="hljs-string">f&quot;https://ssl.ptlogin2.qq.com/ptqrlogin?u1=https%3A%2F%2Fgraph.qq.com%2Foauth2.0%2Flogin_jump&amp;ptqrtoken=<span class="hljs-subst">&#123;get_ptqrtoken(qrsig)&#125;</span>&amp;ptredirect=0&amp;h=1&amp;t=1&amp;g=1&amp;from_ui=1&amp;ptlang=2052&amp;action=0-0-<span class="hljs-subst">&#123;time_&#125;</span>&amp;js_ver=23071715&amp;js_type=1&amp;pt_uistyle=40&amp;aid=716027609&amp;daid=383&amp;pt_3rd_aid=100383922&amp;has_onekey=1&amp;&amp;o1vId=271f9cd6edb6fcd5b0cdbfea4b2646a0&amp;pt_js_version=v1.46.0&quot;</span>)<br><span class="hljs-built_in">print</span>(h.status_code)<br></code></pre></td></tr></table></figure>
-
 <p>如果不出意外 它会返回一个403的状态码 而不是200</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">403错误是禁止相应。是HTTP协议中的一个状态码(Status Code)。没有权限访问此站。403错误是网站访问过程中，常见的错误提示。<br></code></pre></td></tr></table></figure>
-
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">200状态码:表示请求已成功,请求所希望的响应头或数据体将随此响应返回<br></code></pre></td></tr></table></figure>
-
 <p>猜想应该是缺少了一个参数</p>
 <p>这个时候打开<code>fidder</code> 抓包软件</p>
-<p>对端口进行抓取 选择<code>重发并编辑</code> 这边我删掉了<code>login_sig</code>参数 </p>
-<p><img src="https://z1.ax1x.com/2023/08/01/pP9xwY8.png" srcset="/img/loading.gif" lazyload></p>
+<p>对端口进行抓取 选择<code>重发并编辑</code> 这边我删掉了<code>login_sig</code>参数</p>
+<p><img src="https://z1.ax1x.com/2023/08/01/pP9xwY8.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>发现还是能正常运行 因此<code>login_sig</code>可以不填写</p>
-<p><img src="https://z1.ax1x.com/2023/08/01/pP9xsyj.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/08/01/pP9xsyj.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>那继续删掉cookie试试能不能访问 如果删掉cookie还能访问 那就是跟cookie无关 否则就是cookie问题</p>
-<p><img src="https://z1.ax1x.com/2023/08/01/pP9xcmn.png" srcset="/img/loading.gif" lazyload></p>
-<p>发现403 看来不能访问跟cookie有关 <img src="https://z1.ax1x.com/2023/08/01/pP9xWkV.png" srcset="/img/loading.gif" lazyload></p>
-<p>那接下来 在cookie里继续删减一些无关参数 </p>
+<p><img src="https://z1.ax1x.com/2023/08/01/pP9xcmn.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>发现403 看来不能访问跟cookie有关 <img src="https://z1.ax1x.com/2023/08/01/pP9xWkV.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>那接下来 在cookie里继续删减一些无关参数</p>
 <p>这里经过我的测试 最后只需要留qrsig就行了 删了其他参数不影响api访问</p>
-<p><img src="https://z1.ax1x.com/2023/08/01/pP9zP0I.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/08/01/pP9zP0I.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>在请求参数上面做了cookie 激动人心的200出现了</p>
-<p><img src="https://z1.ax1x.com/2023/08/01/pP9z8hT.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/08/01/pP9z8hT.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>再写一层封装就行了 最终代码如下面</p>
-<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p><code>get.py</code> 申请二维码登录的</p>
+<h2 id="示例代码">示例代码</h2>
+<p><code>get.py</code> 申请二维码登录的</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> httpx<br><br>a = httpx.get(<span class="hljs-string">&quot;https://ssl.ptlogin2.qq.com/ptqrshow?appid=716027609&amp;e=2&amp;l=M&amp;s=3&amp;d=72&amp;v=4&amp;t=0.9719602746914588&amp;daid=383&amp;pt_3rd_aid=100383922&amp;u1=https%3A%2F%2Fgraph.qq.com%2Foauth2.0%2Flogin_jump&quot;</span>)<br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;./qrcode.jpg&quot;</span>,<span class="hljs-string">&quot;wb&quot;</span>) <span class="hljs-keyword">as</span> f:<br>    f.write(a.content)<br>    f.close()<br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;qrsig&quot;</span>,<span class="hljs-string">&quot;w&quot;</span>,encoding=<span class="hljs-string">&quot;utf_8&quot;</span>) <span class="hljs-keyword">as</span> s:<br>    s.write(a.cookies[<span class="hljs-string">&quot;qrsig&quot;</span>])<br>    s.close()<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;获取二维码成功&quot;</span>)<br></code></pre></td></tr></table></figure>
-
 <p>执行后 当前目录会生成一个二维码 以及保存一个qrsig 登录请使用扫一扫   <code>注意:不要使用二维码识别或者相册识别！！</code></p>
 <p><code>2.py</code> 获取二维码状态</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> httpx<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> time<br><br><span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.isfile(<span class="hljs-string">&quot;qrsig&quot;</span>) <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> os.path.isfile(<span class="hljs-string">&quot;qrcode.jpg&quot;</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;二维码信息读取失败,请打开get.py获取二维码&quot;</span>)<br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;qrsig&quot;</span>,<span class="hljs-string">&quot;r&quot;</span>,encoding=<span class="hljs-string">&quot;utf_8&quot;</span>) <span class="hljs-keyword">as</span> f:<br>    qrsig = f.read().strip()<br>    f.close()<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_ptqrtoken</span>(<span class="hljs-params">qsing: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">int</span>:<br>    a = <span class="hljs-built_in">len</span>(qsing)<br>    <span class="hljs-built_in">hash</span> = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,a):<br>        <span class="hljs-built_in">hash</span> += ((<span class="hljs-built_in">hash</span> &lt;&lt; <span class="hljs-number">5</span>) &amp; <span class="hljs-number">2147483647</span>) + <span class="hljs-built_in">ord</span>(qsing[i]) &amp; <span class="hljs-number">2147483647</span><br>        <span class="hljs-built_in">hash</span> &amp;= <span class="hljs-number">2147483647</span><br>		<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">hash</span> &amp; <span class="hljs-number">2147483647</span><br><br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>    time_ = <span class="hljs-built_in">int</span>(time.time() * <span class="hljs-number">1000</span>)<br>    h = httpx.get(<span class="hljs-string">f&quot;https://ssl.ptlogin2.qq.com/ptqrlogin?u1=https%3A%2F%2Fgraph.qq.com%2Foauth2.0%2Flogin_jump&amp;ptqrtoken=<span class="hljs-subst">&#123;get_ptqrtoken(qrsig)&#125;</span>&amp;ptredirect=0&amp;h=1&amp;t=1&amp;g=1&amp;from_ui=1&amp;ptlang=2052&amp;action=0-0-<span class="hljs-subst">&#123;time_&#125;</span>&amp;js_ver=23071715&amp;js_type=1&amp;pt_uistyle=40&amp;aid=716027609&amp;daid=383&amp;pt_3rd_aid=100383922&amp;has_onekey=1&amp;&amp;o1vId=271f9cd6edb6fcd5b0cdbfea4b2646a0&amp;pt_js_version=v1.46.0&quot;</span>,cookies=&#123;<span class="hljs-string">&quot;qrsig&quot;</span>:qrsig&#125;)<br><br>    <span class="hljs-keyword">if</span> h.status_code != <span class="hljs-number">200</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;登录遇到问题&quot;</span>)<br>        <span class="hljs-keyword">break</span><br>    <br>    k = h.text.split(<span class="hljs-string">&quot;,&quot;</span>)<br><br>    <span class="hljs-keyword">if</span> k[<span class="hljs-number">0</span>] == <span class="hljs-string">&quot;ptuiCB(&#x27;65&#x27;&quot;</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;二维码已失效&quot;</span>)<br>        <span class="hljs-keyword">break</span><br><br>    <span class="hljs-keyword">if</span> k[<span class="hljs-number">0</span>] == <span class="hljs-string">&quot;ptuiCB(&#x27;67&#x27;&quot;</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;二维码已被扫描,等待被确认&quot;</span>)<br>        <br>    <span class="hljs-keyword">if</span> k[<span class="hljs-number">0</span>] == <span class="hljs-string">&quot;ptuiCB(&#x27;68&#x27;&quot;</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;二维码登录被拒绝&quot;</span>)<br>        <span class="hljs-keyword">break</span><br><br>    <span class="hljs-keyword">if</span> k[<span class="hljs-number">0</span>] == <span class="hljs-string">&quot;ptuiCB(&#x27;66&#x27;&quot;</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;等待扫描二维码,二维码未失效&quot;</span>)<br>    <br>    <span class="hljs-keyword">if</span> k[<span class="hljs-number">0</span>] == <span class="hljs-string">&quot;ptuiCB(&#x27;0&#x27;&quot;</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;登录成功\n以下是你的登录链接&quot;</span>)<br>        <span class="hljs-built_in">print</span>(k[<span class="hljs-number">2</span>])<br>        <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;按任意键退出\n&quot;</span>)<br>        <span class="hljs-keyword">break</span><br><br>    time.sleep(<span class="hljs-number">3</span>)<br></code></pre></td></tr></table></figure>
-
 <p>执行文件后 去扫描当前目录下的二维码 没有二维码请先执行<code>get.py</code> 如果没错误 则会返回一个登录链接 点进去就能登录了</p>
-<h2 id="源码下载"><a href="#源码下载" class="headerlink" title="源码下载"></a>源码下载</h2><p>这里我方便大家运行 我稍微改了一下 以下是传送门</p>
-<p> 👇 👇 👇</p>
+<h2 id="源码下载">源码下载</h2>
+<p>这里我方便大家运行 我稍微改了一下 以下是传送门</p>
+<p>👇 👇 👇</p>
 <p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1_vOP6DYKvODvB8RdyMDHnw?pwd=9ajb">传送门</a></p>
-<p> 👆 👆 👆</p>
-<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="https://z1.ax1x.com/2023/08/01/pP9zODs.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>这篇博文写了挺久的 希望能帮助到你 下期见！！！</p>
+<p>👆 👆 👆</p>
+<h2 id="效果">效果</h2>
+<p><img src="https://z1.ax1x.com/2023/08/01/pP9zODs.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="后记">后记</h2>
+<p>这篇博文写了挺久的 希望能帮助到你 下期见！！！</p>
 
                 
               </div>
@@ -628,6 +625,11 @@
 
 
   
+
+
+  
+  
+
 
 
 

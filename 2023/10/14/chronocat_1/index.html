@@ -48,6 +48,8 @@
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -338,107 +340,101 @@
                 <p>最近<code>go-cqhttp</code>发表了一个重要通知，就是因为<code>txsb</code>频繁的去修改加密签名，<code>go-cqhttp</code>开发组已无力去维护本项目，协议库的时代已成为过去，陪伴了我们三年的时间</p>
 <p>我们可以在<code>gocq</code>的<code>GitHub</code><a target="_blank" rel="noopener" href="https://github.com/Mrs4s/go-cqhttp">仓库</a>看到这样的一句话</p>
 <span id="more"></span>
-<p><img src="https://z1.ax1x.com/2023/10/13/pipcjQx.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/10/13/pipcjQx.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>因为本人在学校里住宿，平时只能节假日或者周末上线，所以得知消息来晚了一点<code>(以下是官方原话自行看吧)</code></p>
-<p><img src="https://pic.imgdb.cn/item/652965b5c458853aefb0e53a.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://pic.imgdb.cn/item/652965b5c458853aefb0e53a.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>所以本期教程就使用推荐的框架<code>Chronocat</code></p>
-<h2 id="配置客户端"><a href="#配置客户端" class="headerlink" title="配置客户端"></a>配置客户端</h2><p>首先是安装<code>QQNT</code>版官方客户端  这里<code>Chronocat推荐了</code>了三个版本 选择对应的系统下载👇 👇</p>
+<h2 id="配置客户端">配置客户端</h2>
+<p>首先是安装<code>QQNT</code>版官方客户端  这里<code>Chronocat推荐了</code>了三个版本 选择对应的系统下载👇 👇</p>
 <p><a target="_blank" rel="noopener" href="https://dldir1.qq.com/qqfile/qq/QQNT/8ebcccd2/QQ9.9.0.14619_x64.exe">Windows</a></p>
 <p><a target="_blank" rel="noopener" href="https://dldir1.qq.com/qqfile/qq/QQNT/5333e29d/QQ_v6.9.12-10951.dmg">macOS</a></p>
 <p><a target="_blank" rel="noopener" href="https://dldir1.qq.com/qqfile/qq/QQNT/ad5b5393/linuxqq_3.1.2-13107_amd64.deb">Linux</a></p>
 <p>本期教程以Windows系统演示</p>
 <p>这里博主已经安装好了</p>
-<p><img src="https://pic.imgdb.cn/item/652966e9c458853aefb4ee4a.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://pic.imgdb.cn/item/652966e9c458853aefb4ee4a.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>登录之后 <code>左下角的三条横线-&gt;设置-&gt;登录设置</code></p>
-<p><img src="https://pic.imgdb.cn/item/6529673ac458853aefb64a3c.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://pic.imgdb.cn/item/6529673ac458853aefb64a3c.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>把第一个和第二个打开 然后关掉设置</p>
 <p>客户端已经配置好了 接下来去下载框架本体</p>
-<h2 id="安装Liteloader"><a href="#安装Liteloader" class="headerlink" title="安装Liteloader"></a>安装Liteloader</h2><p>因为Chronocat需要liteloader来启动 所以还要下一个liteloader 下载链接已经准备好了</p>
+<h2 id="安装Liteloader">安装Liteloader</h2>
+<p>因为Chronocat需要liteloader来启动 所以还要下一个liteloader 下载链接已经准备好了</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/LiteLoaderQQNT/LiteLoaderQQNT/releases/download/0.5.3/LiteLoaderQQNT-Launcher_x86.exe">Windows 32位</a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/LiteLoaderQQNT/LiteLoaderQQNT/releases/download/0.5.3/LiteLoaderQQNT-Launcher_x64.exe">Windows 64位</a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/LiteLoaderQQNT/LiteLoaderQQNT/releases/download/0.5.3/LiteLoaderQQNT.zip">补丁(必须)</a></p>
 <p>把补丁解压 放到你的qqnt安装目录下的 <code>resources-&gt;app</code>文件夹</p>
-<p><img src="https://pic.imgdb.cn/item/6529690ac458853aefbd36b4.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://pic.imgdb.cn/item/6529690ac458853aefbd36b4.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>打开下面的<code>package.json</code>文件 修改如下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">  &#123;<br>   ...<br>   <span class="hljs-string">&quot;homepage&quot;</span>: <span class="hljs-string">&quot;https://im.qq.com&quot;</span>,<br>   <span class="hljs-string">&quot;sideEffects&quot;</span>: <span class="hljs-literal">true</span>,<br>-  <span class="hljs-string">&quot;main&quot;</span>: <span class="hljs-string">&quot;./app_launcher/index.js&quot;</span>,<br>+  <span class="hljs-string">&quot;main&quot;</span>: <span class="hljs-string">&quot;./LiteLoader&quot;</span>,<br>   ...<br>  &#125;<br></code></pre></td></tr></table></figure>
-
 <p>保存关闭 退出你的qq 重新登录</p>
 <p>打开设置</p>
-<p><img src="https://chronocat.vercel.app/assets/images/settings1-0075a1e4e22c2a9fecd66caf33f89d3f.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://pic.imgdb.cn/item/652969e8c458853aefc002f9.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://chronocat.vercel.app/assets/images/settings1-0075a1e4e22c2a9fecd66caf33f89d3f.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://pic.imgdb.cn/item/652969e8c458853aefc002f9.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>出现这两个说明安装成功了</p>
-<h2 id="安装Chronocat"><a href="#安装Chronocat" class="headerlink" title="安装Chronocat"></a>安装Chronocat</h2><p>下载最新版的插件</p>
+<h2 id="安装Chronocat">安装Chronocat</h2>
+<p>下载最新版的插件</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/chrononeko/chronocat/releases/download/v0.0.52/chronocat-llqqnt-v0.0.52.zip">chronocat-llqqnt-v0.0.52.zip</a></p>
 <p><a target="_blank" rel="noopener" href="https://cdn.bingyue.top/chronocat-llqqnt-v0.0.52.zip">备用下载链接</a></p>
 <p>解压 打开你电脑上的文档文件夹 找到<code>LiteLoaderQQNT</code>文件夹</p>
-<p><img src="https://pic.imgdb.cn/item/65296af3c458853aefc39619.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://pic.imgdb.cn/item/65296af3c458853aefc39619.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>打开该文件夹 进入plugins文件夹 把解压好的<code>chronocat-llqqnt-v0.0.52</code>复制进去</p>
-<p><img src="https://pic.imgdb.cn/item/65296b5ec458853aefc50b36.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://pic.imgdb.cn/item/65296b5ec458853aefc50b36.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>重启一下QQ 确保插件正确加载</p>
-<p><img src="https://pic.imgdb.cn/item/65296bd4c458853aefc6b676.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://pic.imgdb.cn/item/65296bd4c458853aefc6b676.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>已经安装好了</p>
-<h2 id="对接Nonebot"><a href="#对接Nonebot" class="headerlink" title="对接Nonebot"></a>对接Nonebot</h2><p>确保你已经安装<code>nb-cli</code>如果没有可以去我之前的教程<a href="https://blog.bingyue.top/2023/03/26/nonebot2_cr/">查看</a></p>
+<h2 id="对接Nonebot">对接Nonebot</h2>
+<p>确保你已经安装<code>nb-cli</code>如果没有可以去我之前的教程<a href="https://blog.bingyue.top/2023/03/26/nonebot2_cr/">查看</a></p>
 <p>打开你的<code>cmd or powershell</code> 输入如下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install nonebot-adapter-red<br>pip install nonebot2[httpx]<br>pip install nonebot2[websockets]<br>pip install nonebot2[aiohttp]<br></code></pre></td></tr></table></figure>
-
 <p>安装依赖后</p>
 <p>打开我们编写机器人的文件夹</p>
-<p><img src="https://z1.ax1x.com/2023/10/14/pi9pkyq.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/10/14/pi9pkyq.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>这里我们修改<code>.env.dev</code>和<code>pyproject.toml</code></p>
 <p>打开<code>pyproject.toml</code></p>
 <p>把</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">adapters = [<br>    &#123; name = <span class="hljs-string">&quot;OneBot V11&quot;</span>, module_name = <span class="hljs-string">&quot;nonebot.adapters.onebot.v11&quot;</span> &#125;<br>]<br></code></pre></td></tr></table></figure>
-
 <p>改成</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">adapters = [<br>    &#123; name = <span class="hljs-string">&quot;RedProtocol&quot;</span>, module_name = <span class="hljs-string">&quot;nonebot.adapters.red&quot;</span> &#125;<br>]<br></code></pre></td></tr></table></figure>
-
-<p><img src="https://z1.ax1x.com/2023/10/14/pi9pZwT.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/10/14/pi9pZwT.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>保存退出 如上图所示</p>
 <p>再打开<code>.env.dev</code></p>
 <p>添加内容</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">DRIVER=~httpx+~websockets<br>DRIVER=~aiohttp<br></code></pre></td></tr></table></figure>
-
 <p>保存退出</p>
-<p><img src="https://z1.ax1x.com/2023/10/14/pi9pKfJ.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/10/14/pi9pKfJ.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>返回当前文件夹 启动nonebot</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs bash">10-14 18:12:30 [SUCCESS] nonebot | NoneBot is initializing...<br>10-14 18:12:30 [INFO] nonebot | Current Env: dev<br>10-14 18:12:31 [SUCCESS] nonebot | Succeeded to load plugin <span class="hljs-string">&quot;echo&quot;</span> from <span class="hljs-string">&quot;nonebot.plugins.echo&quot;</span><br>10-14 18:12:31 [SUCCESS] nonebot | Running NoneBot...<br>10-14 18:12:31 [ERROR] nonebot | Error when running startup <span class="hljs-keyword">function</span>. Ignored!<br>Traceback (most recent call last):<br>  File <span class="hljs-string">&quot;&lt;string&gt;&quot;</span>, line 17, <span class="hljs-keyword">in</span> &lt;module&gt;<br>  File <span class="hljs-string">&quot;C:\Users\Administrator\AppData\Local\Programs\Python\Python310\lib\site-packages\nonebot\__init__.py&quot;</span>, line 331, <span class="hljs-keyword">in</span> run<br>    get_driver().run(*args, **kwargs)<br>  File <span class="hljs-string">&quot;C:\Users\Administrator\AppData\Local\Programs\Python\Python310\lib\site-packages\nonebot\drivers\none.py&quot;</span>, line 70, <span class="hljs-keyword">in</span> run<br>    loop.run_until_complete(self._serve())<br>  File <span class="hljs-string">&quot;C:\Users\Administrator\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py&quot;</span>, line 636, <span class="hljs-keyword">in</span> run_until_complete<br>    self.run_forever()<br>  File <span class="hljs-string">&quot;C:\Users\Administrator\AppData\Local\Programs\Python\Python310\lib\asyncio\windows_events.py&quot;</span>, line 321, <span class="hljs-keyword">in</span> run_forever<br>    super().run_forever()<br>  File <span class="hljs-string">&quot;C:\Users\Administrator\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py&quot;</span>, line 603, <span class="hljs-keyword">in</span> run_forever<br>    self._run_once()<br>  File <span class="hljs-string">&quot;C:\Users\Administrator\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py&quot;</span>, line 1899, <span class="hljs-keyword">in</span> _run_once<br>    handle._run()<br>  File <span class="hljs-string">&quot;C:\Users\Administrator\AppData\Local\Programs\Python\Python310\lib\asyncio\events.py&quot;</span>, line 80, <span class="hljs-keyword">in</span> _run<br>    self._context.run(self._callback, *self._args)<br>  File <span class="hljs-string">&quot;C:\Users\Administrator\AppData\Local\Programs\Python\Python310\lib\site-packages\nonebot\drivers\none.py&quot;</span>, line 74, <span class="hljs-keyword">in</span> _serve<br>    await self._startup()<br>&gt; File <span class="hljs-string">&quot;C:\Users\Administrator\AppData\Local\Programs\Python\Python310\lib\site-packages\nonebot\drivers\none.py&quot;</span>, line 82, <span class="hljs-keyword">in</span> _startup<br>    await self._lifespan.startup()<br>  File <span class="hljs-string">&quot;C:\Users\Administrator\AppData\Local\Programs\Python\Python310\lib\site-packages\nonebot\drivers\_lifespan.py&quot;</span>, line 36, <span class="hljs-keyword">in</span> startup<br>    await self._run_lifespan_func(self._startup_funcs)<br>  File <span class="hljs-string">&quot;C:\Users\Administrator\AppData\Local\Programs\Python\Python310\lib\site-packages\nonebot\drivers\_lifespan.py&quot;</span>, line 30, <span class="hljs-keyword">in</span> _run_lifespan_func<br>    await cast(ASYNC_LIFESPAN_FUNC, func)()<br>  File <span class="hljs-string">&quot;C:\Users\Administrator\AppData\Local\Programs\Python\Python310\lib\site-packages\nonebot\adapters\red\adapter.py&quot;</span>, line 67, <span class="hljs-keyword">in</span> startup<br>    raise RuntimeError(<br>RuntimeError: No bots found <span class="hljs-keyword">in</span> config!<br>Please check your config file and make sure it<span class="hljs-string">&#x27;s correct.</span><br><span class="hljs-string">10-14 18:12:31 [INFO] nonebot | Application startup completed.</span><br></code></pre></td></tr></table></figure>
-
 <p>如不出意外 你会收到如下报错</p>
 <p>关闭命令行窗口 打开你的电脑c盘-&gt;user文件夹-&gt;<code>电脑用户名</code>文件夹</p>
-<p>找到一个名叫<code>.chronocat</code>的文件夹<br><img src="https://z1.ax1x.com/2023/10/14/pi9pafH.png" srcset="/img/loading.gif" lazyload></p>
+<p>找到一个名叫<code>.chronocat</code>的文件夹<br>
+<img src="https://z1.ax1x.com/2023/10/14/pi9pafH.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>打开 config-&gt;chronocat.yml</p>
 <p>这里我只做单账号配置 多账号配置参考官方在GitHub写的文档-&gt;<a target="_blank" rel="noopener" href="https://github.com/nonebot/adapter-red/blob/main/README.md">传送门</a></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">################################################################</span><br><span class="hljs-comment">#                           全局配置</span><br><span class="hljs-comment">################################################################</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># 下面的配置是通用的！如果你只登录一个账号，</span><br><span class="hljs-comment"># 那么只需修改下面这部分配置即可！</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment">################################################################</span><br><br><span class="hljs-comment"># servers：服务配置</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># 配置 Chronocat 开启的服务。需要尤其注意服务列表的格式哦~</span><br>servers:<br>  <span class="hljs-comment"># type：服务类型</span><br>  <span class="hljs-comment">#</span><br>  <span class="hljs-comment"># 开启 red 服务只需要指定 type 为 red 即可。</span><br>  - <span class="hljs-built_in">type</span>: red<br><br>    <span class="hljs-comment"># token：服务密码</span><br>    <span class="hljs-comment">#</span><br>    <span class="hljs-comment"># Chronocat 已经自动生成了随机密码。要妥善保存哦！</span><br>    <span class="hljs-comment"># 客户端使用服务时需要提供这个密码！</span><br>    token: <span class="hljs-string">&#x27;8b3b9d03d3f053ae02712a3106e28e178c14c3d1d7a1be73dcf7b763e83b1485&#x27;</span><br><br>    <span class="hljs-comment"># port：服务端口</span><br>    <span class="hljs-comment">#</span><br>    <span class="hljs-comment"># Chronocat 开启 red 服务的端口，默认为 16530。</span><br>    port: 16530<br><br>  <span class="hljs-comment"># 开启 satori 服务与上面相同，指定 type 为 satori 即可。</span><br>  - <span class="hljs-built_in">type</span>: satori<br><br>    <span class="hljs-comment"># 这里的 token 与上面的相同，</span><br>    <span class="hljs-comment"># 但你也可以进行更换，让每个服务使用不同的服务密码。</span><br>    token: <span class="hljs-string">&#x27;8b3b9d03d3f053ae02712a3106e28e178c14c3d1d7a1be73dcf7b763e83b1485&#x27;</span><br><br>    <span class="hljs-comment"># satori 服务的默认端口为 5500。</span><br>    port: 5500<br><span class="hljs-comment">#</span><br></code></pre></td></tr></table></figure>
-
 <p>修改这里的全局配置</p>
 <p>这里的token是随机生成的 每个人的不一样 我们只需要在 <code>type</code>类型为<code>red</code>这里 添加一个服务器地址</p>
 <p>则</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs bash">servers:<br>  <span class="hljs-comment"># type：服务类型</span><br>  <span class="hljs-comment">#</span><br>  <span class="hljs-comment"># 开启 red 服务只需要指定 type 为 red 即可。</span><br>  - <span class="hljs-built_in">type</span>: red<br><br>    <span class="hljs-comment"># token：服务密码</span><br>    <span class="hljs-comment">#</span><br>    <span class="hljs-comment"># Chronocat 已经自动生成了随机密码。要妥善保存哦！</span><br>    <span class="hljs-comment"># 客户端使用服务时需要提供这个密码！</span><br>    token: <span class="hljs-string">&#x27;8b3b9d03d3f053ae02712a3106e28e178c14c3d1d7a1be73dcf7b763e83b1485&#x27;</span><br><br>    <span class="hljs-comment"># port：服务端口</span><br>    <span class="hljs-comment">#</span><br>    <span class="hljs-comment"># Chronocat 开启 red 服务的端口，默认为 16530。</span><br>    port: 16530<br>    listen: localhost  <span class="hljs-comment"># host</span><br></code></pre></td></tr></table></figure>
-
-<p>在这个<code>port:16530</code>下面加一句 </p>
+<p>在这个<code>port:16530</code>下面加一句</p>
 <p>像我这样</p>
-<p><img src="https://z1.ax1x.com/2023/10/14/pi9p5Xq.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/10/14/pi9p5Xq.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>如果你是服务器 你可以把服务器地址填成公网则把<code>localhost</code>改成<code>0.0.0.0</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">请记住你设置的服务器地址<br>请记住type-red下的token<br>请记住type-red下的port<br></code></pre></td></tr></table></figure>
-
-
-
 <p>返回机器人的文件夹 打开<code>env.dev</code></p>
 <p>添加如下内容</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">RED_BOTS=<span class="hljs-string">&#x27;</span><br><span class="hljs-string">[</span><br><span class="hljs-string">  &#123;</span><br><span class="hljs-string">    &quot;port&quot;: &quot;xxx&quot;, # 端口</span><br><span class="hljs-string">    &quot;token&quot;: &quot;xxx&quot;, # token</span><br><span class="hljs-string">    &quot;host&quot;: &quot;xxx&quot; # 服务器地址</span><br><span class="hljs-string">  &#125;</span><br><span class="hljs-string">]</span><br><span class="hljs-string">&#x27;</span><br></code></pre></td></tr></table></figure>
-
 <p>这里为博主修改好的</p>
-<p><img src="https://z1.ax1x.com/2023/10/14/pi9pX9J.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/10/14/pi9pX9J.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>保存 继续启动nonebot</p>
 <p>如果不出意外 你bot的消息会出现在控制台上</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">PS E:\<span class="hljs-built_in">test</span>&gt; nb run<br>10-14 18:26:55 [SUCCESS] nonebot | NoneBot is initializing...<br>10-14 18:26:55 [INFO] nonebot | Current Env: dev<br>10-14 18:26:56 [SUCCESS] nonebot | Succeeded to load plugin <span class="hljs-string">&quot;echo&quot;</span> from <span class="hljs-string">&quot;nonebot.plugins.echo&quot;</span><br>10-14 18:26:56 [SUCCESS] nonebot | Running NoneBot...<br>10-14 18:26:56 [INFO] nonebot | Application startup completed.<br>10-14 18:26:56 [INFO] nonebot | RedProtocol | Bot 35******** connected, Chronocat Version: 0.0.52<br>10-14 18:26:57 [SUCCESS] nonebot | RedProtocol 35******** | [message.group]: Message from 2065708068 <span class="hljs-keyword">in</span> 『纱****************[image: &#123;<span class="hljs-string">&#x27;md5&#x27;</span>: <span class="hljs-string">&#x27;eaedd389*****************&#x27;</span>, <span class="hljs-string">&#x27;size&#x27;</span>: <span class="hljs-string">&#x27;22911&#x27;</span>, <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-string">&#x27;7289************&#x27;</span>, <span class="hljs-string">&#x27;uuid&#x27;</span>: <span class="hljs-string">&#x27;312*******&#x27;</span>, <span class="hljs-string">&#x27;path&#x27;</span>: <span class="hljs-string">&#x27;F:\\QQ\\**************************************************&#x27;</span>, <span class="hljs-string">&#x27;width&#x27;</span>: 321, <span class="hljs-string">&#x27;height&#x27;</span>: 335&#125;]<br>10-14 18:27:00 [SUCCESS] nonebot | RedProtocol 35******** | [message.group]: Message from ULTRAMAN THE NEXT <span class="hljs-keyword">in</span> 『纱***********总群: 6<br>10-14 18:27:03 [SUCCESS] nonebot | RedProtocol 35******** | [message.group]: Message from 2065******** <span class="hljs-keyword">in</span> ******是笨蛋[image: &#123;<span class="hljs-string">&#x27;md5&#x27;</span>: <span class="hljs-string">&#x27;68af1fafbb*************&#x27;</span>, <span class="hljs-string">&#x27;size&#x27;</span>: <span class="hljs-string">&#x27;16316&#x27;</span>, <span class="hljs-string">&#x27;id&#x27;</span>: <span class="hljs-string">&#x27;728**************&#x27;</span>, <span class="hljs-string">&#x27;uuid&#x27;</span>: <span class="hljs-string">&#x27;228*********&#x27;</span>, <span class="hljs-string">&#x27;path&#x27;</span>: <span class="hljs-string">&#x27;F:\\QQ\\***************************************************&#x27;</span>, <span class="hljs-string">&#x27;width&#x27;</span>: 371, <span class="hljs-string">&#x27;height&#x27;</span>: 351&#125;]<br>10-14 18:27:03 [INFO] nonebot | Shutting down<br>10-14 18:27:03 [INFO] nonebot | Waiting <span class="hljs-keyword">for</span> application shutdown.<br>10-14 18:27:03 [INFO] nonebot | Application shutdown complete.<br>PS E:\<span class="hljs-built_in">test</span>&gt;<br></code></pre></td></tr></table></figure>
-
 <p>这样已经部署成功了</p>
-<h2 id="插件编写示例"><a href="#插件编写示例" class="headerlink" title="插件编写示例"></a>插件编写示例</h2><p>写法和gocq的差不多 但是部分api暂不支持</p>
+<h2 id="插件编写示例">插件编写示例</h2>
+<p>写法和gocq的差不多 但是部分api暂不支持</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> nonebot <span class="hljs-keyword">import</span> on_command<br><span class="hljs-keyword">from</span> nonebot.adapters.red.event <span class="hljs-keyword">import</span> GroupMessageEvent<br><span class="hljs-keyword">from</span> nonebot.adapters.red.message <span class="hljs-keyword">import</span> MessageSegment<br><br>a = on_command(<span class="hljs-string">&quot;测试&quot;</span>)<br><br><span class="hljs-meta">@a.handle()</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">_</span>(<span class="hljs-params">event: GroupMessageEvent</span>):<br>    <span class="hljs-keyword">await</span> a.finish(<span class="hljs-string">f&quot;bingyue-&gt;<span class="hljs-subst">&#123;event.get_user_id()&#125;</span> ok&quot;</span>+MessageSegment.face(<span class="hljs-string">&#x27;124&#x27;</span>))<br></code></pre></td></tr></table></figure>
-
-<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="https://z1.ax1x.com/2023/10/14/pi99jIS.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>编写不容易，该框架的写法和gocq基本一致，基本能日用了，坏处就是得挂个qqnt</p>
+<h2 id="效果">效果</h2>
+<p><img src="https://z1.ax1x.com/2023/10/14/pi99jIS.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="最后">最后</h2>
+<p>编写不容易，该框架的写法和gocq基本一致，基本能日用了，坏处就是得挂个qqnt</p>
 <p>唉 傻逼腾讯</p>
 
                 
@@ -627,6 +623,11 @@
 
 
   
+
+
+  
+  
+
 
 
 

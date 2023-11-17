@@ -48,6 +48,8 @@
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -338,15 +340,16 @@
                 <p>大家好，由于最近<code>nonebot2</code>的更新，官方的已经不再生成<code>bot.py</code>所以今天来教大家，如何在创建项目，并运行项目</p>
 <span id="more"></span>
 <p>**本文写于2023-03-26 **</p>
-<h2 id="1-下载nb-cli"><a href="#1-下载nb-cli" class="headerlink" title="1.下载nb-cli"></a>1.下载nb-cli</h2><p>首先在你的桌面<code>空白处</code>用按住键盘<code>shift</code>键，加上你的鼠标<code>右键</code></p>
+<h2 id="1-下载nb-cli">1.下载nb-cli</h2>
+<p>首先在你的桌面<code>空白处</code>用按住键盘<code>shift</code>键，加上你的鼠标<code>右键</code></p>
 <p>不出意料的话如下图所示</p>
 <p><img src="https://z1.ax1x.com/2023/03/26/ppraIzQ.jpg" srcset="/img/loading.gif" lazyload alt="ppraIzQ.jpg"></p>
 <p>选择<code>打开powershell</code></p>
 <p>输入如下三句命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install nb-cli<br>pip install nonebot2<br>pip install nonebot2[fastapi]<br></code></pre></td></tr></table></figure>
-
 <p><img src="https://z1.ax1x.com/2023/03/26/ppravJU.jpg" srcset="/img/loading.gif" lazyload alt="就这样"></p>
-<h2 id="2-创建项目"><a href="#2-创建项目" class="headerlink" title="2.创建项目"></a>2.创建项目</h2><p>这个时候切记不要关闭你的<code>powershell</code></p>
+<h2 id="2-创建项目">2.创建项目</h2>
+<p>这个时候切记不要关闭你的<code>powershell</code></p>
 <p>输入一句<code>nb</code>然后回车</p>
 <p>选择创建项目</p>
 <p><img src="https://z1.ax1x.com/2023/03/26/pprdnQH.jpg" srcset="/img/loading.gif" lazyload alt="创建项目"></p>
@@ -358,24 +361,21 @@
 <p><strong>注意：上下切换选项目 空格选择 回车确认</strong> 一定要记住</p>
 <p>选择<code>fastapi</code></p>
 <p><img src="https://z1.ax1x.com/2023/03/26/pprd0wq.jpg" srcset="/img/loading.gif" lazyload alt="fastapi"></p>
-<p>选择<code>onebot v11</code>协议 </p>
+<p>选择<code>onebot v11</code>协议</p>
 <p><img src="https://z1.ax1x.com/2023/03/26/pprdcpF.jpg" srcset="/img/loading.gif" lazyload alt="onebot"></p>
 <p>选择在<code>scr</code>目录下</p>
 <p><img src="https://z1.ax1x.com/2023/03/26/pprdRX9.jpg" srcset="/img/loading.gif" lazyload alt="scr"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">立即安装依赖 输入y<br>创建虚拟环境 输入n<br></code></pre></td></tr></table></figure>
-
 <p>接下来 选择echo插件</p>
 <p><img src="https://z1.ax1x.com/2023/03/26/pprdTfO.jpg" srcset="/img/loading.gif" lazyload alt="echo"></p>
 <p>回车</p>
 <p>大功告成</p>
-<h2 id="3-运行nonebot2"><a href="#3-运行nonebot2" class="headerlink" title="3.运行nonebot2"></a>3.运行nonebot2</h2><p>打开你的文件夹</p>
+<h2 id="3-运行nonebot2">3.运行nonebot2</h2>
+<p>打开你的文件夹</p>
 <p>以下是文件的介绍</p>
 <p><img src="https://z1.ax1x.com/2023/03/26/pprwfgg.png" srcset="/img/loading.gif" lazyload alt="123"></p>
 <p>先打开<code>env.dev</code> 复制粘贴如下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">HOST=0.0.0.0  <span class="hljs-comment"># 配置 NoneBot 监听的 IP / 主机名 默认127.0.0.1</span><br>PORT=8080  <span class="hljs-comment"># 配置 NoneBot 监听的端口 这里设置成你的cq监听接口</span><br>COMMAND_START=[<span class="hljs-string">&quot;/&quot;</span>]  <span class="hljs-comment"># 配置命令起始字符</span><br>COMMAND_SEP=[<span class="hljs-string">&quot;.&quot;</span>]  <span class="hljs-comment"># 配置命令分割字符</span><br></code></pre></td></tr></table></figure>
-
-
-
 <p><code>pyproject.toml</code>修改如下</p>
 <p><img src="https://z1.ax1x.com/2023/03/26/ppr00iV.png" srcset="/img/loading.gif" lazyload alt="q"></p>
 <p>启动nonebot</p>
@@ -383,10 +383,10 @@
 <p>参考<code>步骤1</code></p>
 <p>然后输入如下命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nb run<br></code></pre></td></tr></table></figure>
-
 <p>出现下图你的nb就启动成功了</p>
 <p><img src="https://z1.ax1x.com/2023/03/26/ppr0rzF.png" srcset="/img/loading.gif" lazyload alt="test"></p>
-<h2 id="写到最后"><a href="#写到最后" class="headerlink" title="写到最后"></a>写到最后</h2><p>感谢你看到这里 关于<strong>个人如何编写插件</strong> 将放到7月份讲 如有问题可以点击博客上面的<code>关于</code>加作者qq</p>
+<h2 id="写到最后">写到最后</h2>
+<p>感谢你看到这里 关于<strong>个人如何编写插件</strong> 将放到7月份讲 如有问题可以点击博客上面的<code>关于</code>加作者qq</p>
 <p>~~拜拜</p>
 
                 
@@ -575,6 +575,11 @@
 
 
   
+
+
+  
+  
+
 
 
 

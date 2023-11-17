@@ -48,6 +48,8 @@
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -335,14 +337,15 @@
             
               <div class="markdown-body">
                 
-                <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><span id="more"></span>
+                <h2 id="题目">题目</h2>
+<span id="more"></span>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">请你设计一个可以解释字符串<span class="hljs-built_in">command</span>的Goal 解析器。<span class="hljs-built_in">command</span>由<span class="hljs-string">&quot;G&quot;</span>、<span class="hljs-string">&quot;()&quot;</span>和/或<span class="hljs-string">&quot;(al)&quot;</span>按某种顺序组成。<br>Goal 解析器会将<span class="hljs-string">&quot;G&quot;</span>解释为字符串<span class="hljs-string">&quot;G&quot;</span>、<span class="hljs-string">&quot;()&quot;</span>解释为字符串<span class="hljs-string">&quot;o&quot;</span>，<span class="hljs-string">&quot;(al)&quot;</span>解释为字符串<span class="hljs-string">&quot;al&quot;</span>。然后，按原顺序将经解释得到的字符串连接成一个字符串。<br><br>给你字符串<span class="hljs-built_in">command</span>，返回Goal解析器对<span class="hljs-built_in">command</span>的解释结果。<br><br>示例 1：<br>输入：<span class="hljs-built_in">command</span> = <span class="hljs-string">&quot;G()(al)&quot;</span> 输出：<span class="hljs-string">&quot;Goal&quot;</span> <br>解释：Goal 解析器解释命令的步骤如下所示： G -&gt; G () -&gt; o (al) -&gt; al 最后连接得到的结果是 <span class="hljs-string">&quot;Goal&quot;</span><br></code></pre></td></tr></table></figure>
-
 <p><br></br></p>
-<h2 id="题解代码"><a href="#题解代码" class="headerlink" title="题解代码"></a>题解代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">interpret</span>(<span class="hljs-params">self, command: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">str</span>:<br>        <span class="hljs-keyword">return</span> command.replace(<span class="hljs-string">&quot;()&quot;</span>,<span class="hljs-string">&quot;o&quot;</span>).replace(<span class="hljs-string">&quot;(al)&quot;</span>,<span class="hljs-string">&quot;al&quot;</span>)<br></code></pre></td></tr></table></figure>
-
+<h2 id="题解代码">题解代码</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">interpret</span>(<span class="hljs-params">self, command: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">str</span>:<br>        <span class="hljs-keyword">return</span> command.replace(<span class="hljs-string">&quot;()&quot;</span>,<span class="hljs-string">&quot;o&quot;</span>).replace(<span class="hljs-string">&quot;(al)&quot;</span>,<span class="hljs-string">&quot;al&quot;</span>)<br></code></pre></td></tr></table></figure>
 <p><br></br></p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>直接替换就完事<br></p>
+<h2 id="解题思路">解题思路</h2>
+<p>直接替换就完事<br></p>
 
                 
               </div>
@@ -537,6 +540,11 @@
 
 
   
+
+
+  
+  
+
 
 
 

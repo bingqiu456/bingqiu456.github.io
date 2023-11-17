@@ -49,6 +49,8 @@
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -336,14 +338,17 @@
             
               <div class="markdown-body">
                 
-                <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><span id="more"></span>
+                <h2 id="题目">题目</h2>
+<span id="more"></span>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组s的形式给出。<br>不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。<br><br>示例 1：<br>输入：s = [<span class="hljs-string">&quot;h&quot;</span>,<span class="hljs-string">&quot;e&quot;</span>,<span class="hljs-string">&quot;l&quot;</span>,<span class="hljs-string">&quot;l&quot;</span>,<span class="hljs-string">&quot;o&quot;</span>] 输出：[<span class="hljs-string">&quot;o&quot;</span>,<span class="hljs-string">&quot;l&quot;</span>,<span class="hljs-string">&quot;l&quot;</span>,<span class="hljs-string">&quot;e&quot;</span>,<span class="hljs-string">&quot;h&quot;</span>] <br><br>示例 2：<br>输入：s = [<span class="hljs-string">&quot;H&quot;</span>,<span class="hljs-string">&quot;a&quot;</span>,<span class="hljs-string">&quot;n&quot;</span>,<span class="hljs-string">&quot;n&quot;</span>,<span class="hljs-string">&quot;a&quot;</span>,<span class="hljs-string">&quot;h&quot;</span>] 输出：[<span class="hljs-string">&quot;h&quot;</span>,<span class="hljs-string">&quot;a&quot;</span>,<span class="hljs-string">&quot;n&quot;</span>,<span class="hljs-string">&quot;n&quot;</span>,<span class="hljs-string">&quot;a&quot;</span>,<span class="hljs-string">&quot;H&quot;</span>]<br></code></pre></td></tr></table></figure>
-
 <p><br></br></p>
-<h2 id="题解代码"><a href="#题解代码" class="headerlink" title="题解代码"></a>题解代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">reverseString</span>(<span class="hljs-params">self, s: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>) -&gt; <span class="hljs-literal">None</span>:<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        Do not return anything, modify s in-place instead.</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        u = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">len</span>(s)/<span class="hljs-number">2</span>)<br>        i = -<span class="hljs-number">1</span><br>        h =  <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> h &lt; u:<br>            s[h],s[i] = s[i],s[h]<br>            h += <span class="hljs-number">1</span><br>            i += -<span class="hljs-number">1</span><br><br></code></pre></td></tr></table></figure>
-
+<h2 id="题解代码">题解代码</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs Python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">reverseString</span>(<span class="hljs-params">self, s: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>) -&gt; <span class="hljs-literal">None</span>:<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        Do not return anything, modify s in-place instead.</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        u = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">len</span>(s)/<span class="hljs-number">2</span>)<br>        i = -<span class="hljs-number">1</span><br>        h =  <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> h &lt; u:<br>            s[h],s[i] = s[i],s[h]<br>            h += <span class="hljs-number">1</span><br>            i += -<span class="hljs-number">1</span><br><br></code></pre></td></tr></table></figure>
 <p><br></br></p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>我们不难发现 其实它只是互相一起交换位置而已<br><br>直接用两个指针 一个记录向前的索引 一个记录向后索引<br><br>因为循环一次要两个索引 所以要除2得出总次数<br></p>
+<h2 id="解题思路">解题思路</h2>
+<p>我们不难发现 其实它只是互相一起交换位置而已<br><br>
+直接用两个指针 一个记录向前的索引 一个记录向后索引<br><br>
+因为循环一次要两个索引 所以要除2得出总次数<br></p>
 
                 
               </div>
@@ -540,6 +545,11 @@
 
 
   
+
+
+  
+  
+
 
 
 

@@ -16,12 +16,12 @@
   <meta name="author" content="bingyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="题目描述题目:拿硬币 桌上有 n 堆力扣币，每堆的数量保存在数组 coins 中。我们每次可以选择任意一堆，拿走其中的一枚或者两枚，求拿完所有力扣币的最少次数。">
+    <meta name="description" content="题目描述 题目:拿硬币 桌上有 n 堆力扣币，每堆的数量保存在数组 coins 中。我们每次可以选择任意一堆，拿走其中的一枚或者两枚，求拿完所有力扣币的最少次数。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode LCP06.拿硬币">
 <meta property="og:url" content="http://blog.bingyue.top/2023/03/31/LCP06/index.html">
 <meta property="og:site_name" content="冰月博客">
-<meta property="og:description" content="题目描述题目:拿硬币 桌上有 n 堆力扣币，每堆的数量保存在数组 coins 中。我们每次可以选择任意一堆，拿走其中的一枚或者两枚，求拿完所有力扣币的最少次数。">
+<meta property="og:description" content="题目描述 题目:拿硬币 桌上有 n 堆力扣币，每堆的数量保存在数组 coins 中。我们每次可以选择任意一堆，拿走其中的一枚或者两枚，求拿完所有力扣币的最少次数。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://z1.ax1x.com/2023/06/29/pCwQfkd.png">
 <meta property="article:published_time" content="2023-03-31T14:08:25.000Z">
@@ -47,6 +47,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
 
 
 
@@ -335,7 +337,8 @@
             
               <div class="markdown-body">
                 
-                <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>题目:<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/na-ying-bi/">拿硬币</a></p>
+                <h2 id="题目描述">题目描述</h2>
+<p>题目:<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/na-ying-bi/">拿硬币</a></p>
 <p>桌上有 n 堆力扣币，每堆的数量保存在数组 coins 中。我们每次可以选择任意一堆，拿走其中的一枚或者两枚，求拿完所有力扣币的最少次数。</p>
 <span id="more"></span>
 <p>示例 1：</p>
@@ -345,15 +348,15 @@
 <p>示例 2：</p>
 <p>输入：<code>[2,3,10]</code></p>
 <p>输出：<code>8</code></p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>这时候得分开两种情况讨论</p>
+<h2 id="解题思路">解题思路</h2>
+<p>这时候得分开两种情况讨论</p>
 <p>如果<code>f[i]&lt;2</code> 则算1次</p>
 <p>如果<code>f[i]&gt;=2</code>则算 <code>f[i] / 2 + f[i] % 2</code></p>
-<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p><strong>Python3</strong></p>
+<h2 id="示例代码">示例代码</h2>
+<p><strong>Python3</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">minCount</span>(<span class="hljs-params">self, coins: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:<br>        ans = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,<span class="hljs-built_in">len</span>(coins)):<br>            <span class="hljs-keyword">if</span> coins[i] &lt; <span class="hljs-number">2</span>:<br>                ans+=<span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:<br>                ans += coins[i] // <span class="hljs-number">2</span> + coins[i] % <span class="hljs-number">2</span><br>        <span class="hljs-keyword">return</span> ans<br></code></pre></td></tr></table></figure>
-
 <p><strong>C++</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">minCount</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; coins)</span> </span>&#123;<br>        <span class="hljs-type">int</span> a = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; coins.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            <span class="hljs-keyword">if</span>(coins[i] &lt; <span class="hljs-number">2</span>)&#123;<br>                a++;<br>            &#125;<span class="hljs-keyword">else</span>&#123;<br>                a+=(coins[i]/<span class="hljs-number">2</span> + coins[i] % <span class="hljs-number">2</span>);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> a;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-
 <p><img src="https://z1.ax1x.com/2023/03/31/ppRImee.png" srcset="/img/loading.gif" lazyload alt="w"></p>
 
                 
@@ -542,6 +545,11 @@
 
 
   
+
+
+  
+  
+
 
 
 

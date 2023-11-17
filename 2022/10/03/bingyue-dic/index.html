@@ -16,12 +16,12 @@
   <meta name="author" content="bingyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Bingyue Dictionary✨ 一个可以支持变量的词库系统 基于nonebot2✨">
+    <meta name="description" content="Bingyue Dictionary ✨ 一个可以支持变量的词库系统 基于nonebot2✨">
 <meta property="og:type" content="article">
 <meta property="og:title" content="bingyue-dic使用文档">
 <meta property="og:url" content="http://blog.bingyue.top/2022/10/03/bingyue-dic/index.html">
 <meta property="og:site_name" content="冰月博客">
-<meta property="og:description" content="Bingyue Dictionary✨ 一个可以支持变量的词库系统 基于nonebot2✨">
+<meta property="og:description" content="Bingyue Dictionary ✨ 一个可以支持变量的词库系统 基于nonebot2✨">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://z1.ax1x.com/2023/06/29/pCwQRTH.png">
 <meta property="article:published_time" content="2022-10-03T05:58:25.000Z">
@@ -49,6 +49,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
 
 
 
@@ -338,52 +340,62 @@
               <div class="markdown-body">
                 
                 <div align="center">
-
-<h1 id="Bingyue-Dictionary"><a href="#Bingyue-Dictionary" class="headerlink" title="Bingyue Dictionary"></a>Bingyue Dictionary</h1><p><em>✨ 一个可以支持变量的词库系统 基于nonebot2✨</em><br>    <br></br></p>
+<h1>Bingyue Dictionary</h1>
+<p><em>✨ 一个可以支持变量的词库系统 基于nonebot2✨</em><br>
+<br></br></p>
 </div>
-
 <span id="more"></span>
-
-<h1 id="如何安装-如何使用"><a href="#如何安装-如何使用" class="headerlink" title="如何安装?如何使用?"></a>如何安装?如何使用?</h1><p>1.首先确保电脑上有<code>python3.7或者更高版本</code></p>
+<h1>如何安装?如何使用?</h1>
+<p>1.首先确保电脑上有<code>python3.7或者更高版本</code></p>
 <p>2.打开你的<code>cmd</code></p>
 <p>3.先把镜像站切换到清华源</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip config <span class="hljs-built_in">set</span> global.index-url https://pypi.tuna.tsinghua.edu.cn/simple<br></code></pre></td></tr></table></figure>
-
 <p>4.然后安装我的库</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install bingyue-dic<br></code></pre></td></tr></table></figure>
-
 <p>5.如果出现<code>Requirement already</code>或者<code>Successfully</code>就说明已经安装成功</p>
 <p>6.加载到nonebot上</p>
 <p>打开你的<code>bot.py</code> 加上这条语句</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nonebot.load_plugin(<span class="hljs-string">&quot;bingyue_dic&quot;</span>)<br></code></pre></td></tr></table></figure>
-
 <p>同时在你的<code>.env.dev（nonebot配置文件）</code>加上</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">owner_dic=1212212<br>admin_dic=[<span class="hljs-string">&quot;1001&quot;</span>,<span class="hljs-string">&quot;10212&quot;</span>]<br></code></pre></td></tr></table></figure>
-
 <p>7.在你的nonebot机器人目录下 新建一个叫<code>dic</code>的文件夹</p>
 <p>再新建一个<code>dic.txt</code></p>
 <p>就能开始编写词库了</p>
 <p><br></br></p>
-<h1 id="一键部署"><a href="#一键部署" class="headerlink" title="一键部署"></a>一键部署</h1><p>1.确保你电脑已经拥有<code>python3.7</code>或<code>更高版本</code><br><br>2.<a target="_blank" rel="noopener" href="https://github.com/bingqiu456/bingyue-dic/releases/download/0.9.0/bingyue-dic.zip">点击下载部署包</a><br><br>3.解压<br><br>4.运行<code>安装依赖库.bat</code><br><br>5.运行<code>点我启动.bat</code><br><br>6.在<code>cq配置文件里</code> <br></p>
+<h1>一键部署</h1>
+<p>1.确保你电脑已经拥有<code>python3.7</code>或<code>更高版本</code><br><br>
+2.<a target="_blank" rel="noopener" href="https://github.com/bingqiu456/bingyue-dic/releases/download/0.9.0/bingyue-dic.zip">点击下载部署包</a><br><br>
+3.解压<br><br>
+4.运行<code>安装依赖库.bat</code><br><br>
+5.运行<code>点我启动.bat</code><br><br>
+6.在<code>cq配置文件里</code> <br></p>
 <p>找到<br></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">universal: ws://your_websocket_universal.server<br></code></pre></td></tr></table></figure>
 <p>改成</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">universal: ws://127.0.0.1:20000/onebot/v11/ws/<br></code></pre></td></tr></table></figure>
-
 <p><br></br></p>
-<h1 id="配置说明"><a href="#配置说明" class="headerlink" title="配置说明"></a>配置说明</h1><p>1.打开你的<code>.env.dev</code><br><br>2.输入如下<code>(已有的无需重复操作)</code><br></p>
+<h1>配置说明</h1>
+<p>1.打开你的<code>.env.dev</code><br><br>
+2.输入如下<code>(已有的无需重复操作)</code><br></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">owner_dic=0 <span class="hljs-comment">##词库主人</span><br>admin_dic=[<span class="hljs-string">&quot;0&quot;</span>] <span class="hljs-comment">##词库管理员列表</span><br></code></pre></td></tr></table></figure>
 <p>3.保存</p>
 <p><br></br></p>
-<h1 id="截图预览"><a href="#截图预览" class="headerlink" title="截图预览"></a>截图预览</h1><p><img src="https://z1.ax1x.com/2022/10/03/xQFtQP.jpg" srcset="/img/loading.gif" lazyload alt="效果如下"></p>
+<h1>截图预览</h1>
+<p><img src="https://z1.ax1x.com/2022/10/03/xQFtQP.jpg" srcset="/img/loading.gif" lazyload alt="效果如下"></p>
 <p><br></br></p>
-<h1 id="关于最后"><a href="#关于最后" class="headerlink" title="关于最后"></a>关于最后</h1><ul>
+<h1>关于最后</h1>
+<ul>
 <li>作者 : Bingyue</li>
 <li>QQ : 35***19417</li>
 <li>github : bingqiu456</li>
 <li>编写时间 2022-10-02 13:33:02</li>
 </ul>
-<p>最后本项目<br><br>仅供<code>研究学习</code> 请不要<code>内战</code><br><br>但我劝你最好去学<code>python</code> 编写属于自己的插件<br><br><code>伪代码</code>没啥前途 说真的<br><br>更新随缘<br><br>同时也不要拿去跟某些框架比<br></p>
+<p>最后本项目<br><br>
+仅供<code>研究学习</code> 请不要<code>内战</code><br><br>
+但我劝你最好去学<code>python</code> 编写属于自己的插件<br><br>
+<code>伪代码</code>没啥前途 说真的<br><br>
+更新随缘<br><br>
+同时也不要拿去跟某些框架比<br></p>
 
                 
               </div>
@@ -582,6 +594,11 @@
 
 
   
+
+
+  
+  
+
 
 
 

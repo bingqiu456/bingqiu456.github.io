@@ -16,12 +16,12 @@
   <meta name="author" content="bingyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="题目描述1014. 最佳观光组合给你一个正整数数组 values，其中 values[i] 表示第 i 个观光景点的评分，并且两个景点 i 和 j 之间的 距离 为 j - i。">
+    <meta name="description" content="题目描述 1014. 最佳观光组合 给你一个正整数数组 values，其中 values[i] 表示第 i 个观光景点的评分，并且两个景点 i 和 j 之间的 距离 为 j - i。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode 1014.最佳观光组合">
 <meta property="og:url" content="http://blog.bingyue.top/2023/04/08/leetcode1014/index.html">
 <meta property="og:site_name" content="冰月博客">
-<meta property="og:description" content="题目描述1014. 最佳观光组合给你一个正整数数组 values，其中 values[i] 表示第 i 个观光景点的评分，并且两个景点 i 和 j 之间的 距离 为 j - i。">
+<meta property="og:description" content="题目描述 1014. 最佳观光组合 给你一个正整数数组 values，其中 values[i] 表示第 i 个观光景点的评分，并且两个景点 i 和 j 之间的 距离 为 j - i。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://z1.ax1x.com/2023/06/29/pCwQfkd.png">
 <meta property="article:published_time" content="2023-04-07T16:37:25.000Z">
@@ -48,6 +48,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
 
 
 
@@ -336,22 +338,23 @@
             
               <div class="markdown-body">
                 
-                <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><h4 id="1014-最佳观光组合"><a href="#1014-最佳观光组合" class="headerlink" title="1014. 最佳观光组合"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-sightseeing-pair/">1014. 最佳观光组合</a></h4><p>给你一个正整数数组 values，其中 values[i] 表示第 i 个观光景点的评分，并且两个景点 i 和 j 之间的 距离 为 j - i。</p>
+                <h2 id="题目描述">题目描述</h2>
+<h4 id="1014-最佳观光组合"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-sightseeing-pair/">1014. 最佳观光组合</a></h4>
+<p>给你一个正整数数组 values，其中 values[i] 表示第 i 个观光景点的评分，并且两个景点 i 和 j 之间的 距离 为 j - i。</p>
 <span id="more"></span>
 <p>一对景点（i &lt; j）组成的观光组合的得分为 values[i] + values[j] + i - j ，也就是景点的评分之和 减去 它们两者之间的距离。</p>
 <p>返回一对观光景点能取得的最高分。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">输入：values = [8,1,5,2,6]<br>输出：11<br>解释：i = 0, j = 2, values[i] + values[j] + i - j = 8 + 5 + 0 - 2 = 11<br></code></pre></td></tr></table></figure>
-
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>本题和股票买卖1类似 具体可以参考股票1的代码</p>
-<p><del>就是加了个ij上去而已</del></p>
+<h2 id="解题思路">解题思路</h2>
+<p>本题和股票买卖1类似 具体可以参考股票1的代码</p>
+<p><s>就是加了个ij上去而已</s></p>
 <p>因此我们可以用两个变量去维护状态</p>
 <p><code>一个更新目前的最大值</code></p>
 <p><code>一个更新values[i]+i</code></p>
-<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 时间复杂度：O(n)</span><br><span class="hljs-comment"># 空间复杂度: O(1)</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">maxScoreSightseeingPair</span>(<span class="hljs-params">self, values: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:<br><br>        a,b = <span class="hljs-number">0</span>,values[<span class="hljs-number">0</span>]+<span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-built_in">len</span>(values)):<br>            a = <span class="hljs-built_in">max</span>(a,b+values[i]-i)<br>            b = <span class="hljs-built_in">max</span>(b,values[i]+i)<br>        <span class="hljs-keyword">return</span> a<br></code></pre></td></tr></table></figure>
-
+<h2 id="示例代码">示例代码</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 时间复杂度：O(n)</span><br><span class="hljs-comment"># 空间复杂度: O(1)</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">maxScoreSightseeingPair</span>(<span class="hljs-params">self, values: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:<br><br>        a,b = <span class="hljs-number">0</span>,values[<span class="hljs-number">0</span>]+<span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-built_in">len</span>(values)):<br>            a = <span class="hljs-built_in">max</span>(a,b+values[i]-i)<br>            b = <span class="hljs-built_in">max</span>(b,values[i]+i)<br>        <span class="hljs-keyword">return</span> a<br></code></pre></td></tr></table></figure>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 时间复杂度：O(n)</span><br><span class="hljs-comment">// 空间复杂度: O(1)</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">maxScoreSightseeingPair</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; values)</span> </span>&#123;<br>        <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>, j = values[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> w = <span class="hljs-number">1</span>; w &lt; values.<span class="hljs-built_in">size</span>(); w++)&#123;<br>            i = <span class="hljs-built_in">max</span>(i,j+values[w]-w);<br>            j = <span class="hljs-built_in">max</span>(j,values[w]+w);<br>        &#125;<br>        <span class="hljs-keyword">return</span> i;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-
-<p><img src="https://z1.ax1x.com/2023/04/08/pp7QoC9.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/04/08/pp7QoC9.png" srcset="/img/loading.gif" lazyload alt=""></p>
 
                 
               </div>
@@ -548,6 +551,11 @@
 
 
   
+
+
+  
+  
+
 
 
 

@@ -51,6 +51,8 @@
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
 
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -346,10 +348,10 @@
 <li>vscode <code>(其他代码编辑器也行)</code></li>
 </ul>
 <span id="more"></span>
-
-<h2 id="申请官方key"><a href="#申请官方key" class="headerlink" title="申请官方key"></a>申请官方key</h2><p>登录<a target="_blank" rel="noopener" href="https://q.qq.com/#/">QQ开发平台</a>，没有账号可以去注册一个号，我这边已经注册好了</p>
-<p><img src="https://z1.ax1x.com/2023/07/20/pCH8cbd.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://z1.ax1x.com/2023/07/20/pCHG4oR.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="申请官方key">申请官方key</h2>
+<p>登录<a target="_blank" rel="noopener" href="https://q.qq.com/#/">QQ开发平台</a>，没有账号可以去注册一个号，我这边已经注册好了</p>
+<p><img src="https://z1.ax1x.com/2023/07/20/pCH8cbd.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://z1.ax1x.com/2023/07/20/pCHG4oR.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>我这里已经申请到key了，你申请之后官方会给你三个票据</p>
 <table>
 <thead>
@@ -358,48 +360,47 @@
 <th>用于识别一个机器人的 id</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>bot_secret</td>
 <td>用于在 oauth 场景进行请求签名的密钥</td>
 </tr>
 <tr>
 <td>bot_token</td>
-<td>机器人token，用于以机器人身份调用 openapi，格式为 ${app_id}.${random_str}</td>
+<td>机器人token，用于以机器人身份调用 openapi，格式为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi>a</mi><mi>p</mi><msub><mi>p</mi><mi>i</mi></msub><mi>d</mi></mrow><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">{app_id}.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="mord mathnormal">p</span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal">d</span></span><span class="mord">.</span></span></span></span>{random_str}</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>这三个东西非常重要 接下来我们去下载nonebot封装的适配器</p>
-<h2 id="下载适配器"><a href="#下载适配器" class="headerlink" title="下载适配器"></a>下载适配器</h2><h3 id="手动下载"><a href="#手动下载" class="headerlink" title="手动下载"></a>手动下载</h3><p>打开<code>powershell</code>输入如下命令</p>
+<h2 id="下载适配器">下载适配器</h2>
+<h3 id="手动下载">手动下载</h3>
+<p>打开<code>powershell</code>输入如下命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">nb adapter install nonebot-adapter-qqguild<br>nb driver install nonebot2[aiohttp]<br></code></pre></td></tr></table></figure>
-
 <p>安装适配器后 打开你的插件目录 找到<code>pyproject.toml</code></p>
-<p><img src="https://z1.ax1x.com/2023/07/20/pCHJDne.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/07/20/pCHJDne.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>把<code>adapters</code>适配器里添加<code>qq频道适配器</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">adapters = [<br>    &#123; name = <span class="hljs-string">&quot;QQ 频道&quot;</span>, module_name = <span class="hljs-string">&quot;nonebot.adapters.qqguild&quot;</span> &#125;<br>]<br></code></pre></td></tr></table></figure>
-
-<p>再找到<code>.env</code>文件  </p>
+<p>再找到<code>.env</code>文件</p>
 <p>把<code>DRIVER=~fastapi</code></p>
-<p><img src="https://z1.ax1x.com/2023/07/20/pCHJo7j.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/07/20/pCHJo7j.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>改成</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">ENVIRONMENT=dev<br>DRIVER=~aiohttp<br></code></pre></td></tr></table></figure>
-
-
-
-<h3 id="懒人安装"><a href="#懒人安装" class="headerlink" title="懒人安装"></a>懒人安装</h3><p>在创建项目的时候 把驱动器改成aiohttp 同时适配器选择qq频道</p>
-<p><img src="https://z1.ax1x.com/2023/07/20/pCHJxuF.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://z1.ax1x.com/2023/07/20/pCHJzB4.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>完事之后，打开你的<code>env.dev.</code></p>
+<h3 id="懒人安装">懒人安装</h3>
+<p>在创建项目的时候 把驱动器改成aiohttp 同时适配器选择qq频道</p>
+<p><img src="https://z1.ax1x.com/2023/07/20/pCHJxuF.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://z1.ax1x.com/2023/07/20/pCHJzB4.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="使用">使用</h2>
+<p>完事之后，打开你的<code>env.dev.</code></p>
 <p>输入如下内容</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">QQGUILD_BOTS=<span class="hljs-string">&#x27;</span><br><span class="hljs-string">[</span><br><span class="hljs-string">  &#123;</span><br><span class="hljs-string">    &quot;id&quot;: &quot;xxx&quot;, #这里是bot_id</span><br><span class="hljs-string">    &quot;token&quot;: &quot;xxx&quot;, # 这里是 bot_secret</span><br><span class="hljs-string">    &quot;secret&quot;: &quot;xxx&quot;, # 这里是bot_token</span><br><span class="hljs-string">    &quot;intent&quot;: &#123;</span><br><span class="hljs-string">      &quot;guild_messages&quot;: true,</span><br><span class="hljs-string">      &quot;at_messages&quot;: false</span><br><span class="hljs-string">    &#125;</span><br><span class="hljs-string">  &#125;</span><br><span class="hljs-string">]</span><br><span class="hljs-string">&#x27;</span><br></code></pre></td></tr></table></figure>
-
 <p>保存</p>
 <p>在当前目录下启动nb</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">07-20 19:59:42 [INFO] nonebot | QQ Guild | Bot ********* connected<br>07-20 19:59:42 [SUCCESS] nonebot | QQ Guild ********** | [READY]: &#123;<span class="hljs-string">&#x27;version&#x27;</span>: 1, <span class="hljs-string">&#x27;session_id&#x27;</span>: <span class="hljs-string">&#x27;********************&#x27;</span>, <span class="hljs-string">&#x27;user&#x27;</span>: &#123;<span class="hljs-string">&#x27;id&#x27;</span>: **********, <span class="hljs-string">&#x27;username&#x27;</span>: <span class="hljs-string">&#x27;*****&#x27;</span>, <span class="hljs-string">&#x27;avatar&#x27;</span>: None, <span class="hljs-string">&#x27;bot&#x27;</span>: True, <span class="hljs-string">&#x27;union_openid&#x27;</span>: None, <span class="hljs-string">&#x27;union_user_account&#x27;</span>: None&#125;, <span class="hljs-string">&#x27;shard&#x27;</span>: (0, 1)&#125;<br></code></pre></td></tr></table></figure>
-
 <p>如果出现上述东西 说明已连接成功 可以自由收发消息了</p>
-<h2 id="插件示例"><a href="#插件示例" class="headerlink" title="插件示例"></a>插件示例</h2><p>这里只展示一些基础写法，可以参考一下</p>
+<h2 id="插件示例">插件示例</h2>
+<p>这里只展示一些基础写法，可以参考一下</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> nonebot <span class="hljs-keyword">import</span> on_fullmatch<br><span class="hljs-keyword">from</span> nonebot.adapters.qqguild <span class="hljs-keyword">import</span> MessageEvent, MessageSegment<br><br>a = on_fullmatch(<span class="hljs-string">&quot;/获取用户id&quot;</span>)<br><br><span class="hljs-meta">@a.handle()</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">_</span>(<span class="hljs-params">event: MessageEvent</span>):<br>    <span class="hljs-keyword">await</span> a.finish(<span class="hljs-string">f&quot;你的用户id为:<span class="hljs-subst">&#123;event.get_user_id()&#125;</span>&quot;</span>)<br><br>b = on_fullmatch(<span class="hljs-string">&quot;/你好&quot;</span>)<br><br><span class="hljs-meta">@b.handle()</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">_</span>(<span class="hljs-params">event: MessageEvent</span>):<br>    <span class="hljs-keyword">await</span> b.finish(MessageSegment.reference(event.<span class="hljs-built_in">id</span>)+<span class="hljs-string">&quot;你也好呀！&quot;</span>)<br></code></pre></td></tr></table></figure>
-
-<p><img src="https://z1.ax1x.com/2023/07/20/pCH0usx.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/07/20/pCH0usx.png" srcset="/img/loading.gif" lazyload alt=""></p>
 
                 
               </div>
@@ -593,6 +594,11 @@
 
 
   
+
+
+  
+  
+
 
 
 

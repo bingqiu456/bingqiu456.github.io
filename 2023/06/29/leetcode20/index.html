@@ -16,12 +16,12 @@
   <meta name="author" content="bingyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="题目详情原题链接点我给定一个只包括&#39;(&#39;，&#39;)&#39;，&#39;&amp;#123;&#39;，&#39;&amp;#125;&#39;，&#39;[&#39;，&#39;]&#39;的字符串 s ，判断字符串是否有效。">
+    <meta name="description" content="题目详情 原题链接点我 给定一个只包括&#39;(&#39;，&#39;)&#39;，&#39;&amp;#123;&#39;，&#39;&amp;#125;&#39;，&#39;[&#39;，&#39;]&#39;的字符串 s ，判断字符串是否有效。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode 20.有效的括号">
 <meta property="og:url" content="http://blog.bingyue.top/2023/06/29/leetcode20/index.html">
 <meta property="og:site_name" content="冰月博客">
-<meta property="og:description" content="题目详情原题链接点我给定一个只包括&#39;(&#39;，&#39;)&#39;，&#39;&amp;#123;&#39;，&#39;&amp;#125;&#39;，&#39;[&#39;，&#39;]&#39;的字符串 s ，判断字符串是否有效。">
+<meta property="og:description" content="题目详情 原题链接点我 给定一个只包括&#39;(&#39;，&#39;)&#39;，&#39;&amp;#123;&#39;，&#39;&amp;#125;&#39;，&#39;[&#39;，&#39;]&#39;的字符串 s ，判断字符串是否有效。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://z1.ax1x.com/2023/06/29/pCwQfkd.png">
 <meta property="article:published_time" content="2023-06-29T01:45:37.000Z">
@@ -48,6 +48,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
 
 
 
@@ -266,7 +268,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.5k 字
+          3.4k 字
         
       </span>
     
@@ -336,59 +338,56 @@
             
               <div class="markdown-body">
                 
-                <h2 id="题目详情"><a href="#题目详情" class="headerlink" title="题目详情"></a>题目详情</h2><p>原题链接<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-parentheses/">点我</a><br>给定一个只包括<code>&#39;(&#39;，&#39;)&#39;，&#39;&#123;&#39;，&#39;&#125;&#39;，&#39;[&#39;，&#39;]&#39;</code>的字符串 s ，判断字符串是否有效。</p>
+                <h2 id="题目详情">题目详情</h2>
+<p>原题链接<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-parentheses/">点我</a><br>
+给定一个只包括<code>'('，')'，'&#123;'，'&#125;'，'['，']'</code>的字符串 s ，判断字符串是否有效。</p>
 <span id="more"></span>
 <p>有效字符串需满足：</p>
-<p>左括号必须用相同类型的右括号闭合。<br>左括号必须以正确的顺序闭合。<br>每个右括号都有一个对应的相同类型的左括号。</p>
+<p>左括号必须用相同类型的右括号闭合。<br>
+左括号必须以正确的顺序闭合。<br>
+每个右括号都有一个对应的相同类型的左括号。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">输入：s = <span class="hljs-string">&quot;()&quot;</span><br>输出：<span class="hljs-literal">true</span><br><br>输入：s = <span class="hljs-string">&quot;()[]&#123;&#125;&quot;</span><br>输出：<span class="hljs-literal">true</span><br><br>输入：s = <span class="hljs-string">&quot;(]&quot;</span><br>输出：<span class="hljs-literal">false</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>这里要用到栈的性质了</p>
+<h2 id="解题思路">解题思路</h2>
+<p>这里要用到栈的性质了</p>
 <p>现在我们有一个数组</p>
-<p><img src="https://z1.ax1x.com/2023/06/29/pCwJpef.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/06/29/pCwJpef.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>但栈的性质是先进来的先出</p>
 <p>有两种操作 进栈和出栈</p>
 <p>也就是 我添加了数字<code>1,2,3</code> 我出栈是3 刚才进来的被踢出去了 所以这个也能拿来检验有效的括号</p>
 <p>现在我们来模拟一下</p>
-<p><img src="https://z1.ax1x.com/2023/06/29/pCwJQkF.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/06/29/pCwJQkF.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>添加一个左(小)括号 进栈</p>
 <p>轮到右小括号的时候 这个时候我们出栈</p>
 <p>如果是右小括号对应的左小括号 则是一个合理的括号</p>
-<p><img src="https://z1.ax1x.com/2023/06/29/pCwJR78.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/06/29/pCwJR78.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>再继续模拟一下<code>错误</code>情况</p>
 <p>进来了一个左<code>小括号</code>和左<code>中括号</code></p>
-<p><img src="https://z1.ax1x.com/2023/06/29/pCwJjNF.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/06/29/pCwJjNF.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>这时候来一个右小括号<code>)</code></p>
 <p>出栈</p>
 <p>但发现是<code>[</code></p>
-<p><img src="https://z1.ax1x.com/2023/06/29/pCwYS39.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/06/29/pCwYS39.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>所以这不是一个合理的括号</p>
 <p>那接下来可以开始写代码了 先创建一个数组 和 字典 <code>(查询括号对应的另一半)</code></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">a = []<br>i = &#123;<span class="hljs-string">&quot;)&quot;</span>:<span class="hljs-string">&quot;(&quot;</span>,<span class="hljs-string">&quot;&#125;&quot;</span>:<span class="hljs-string">&quot;&#123;&quot;</span>,<span class="hljs-string">&quot;]&quot;</span>,<span class="hljs-string">&quot;[&quot;</span>&#125;<br></code></pre></td></tr></table></figure>
-
 <p>开始遍历for循环 左括号进栈 右括号出栈 以及判断</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">for</span> q <span class="hljs-keyword">in</span> s:<br>    <span class="hljs-keyword">if</span> q <span class="hljs-keyword">in</span> [<span class="hljs-string">&quot;(&quot;</span>,<span class="hljs-string">&quot;[&quot;</span>,<span class="hljs-string">&quot;&#123;&quot;</span>]: <span class="hljs-comment"># 左括号进栈</span><br>        a.append(q)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">if</span> a.pop() != i[q]: <span class="hljs-comment"># 如果出栈了不是对应的另一半</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><span class="hljs-keyword">return</span> <span class="hljs-literal">True</span> <span class="hljs-comment"># 否则返回True</span><br></code></pre></td></tr></table></figure>
-
-<p><img src="https://z1.ax1x.com/2023/06/29/pCwYngA.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/06/29/pCwYngA.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>但题目数据范围还有1 也就意味着有 一个字符的测试示例</p>
 <p>一个字符是构不成括号 因此要特殊判断</p>
 <p>最终代码为</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">isValid</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">bool</span>:<br>        <span class="hljs-comment">## 运用栈的性质</span><br><br>        res = [] <span class="hljs-comment"># 先创建一个栈 栈是先进来的先出</span><br><br>        i = &#123;<span class="hljs-string">&quot;)&quot;</span>:<span class="hljs-string">&quot;(&quot;</span>,<span class="hljs-string">&quot;]&quot;</span>:<span class="hljs-string">&quot;[&quot;</span>,<span class="hljs-string">&quot;&#125;&quot;</span>:<span class="hljs-string">&quot;&#123;&quot;</span>&#125; <span class="hljs-comment"># 对应的位置</span><br><br>        <span class="hljs-comment">## 思路</span><br>        <span class="hljs-comment">## 左括号进栈</span><br>        <span class="hljs-comment">## 当遇到右括号时出栈 如果不一致则返回false</span><br><br>        <span class="hljs-keyword">for</span> q <span class="hljs-keyword">in</span> s:<br>            <span class="hljs-keyword">if</span> q <span class="hljs-keyword">in</span> [<span class="hljs-string">&quot;(&quot;</span>,<span class="hljs-string">&quot;&#123;&quot;</span>,<span class="hljs-string">&quot;[&quot;</span>]: <span class="hljs-comment"># 如果是左括号 进栈</span><br>                res.append(q)<br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> res: <span class="hljs-comment"># 因为题目的数据包括一个字符 防止卡特别示例 例如 s = &quot;)&quot;</span><br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>                <span class="hljs-keyword">if</span> res.pop() != i[q]: <span class="hljs-comment"># 右括号出栈 并判断</span><br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">if</span> res: <span class="hljs-comment"># 也是为了防止卡特别示例 s = &quot;[&quot;</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span> <br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span> <br></code></pre></td></tr></table></figure>
-
 <p>但这个特殊判断我写的太麻烦 所以优化一下</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">isValid</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">bool</span>:<br>        <span class="hljs-comment">## 运用栈的性质</span><br><br>        res = [<span class="hljs-string">&quot;?&quot;</span>] <span class="hljs-comment"># 先创建一个栈 栈是先进来的先出</span><br><br>        i = &#123;<span class="hljs-string">&quot;)&quot;</span>:<span class="hljs-string">&quot;(&quot;</span>,<span class="hljs-string">&quot;]&quot;</span>:<span class="hljs-string">&quot;[&quot;</span>,<span class="hljs-string">&quot;&#125;&quot;</span>:<span class="hljs-string">&quot;&#123;&quot;</span>&#125; <span class="hljs-comment"># 对应的位置</span><br><br>        <span class="hljs-comment">## 思路</span><br>        <span class="hljs-comment">## 左括号进栈</span><br>        <span class="hljs-comment">## 当遇到右括号时出栈 如果不一致则返回false</span><br><br>        <span class="hljs-keyword">for</span> q <span class="hljs-keyword">in</span> s:<br>            <span class="hljs-keyword">if</span> q <span class="hljs-keyword">in</span> [<span class="hljs-string">&quot;(&quot;</span>,<span class="hljs-string">&quot;&#123;&quot;</span>,<span class="hljs-string">&quot;[&quot;</span>]: <span class="hljs-comment"># 如果是左括号 进栈</span><br>                res.append(q)<br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">if</span> res.pop() != i[q]: <span class="hljs-comment"># 右括号出栈 并判断</span><br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(res) != <span class="hljs-number">1</span>: <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span> <br></code></pre></td></tr></table></figure>
-
-<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>Python3</p>
+<h2 id="示例代码">示例代码</h2>
+<p>Python3</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">## 时间复杂度: O(n)</span><br><span class="hljs-comment">## 空间复杂度: O(n)</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">isValid</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">bool</span>:<br>        <span class="hljs-comment">## 运用栈的性质</span><br><br>        res = [<span class="hljs-string">&quot;?&quot;</span>] <span class="hljs-comment"># 先创建一个栈 栈是先进来的先出</span><br><br>        i = &#123;<span class="hljs-string">&quot;)&quot;</span>:<span class="hljs-string">&quot;(&quot;</span>,<span class="hljs-string">&quot;]&quot;</span>:<span class="hljs-string">&quot;[&quot;</span>,<span class="hljs-string">&quot;&#125;&quot;</span>:<span class="hljs-string">&quot;&#123;&quot;</span>&#125; <span class="hljs-comment"># 对应的位置</span><br><br>        <span class="hljs-comment">## 思路</span><br>        <span class="hljs-comment">## 左括号进栈</span><br>        <span class="hljs-comment">## 当遇到右括号时出栈 如果不一致则返回false</span><br><br>        <span class="hljs-keyword">for</span> q <span class="hljs-keyword">in</span> s:<br>            <span class="hljs-keyword">if</span> q <span class="hljs-keyword">in</span> [<span class="hljs-string">&quot;(&quot;</span>,<span class="hljs-string">&quot;&#123;&quot;</span>,<span class="hljs-string">&quot;[&quot;</span>]: <span class="hljs-comment"># 如果是左括号 进栈</span><br>                res.append(q)<br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">if</span> res.pop() != i[q]: <span class="hljs-comment"># 右括号出栈 并判断</span><br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(res) != <span class="hljs-number">1</span>: <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span> <br></code></pre></td></tr></table></figure>
-
 <p>C++</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 时间复杂度: O(n)</span><br><span class="hljs-comment">// 空间复杂度: O(n)</span><br><span class="hljs-comment">// 该代码来自官方题解</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isValid</span><span class="hljs-params">(string s)</span> </span>&#123;<br>        <span class="hljs-type">int</span> n = s.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-keyword">if</span> (n % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<br><br>        unordered_map&lt;<span class="hljs-type">char</span>, <span class="hljs-type">char</span>&gt; pairs = &#123;<br>            &#123;<span class="hljs-string">&#x27;)&#x27;</span>, <span class="hljs-string">&#x27;(&#x27;</span>&#125;,<br>            &#123;<span class="hljs-string">&#x27;]&#x27;</span>, <span class="hljs-string">&#x27;[&#x27;</span>&#125;,<br>            &#123;<span class="hljs-string">&#x27;&#125;&#x27;</span>, <span class="hljs-string">&#x27;&#123;&#x27;</span>&#125;<br>        &#125;;<br>        stack&lt;<span class="hljs-type">char</span>&gt; stk;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">char</span> ch: s) &#123;<br>            <span class="hljs-keyword">if</span> (pairs.<span class="hljs-built_in">count</span>(ch)) &#123;<br>                <span class="hljs-keyword">if</span> (stk.<span class="hljs-built_in">empty</span>() || stk.<span class="hljs-built_in">top</span>() != pairs[ch]) &#123;<br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>                &#125;<br>                stk.<span class="hljs-built_in">pop</span>();<br>            &#125;<br>            <span class="hljs-keyword">else</span> &#123;<br>                stk.<span class="hljs-built_in">push</span>(ch);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> stk.<span class="hljs-built_in">empty</span>();<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-
-<p>​    PHP</p>
+<p>​	PHP</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><br>    /**<br>     * @param String $s<br>     * @<span class="hljs-keyword">return</span> Boolean<br>     */<br>    function isValid($s) &#123;<br>        <span class="hljs-keyword">if</span> (strlen($s)==<span class="hljs-number">1</span>)&#123;<span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>;&#125;<br>        $a = array(<span class="hljs-string">&quot;?&quot;</span>);<br><br>        $b = array();<br>        $b[<span class="hljs-string">&quot;)&quot;</span>] = <span class="hljs-string">&quot;(&quot;</span>;<br>        $b[<span class="hljs-string">&quot;&#125;&quot;</span>] = <span class="hljs-string">&quot;&#123;&quot;</span>;<br>        $b[<span class="hljs-string">&quot;]&quot;</span>] = <span class="hljs-string">&quot;[&quot;</span>;<br>        <br>        <span class="hljs-keyword">for</span> ($i = <span class="hljs-number">0</span>; $i &lt; strlen($s); $i++)&#123;<br>            <span class="hljs-keyword">if</span> ($s[$i] == <span class="hljs-string">&quot;&#123;&quot;</span> || $s[$i] == <span class="hljs-string">&quot;(&quot;</span> || $s[$i] == <span class="hljs-string">&quot;[&quot;</span>)&#123;<br>                array_push($a,$s[$i]);<br>            &#125;<span class="hljs-keyword">else</span>&#123;<br>                <span class="hljs-keyword">if</span>(array_pop($a)!= $b[$s[$i]])&#123;<br>                    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (count($a) == <span class="hljs-number">1</span>)&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>;<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="感谢观看"><a href="#感谢观看" class="headerlink" title="感谢观看"></a>感谢观看</h2><p><img src="https://z1.ax1x.com/2023/06/29/pCwtdRH.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="感谢观看">感谢观看</h2>
+<p><img src="https://z1.ax1x.com/2023/06/29/pCwtdRH.png" srcset="/img/loading.gif" lazyload alt=""></p>
 
                 
               </div>
@@ -585,6 +584,11 @@
 
 
   
+
+
+  
+  
+
 
 
 

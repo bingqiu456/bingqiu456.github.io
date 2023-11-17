@@ -16,12 +16,12 @@
   <meta name="author" content="bingyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="题目描述假设你正在爬楼梯。需要 n 阶你才能到达楼顶。">
+    <meta name="description" content="题目描述 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Leetcode 70.爬楼梯题解">
 <meta property="og:url" content="http://blog.bingyue.top/2023/04/04/leetcode70/index.html">
 <meta property="og:site_name" content="冰月博客">
-<meta property="og:description" content="题目描述假设你正在爬楼梯。需要 n 阶你才能到达楼顶。">
+<meta property="og:description" content="题目描述 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://z1.ax1x.com/2023/06/29/pCwQfkd.png">
 <meta property="article:published_time" content="2023-04-04T14:05:25.000Z">
@@ -48,6 +48,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
 
 
 
@@ -336,14 +338,15 @@
             
               <div class="markdown-body">
                 
-                <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>假设你正在爬楼梯。需要 <code>n</code> 阶你才能到达楼顶。</p>
+                <h2 id="题目描述">题目描述</h2>
+<p>假设你正在爬楼梯。需要 <code>n</code> 阶你才能到达楼顶。</p>
 <span id="more"></span>
 <p>每次你可以爬 <code>1</code> 或 <code>2</code> 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
-<h3 id="输入示例"><a href="#输入示例" class="headerlink" title="输入示例"></a>输入示例</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">输入：n = 2<br>输出：2<br>解释：有两种方法可以爬到楼顶。<br>1. 1 阶 + 1 阶<br>2. 2 阶<br></code></pre></td></tr></table></figure>
-
+<h3 id="输入示例">输入示例</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">输入：n = 2<br>输出：2<br>解释：有两种方法可以爬到楼顶。<br>1. 1 阶 + 1 阶<br>2. 2 阶<br></code></pre></td></tr></table></figure>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">输入：n = 3<br>输出：3<br>解释：有三种方法可以爬到楼顶。<br>1. 1 阶 + 1 阶 + 1 阶<br>2. 1 阶 + 2 阶<br>3. 2 阶 + 1 阶<br></code></pre></td></tr></table></figure>
-
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>这是一道非常标准的<code>dp入门题</code></p>
+<h2 id="解题思路">解题思路</h2>
+<p>这是一道非常标准的<code>dp入门题</code></p>
 <p>不如我们先从回溯角度可以写</p>
 <p><strong>设n=4</strong> 我们可以从反反向跳下去 每次可以跳1或者2格 因此 我们可以得出 <code>(i-1)</code> 和<code>(i-2)</code> 求方案总数</p>
 <p>所以最终方程是<code>dfs(i-1)+dfs(i-2)</code></p>
@@ -351,39 +354,30 @@
 <p>从<code>i-2</code>看到 所以i必须大于2 因为答案不可能是负数</p>
 <p>递归代码如下**(Python 和 C++)**</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">climbStairs</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:<br><br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">dfs</span>(<span class="hljs-params">i</span>):<br>            <span class="hljs-keyword">if</span> i &lt; <span class="hljs-number">2</span>: <span class="hljs-keyword">return</span> i<br>            <span class="hljs-keyword">return</span>  dfs(i-<span class="hljs-number">1</span>) + dfs(i-<span class="hljs-number">2</span>)<br>        <br>        <span class="hljs-keyword">return</span> dfs(n+<span class="hljs-number">1</span>) <span class="hljs-comment"># 注意这里加1是因为自己也要算</span><br></code></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br><br><br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span></span>&#123;<br>        <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">2</span>)&#123;<span class="hljs-keyword">return</span> n;&#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">dfs</span>(n<span class="hljs-number">-1</span>)+<span class="hljs-built_in">dfs</span>(n<span class="hljs-number">-2</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">climbStairs</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">dfs</span>(n+<span class="hljs-number">1</span>); <span class="hljs-comment">// 注意这里加1是因为自己也要算</span><br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-
 <p>你提交之后 会发现 唉？ 超时了</p>
 <p>因为递归会造成大量重复计算</p>
 <p>从刚才那个例子开始 比如我执行了一次 <code>dfs(n-2)</code> 相当于执行了两次<code>dfs(n-1)</code> 这样会拖慢时间</p>
 <p>因此我们可以改成 记忆化搜索 保存计算结果 <strong>Python 可以用cache装饰器 c++得自己开数组 代码如下</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">climbStairs</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:<br>        <br><span class="hljs-meta">        @cache</span><br>        <span class="hljs-keyword">def</span> <span class="hljs-title function_">dfs</span>(<span class="hljs-params">i</span>):<br>            <span class="hljs-keyword">if</span> i &lt; <span class="hljs-number">2</span>: <span class="hljs-keyword">return</span> i<br>            <span class="hljs-keyword">return</span>  dfs(i-<span class="hljs-number">1</span>) + dfs(i-<span class="hljs-number">2</span>)<br>        <br>        <span class="hljs-keyword">return</span> dfs(n+<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
-
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br><br>    <span class="hljs-type">int</span> ans[<span class="hljs-number">50</span>];<br><br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span></span>&#123;<br>        <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">2</span>)&#123;<span class="hljs-keyword">return</span> n;&#125;<br>        <span class="hljs-keyword">if</span>(ans[n] != <span class="hljs-number">0</span>)&#123;<span class="hljs-keyword">return</span> ans[n];&#125;<br>        <span class="hljs-type">int</span> res = <span class="hljs-built_in">dfs</span>(n<span class="hljs-number">-1</span>)+<span class="hljs-built_in">dfs</span>(n<span class="hljs-number">-2</span>);<br>        ans[n] = res;<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">climbStairs</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>&#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">50</span>; i++)&#123;<br>            ans[i] = <span class="hljs-number">0</span>; <span class="hljs-comment">// 先把数组初始化</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">dfs</span>(n+<span class="hljs-number">1</span>);<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-
-
-
 <p>ok 那我们能不能把递归去掉 把他改成迭代呢？</p>
 <p><strong>接下来 我们1:1 把递归翻译成动态方程</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">dfs(i) = dfs(i-1)+dfs(i-2)<br>f[i] = f[i-1]+f[i-2]<br></code></pre></td></tr></table></figure>
-
 <p>好 现在边界条件是<code>f[0] = 1 f[1] = 2</code></p>
 <p>写一个从2开始的循环<code>(注意：要循环次数要小于等于n)</code></p>
 <p>以下是代码</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 时间复杂度 : O(n)</span><br><span class="hljs-comment">// 空间复杂度: O(n)</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br><br>    <span class="hljs-type">int</span> ans[<span class="hljs-number">50</span>];<br><br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">climbStairs</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (n==<span class="hljs-number">2</span>)&#123;<span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;&#125;<br>        <span class="hljs-keyword">if</span>(n==<span class="hljs-number">1</span>)&#123;<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;&#125;<br>        ans[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        ans[<span class="hljs-number">1</span>] = <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt; n; i++)&#123;<br>            ans[i] = ans[i<span class="hljs-number">-1</span>]+ans[i<span class="hljs-number">-2</span>];<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans[n<span class="hljs-number">-1</span>];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 时间复杂度: O(n)</span><br><span class="hljs-comment"># 空间复杂度: O(n)</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">climbStairs</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:<br>        <br>        dp = [<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n+<span class="hljs-number">1</span>)]<br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span><br>        dp[<span class="hljs-number">1</span>] = <span class="hljs-number">2</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>,n+<span class="hljs-number">1</span>):<br>            dp[i] = dp[i-<span class="hljs-number">1</span>]+dp[i-<span class="hljs-number">2</span>]<br>        <span class="hljs-keyword">return</span> dp[n-<span class="hljs-number">1</span>]<br></code></pre></td></tr></table></figure>
-
 <p>这里又有一个规律</p>
 <p><strong>dp[i-1] 是上一个状态 dp[i-2] 是上上个状态</strong></p>
 <p>我们能不能用两个变量维持这个状态呢？ <code>见示例代码</code></p>
-<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 时间复杂度：O(n)</span><br><span class="hljs-comment"># 空间复杂度: O(1)</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">climbStairs</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:<br>        <span class="hljs-keyword">if</span> n &lt;= <span class="hljs-number">2</span>: <span class="hljs-keyword">return</span> n <br>        a = <span class="hljs-number">1</span><br>        b = <span class="hljs-number">2</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>,n):<br>            a, b = b, a + b<br>        <span class="hljs-keyword">return</span> b<br></code></pre></td></tr></table></figure>
-
+<h2 id="示例代码">示例代码</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 时间复杂度：O(n)</span><br><span class="hljs-comment"># 空间复杂度: O(1)</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span>:<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">climbStairs</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:<br>        <span class="hljs-keyword">if</span> n &lt;= <span class="hljs-number">2</span>: <span class="hljs-keyword">return</span> n <br>        a = <span class="hljs-number">1</span><br>        b = <span class="hljs-number">2</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>,n):<br>            a, b = b, a + b<br>        <span class="hljs-keyword">return</span> b<br></code></pre></td></tr></table></figure>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 时间复杂度:O(n)</span><br><span class="hljs-comment">// 空间复杂度:O(1)</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">climbStairs</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(n&lt;=<span class="hljs-number">2</span>)&#123;<span class="hljs-keyword">return</span> n;&#125;<br>        <span class="hljs-type">int</span> a = <span class="hljs-number">1</span>, b = <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt; n; i++)&#123;<br>            <span class="hljs-type">int</span> nxt = b;<br>            b+=a;<br>            a = nxt;<br>        &#125;<br>        <span class="hljs-keyword">return</span> b;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p><img src="https://z1.ax1x.com/2023/04/04/pp5VU4U.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="感谢收看">感谢收看</h2>
 
-<p><img src="https://z1.ax1x.com/2023/04/04/pp5VU4U.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="感谢收看"><a href="#感谢收看" class="headerlink" title="感谢收看"></a>感谢收看</h2>
                 
               </div>
             
@@ -579,6 +573,11 @@
 
 
   
+
+
+  
+  
+
 
 
 

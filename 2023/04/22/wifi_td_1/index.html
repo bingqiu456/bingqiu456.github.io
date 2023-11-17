@@ -16,12 +16,12 @@
   <meta name="author" content="bingyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="大家好今天我要刷一个随身WiFi的东西 具体的话可以看这里 感谢酷安的各位大佬的整合 本文章已授权 会做一些修改">
+    <meta name="description" content="大家好 今天我要刷一个随身WiFi的东西 具体的话可以看这里 感谢酷安的各位大佬的整合 本文章已授权 会做一些修改">
 <meta property="og:type" content="article">
 <meta property="og:title" content="随身wifi玩机篇1 备份分区">
 <meta property="og:url" content="http://blog.bingyue.top/2023/04/22/wifi_td_1/index.html">
 <meta property="og:site_name" content="冰月博客">
-<meta property="og:description" content="大家好今天我要刷一个随身WiFi的东西 具体的话可以看这里 感谢酷安的各位大佬的整合 本文章已授权 会做一些修改">
+<meta property="og:description" content="大家好 今天我要刷一个随身WiFi的东西 具体的话可以看这里 感谢酷安的各位大佬的整合 本文章已授权 会做一些修改">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://z1.ax1x.com/2023/06/29/pCwQVQf.png">
 <meta property="article:published_time" content="2023-04-22T01:57:25.000Z">
@@ -47,6 +47,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
 
 
 
@@ -335,95 +337,98 @@
             
               <div class="markdown-body">
                 
-                <h2 id="大家好"><a href="#大家好" class="headerlink" title="大家好"></a>大家好</h2><p>今天我要刷一个随身WiFi的东西 具体的话可以看这里 感谢<strong>酷安</strong>的各位大佬的整合</p>
+                <h2 id="大家好">大家好</h2>
+<p>今天我要刷一个随身WiFi的东西 具体的话可以看这里 感谢<strong>酷安</strong>的各位大佬的整合</p>
 <p>本文章已授权 会做一些修改</p>
 <span id="more"></span>
 <p><a target="_blank" rel="noopener" href="https://www.coolapk.com/feed/45320764">原文</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.123pan.com/s/Dpq0Vv-XAUHd.html">工具链接</a> 提取码<code>V23y</code></p>
 <p>本篇主要讲的是备份分区</p>
-<h2 id="安装驱动-9008工具"><a href="#安装驱动-9008工具" class="headerlink" title="安装驱动 9008工具"></a>安装驱动 9008工具</h2><p>先从链接中下载9008驱动</p>
-<p><img src="https://z1.ax1x.com/2023/04/21/p9EbUW4.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="安装驱动-9008工具">安装驱动 9008工具</h2>
+<p>先从链接中下载9008驱动</p>
+<p><img src="https://z1.ax1x.com/2023/04/21/p9EbUW4.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>以及上面的 9008工具</p>
 <p>然后解压</p>
 <p>先安装驱动 由于我这里安装了 所以本步略过</p>
 <p>打开你下载的<code>[9008全量备份工具]MiKo_Loder Pro</code> 的文件</p>
-<p><img src="https://z1.ax1x.com/2023/04/22/p9VFkOf.png" srcset="/img/loading.gif" lazyload></p>
-<p>先打开miko.exe 安装好工具 </p>
+<p><img src="https://z1.ax1x.com/2023/04/22/p9VFkOf.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>先打开miko.exe 安装好工具</p>
 <p>在miko的安装目录把loader.exe 复制进去 下次用loader.exe打开</p>
-<p><img src="https://z1.ax1x.com/2023/04/22/p9VFMpn.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="备份全分区"><a href="#备份全分区" class="headerlink" title="备份全分区"></a>备份全分区</h2><p><a target="_blank" rel="noopener" href="http://cdn.bingyue.top/adb.zip">下载adb工具包</a></p>
+<p><img src="https://z1.ax1x.com/2023/04/22/p9VFMpn.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="备份全分区">备份全分区</h2>
+<p><a target="_blank" rel="noopener" href="http://cdn.bingyue.top/adb.zip">下载adb工具包</a></p>
 <p>然后在本地目录打开powershell</p>
 <p>把棒子插到电脑usb接口</p>
 <p>输入如下命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">adb reboot edl<br></code></pre></td></tr></table></figure>
-
 <p>如果棒子变黑了 说明已经进入到了9008模式</p>
 <p>现在打开我们刚才的miko工具</p>
 <p>按下图操作</p>
-<p><img src="https://z1.ax1x.com/2023/04/22/p9VF1XV.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/04/22/p9VF1XV.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>双击下面的</p>
-<p><img src="https://z1.ax1x.com/2023/04/22/p9VAUQ1.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/04/22/p9VAUQ1.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>选择一个路径 并把bin文件输入一个名字</p>
 <p>点击<code>Read Full image</code>的按钮 开始备份</p>
 <p>下面的进度条会动 如上图所示</p>
 <p>备份好了重插一下棒子 将会重启</p>
-<h2 id="提取boot和基带"><a href="#提取boot和基带" class="headerlink" title="提取boot和基带"></a>提取boot和基带</h2><p>返回我们下载的<code>[9008分区操作工具]Qualcomm Premium Tool V2.4</code></p>
-<p><img src="https://z1.ax1x.com/2023/04/22/p9VESkF.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="提取boot和基带">提取boot和基带</h2>
+<p>返回我们下载的<code>[9008分区操作工具]Qualcomm Premium Tool V2.4</code></p>
+<p><img src="https://z1.ax1x.com/2023/04/22/p9VESkF.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>注意音量</p>
-<p><img src="https://z1.ax1x.com/2023/04/22/p9VEpY4.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/04/22/p9VEpY4.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>点击<code>getkey</code> 然后保存key文件到你的路径中 打开工具<code>Qualcomm Premium Tool.exe</code></p>
 <p>找到左上角的 help-&gt;activate 打开刚才保存的key 文件 完成激活</p>
 <p>先把棒子进入9008模式 进入方法请看上一步</p>
 <p>扫描分区</p>
-<p><img src="https://z1.ax1x.com/2023/04/22/p9VEPp9.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/04/22/p9VEPp9.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>如果不出意外这里会出现一个列表</p>
 <p><strong>选择boot分区</strong> 和下面三个分区</p>
-<p><img src="https://z1.ax1x.com/2023/04/22/p9VEF61.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/04/22/p9VEF61.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>注意 这里的中间灰色框要双击</p>
-<p>等待备份….</p>
+<p>等待备份…</p>
 <p>这里我们的基带就备份好了</p>
 <p>去到刚才备份的目录下 可以给boot加个img</p>
-<p><img src="https://z1.ax1x.com/2023/04/22/p9VEufH.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="Root-远程控制"><a href="#Root-远程控制" class="headerlink" title="Root 远程控制"></a>Root 远程控制</h2><p><img src="https://z1.ax1x.com/2023/04/22/p9VA2QI.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/04/22/p9VEufH.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="Root-远程控制">Root 远程控制</h2>
+<p><img src="https://z1.ax1x.com/2023/04/22/p9VA2QI.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>下载这两个文件</p>
 <p>解压<code>ARDC和安卓apk</code> 打开ardc 然后插入棒子 将会自动连接</p>
-<p><img src="https://z1.ax1x.com/2023/04/22/p9VEq4e.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://z1.ax1x.com/2023/04/22/p9VVnbV.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://pic1.imgdb.cn/item/64433b640d2dde577793b140.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://pic1.imgdb.cn/item/64433b7f0d2dde577793e445.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/04/22/p9VEq4e.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://z1.ax1x.com/2023/04/22/p9VVnbV.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://pic1.imgdb.cn/item/64433b640d2dde577793b140.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://pic1.imgdb.cn/item/64433b7f0d2dde577793e445.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>把boot.img拖入进去 在桌面打开magisk app</p>
-<p><img src="https://pic1.imgdb.cn/item/64433c8a0d2dde577794f148.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://pic1.imgdb.cn/item/64433c8a0d2dde577794f148.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>选择下一步 修补文件选择download目录下的boot.img</p>
-<p><img src="https://pic1.imgdb.cn/item/64433cb70d2dde5777951d63.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://pic1.imgdb.cn/item/64433cb70d2dde5777951d84.png" srcset="/img/loading.gif" lazyload></p>
-<p><img src="https://pic1.imgdb.cn/item/64433cb70d2dde5777951d9c.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://pic1.imgdb.cn/item/64433cb70d2dde5777951d63.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://pic1.imgdb.cn/item/64433cb70d2dde5777951d84.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://pic1.imgdb.cn/item/64433cb70d2dde5777951d9c.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>选择标准的安卓方式 点击开始刷入 等待结束</p>
 <p>打开es管理器</p>
 <p>打开上面的&lt;&lt;</p>
-<p><img src="https://pic1.imgdb.cn/item/64433d260d2dde5777958c49.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://pic1.imgdb.cn/item/64433d260d2dde5777958c49.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>在es管理器里打开download 文件夹</p>
 <p>找到magisk的boot 点击cmd按钮 输入如下</p>
 <p>这里的xxx.img 是magisk修改好的boot的名字</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">adb pull /sdcard/Download/xxx.img ./<br></code></pre></td></tr></table></figure>
-
 <p>这个时候去ardc的文件目录下 找到magisk.img</p>
 <p>cmd再次输入</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">adb reboot bootloader<br>fastboot flash boot xxxx.img<br></code></pre></td></tr></table></figure>
-
 <p>注意 xxxx.img 是magisk修改好的boot 你可以直接拖入cmd里</p>
 <p>这样就刷好root了 重启一下</p>
 <p>连接adb 输入如下命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">adb shell<br>su root<br>setprop sys.usb.config diag,adb <br></code></pre></td></tr></table></figure>
-
 <p>接下来可以备份qcn了</p>
-<h2 id="备份qcn"><a href="#备份qcn" class="headerlink" title="备份qcn"></a>备份qcn</h2><p><img src="https://z1.ax1x.com/2023/04/22/p9VE8nP.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="备份qcn">备份qcn</h2>
+<p><img src="https://z1.ax1x.com/2023/04/22/p9VE8nP.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>下载这个 工具<code>qpst</code></p>
 <p>解压安装</p>
-<p><img src="https://z1.ax1x.com/2023/04/22/p9VEW9J.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/04/22/p9VEW9J.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>选择端口</p>
-<p><img src="https://z1.ax1x.com/2023/04/22/p9VEhcR.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/04/22/p9VEhcR.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>备份好了</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>本文使用的随身wifi型号是9600(uf6-7)</p>
+<h2 id="最后">最后</h2>
+<p>本文使用的随身wifi型号是9600(uf6-7)</p>
 <p>购买链接-&gt;<a target="_blank" rel="noopener" href="https://m.tb.cn/h.UGUJZOr?tk=0rHcdO86bCf">1</a></p>
 
                 
@@ -612,6 +617,11 @@
 
 
   
+
+
+  
+  
+
 
 
 

@@ -16,12 +16,12 @@
   <meta name="author" content="bingyue">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言相信经过前面的学习 大家已经学会启动nonebot了 和 加载插件 那今天我们写一个插件 认识Nonebot文件结构在上一篇中 我们创建了一个nb项目">
+    <meta name="description" content="前言 相信经过前面的学习 大家已经学会启动nonebot了 和 加载插件 那今天我们写一个插件 认识Nonebot文件结构 在上一篇中 我们创建了一个nb项目">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nonebot2 二编写基础插件">
 <meta property="og:url" content="http://blog.bingyue.top/2023/07/04/nonebot_teach_3/index.html">
 <meta property="og:site_name" content="冰月博客">
-<meta property="og:description" content="前言相信经过前面的学习 大家已经学会启动nonebot了 和 加载插件 那今天我们写一个插件 认识Nonebot文件结构在上一篇中 我们创建了一个nb项目">
+<meta property="og:description" content="前言 相信经过前面的学习 大家已经学会启动nonebot了 和 加载插件 那今天我们写一个插件 认识Nonebot文件结构 在上一篇中 我们创建了一个nb项目">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://z1.ax1x.com/2023/06/29/pCwQ0YR.png">
 <meta property="article:published_time" content="2023-07-04T04:35:42.000Z">
@@ -50,6 +50,8 @@
   <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
 
 
 
@@ -338,85 +340,81 @@
             
               <div class="markdown-body">
                 
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>相信经过前面的学习 大家已经学会启动nonebot了 和 加载插件 那今天我们写一个插件</p>
-<h2 id="认识Nonebot文件结构"><a href="#认识Nonebot文件结构" class="headerlink" title="认识Nonebot文件结构"></a>认识Nonebot文件结构</h2><p>在上一篇中 我们创建了一个nb项目</p>
+                <h2 id="前言">前言</h2>
+<p>相信经过前面的学习 大家已经学会启动nonebot了 和 加载插件 那今天我们写一个插件</p>
+<h2 id="认识Nonebot文件结构">认识Nonebot文件结构</h2>
+<p>在上一篇中 我们创建了一个nb项目</p>
 <span id="more"></span>
 <p>以下是该文件结构</p>
-<p><img src="https://z1.ax1x.com/2023/06/30/pC0g00O.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://z1.ax1x.com/2023/06/30/pC0g00O.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>我们先打开<code>pyproject.toml</code></p>
 <p>内容如下</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs bash">[project]<br>name = <span class="hljs-string">&quot;test&quot;</span> <span class="hljs-comment"># 插件名字</span><br>version = <span class="hljs-string">&quot;0.1.0&quot;</span> <span class="hljs-comment"># 插件版本</span><br>description = <span class="hljs-string">&quot;test&quot;</span> <span class="hljs-comment"># 插件介绍</span><br>readme = <span class="hljs-string">&quot;README.md&quot;</span> <span class="hljs-comment"># 插件文档</span><br>requires-python = <span class="hljs-string">&quot;&gt;=3.8, &lt;4.0&quot;</span> <span class="hljs-comment"># 适用py版本 (勿动)</span><br><br>[tool.nonebot]<br>adapters = [<br>    &#123; name = <span class="hljs-string">&quot;OneBot V11&quot;</span>, module_name = <span class="hljs-string">&quot;nonebot.adapters.onebot.v11&quot;</span> &#125;<br>] <span class="hljs-comment"># 勿动</span><br>plugins = []<br>plugin_dirs = [<span class="hljs-string">&quot;src/plugins&quot;</span>]<br>builtin_plugins = [<span class="hljs-string">&quot;echo&quot;</span>]<br></code></pre></td></tr></table></figure>
-
 <p>看到</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">plugins = []<br>plugin_dirs = [<span class="hljs-string">&quot;src/plugins&quot;</span>]<br>builtin_plugins = [<span class="hljs-string">&quot;echo&quot;</span>]<br></code></pre></td></tr></table></figure>
-
 <p>plugins是加载成品的加载 也就是你从nb官网下载的插件</p>
 <p>一般以这种形式开头</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">plugins = [<span class="hljs-string">&quot;nonebot_plugin_xxxx&quot;</span>]<br></code></pre></td></tr></table></figure>
-
 <p>plugin_dirs 则是加载文件夹里的插件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">plugin_dirs = [<span class="hljs-string">&quot;src/plugins&quot;</span>] <span class="hljs-comment"># 加载scr文件夹里的plugin文件夹下的插件</span><br></code></pre></td></tr></table></figure>
-
 <p>builtin_plugins 则是加载官方内置的插件 一般用不到 可以改为</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">builtin_plugins = []<br></code></pre></td></tr></table></figure>
-
 <p>改好之后保存即可</p>
 <p>打开<code>.env.dev</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">LOG_LEVEL=DEBUG<br></code></pre></td></tr></table></figure>
-
 <p>我们删除这句话 并添加如下内容</p>
 <p>注意 这里不要使用系统自带记事本取修改 否则会报如下错误</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">UnicodeDecodeError: <span class="hljs-string">&#x27;utf-8&#x27;</span> codec can<span class="hljs-string">&#x27;t decode byte 0xc5 in position 16: invalid continuation byte</span><br></code></pre></td></tr></table></figure>
-
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">HOST=0.0.0.0  <span class="hljs-comment"># 配置 NoneBot 监听的 IP / 主机名 默认127.0.0.1</span><br>PORT=8080  <span class="hljs-comment"># 配置 NoneBot 监听的端口 这里设置成你的cq对接的端口号</span><br>COMMAND_START=[<span class="hljs-string">&quot;/&quot;</span>]  <span class="hljs-comment"># 配置命令起始字符</span><br>COMMAND_SEP=[<span class="hljs-string">&quot;.&quot;</span>]  <span class="hljs-comment"># 配置命令分割字符</span><br>SUPERUSERS=[<span class="hljs-string">&quot;你的qq号&quot;</span>] <span class="hljs-comment"># nb超级管理员 输入你的qq号</span><br><br></code></pre></td></tr></table></figure>
-
 <p>这样配置基础就做好了</p>
-<h2 id="开启环境"><a href="#开启环境" class="headerlink" title="开启环境"></a>开启环境</h2><p>在你的<code>scr/plugins</code> 创建一个py文件 名字随意</p>
-<p><img src="https://z1.ax1x.com/2023/06/30/pC028Df.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="开启环境">开启环境</h2>
+<p>在你的<code>scr/plugins</code> 创建一个py文件 名字随意</p>
+<p><img src="https://z1.ax1x.com/2023/06/30/pC028Df.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>用vscode打开他</p>
 <p>编写如下内容</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> nonebot <span class="hljs-keyword">import</span> on_command<br><br>a = on_command(<span class="hljs-string">&quot;你好&quot;</span>) <span class="hljs-comment"># 设置一个消息指令</span><br><br><span class="hljs-meta">@a.handle()</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">_</span>(): <span class="hljs-comment"># 当触发这个消息的时候 async def里的代码会被执行</span><br>    <span class="hljs-keyword">await</span> a.finish(<span class="hljs-string">&quot;hello world&quot;</span>) <span class="hljs-comment"># 结束事件返回一句 hello world</span><br></code></pre></td></tr></table></figure>
-
 <p>保存</p>
 <p>启动你的nb和cq</p>
 <p>向你的机器人回复一句<code>你好</code> 你便会收到一句<code>hello world</code></p>
-<h2 id="插件编写"><a href="#插件编写" class="headerlink" title="插件编写"></a>插件编写</h2><table>
+<h2 id="插件编写">插件编写</h2>
+<table>
 <thead>
 <tr>
 <th>函数</th>
-<th align="left">作用</th>
+<th style="text-align:left">作用</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>on_command</td>
-<td align="left">设置消息关键字 当消息开头包含关键字即触发</td>
+<td style="text-align:left">设置消息关键字 当消息开头包含关键字即触发</td>
 </tr>
 <tr>
 <td>on_fullmatch</td>
-<td align="left">设置消息关键字 当关键字与消息完全一致时触发</td>
+<td style="text-align:left">设置消息关键字 当关键字与消息完全一致时触发</td>
 </tr>
 <tr>
 <td>on_keyword</td>
-<td align="left">设置消息关键字 当消息包含关键字时触发</td>
+<td style="text-align:left">设置消息关键字 当消息包含关键字时触发</td>
 </tr>
 <tr>
 <td>random.randint(0,7)</td>
-<td align="left">生成一个0~7的随机数 可以随意更改</td>
+<td style="text-align:left">生成一个0~7的随机数 可以随意更改</td>
 </tr>
 <tr>
 <td>random.choice(a)</td>
-<td align="left">从a列表里随机挑一个出来</td>
+<td style="text-align:left">从a列表里随机挑一个出来</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> nonebot <span class="hljs-keyword">import</span> on_fullmatch<br><span class="hljs-keyword">import</span> random<br><br>a = on_fullmatch(<span class="hljs-string">&quot;随机人生&quot;</span>)<br><br><span class="hljs-meta">@a.handle()</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">_</span>():<br>    name = [<span class="hljs-string">&quot;大音希声&quot;</span>,<span class="hljs-string">&quot;恬静可人&quot;</span>,<span class="hljs-string">&quot;珞珞如石&quot;</span>] <span class="hljs-comment"># 姓名</span><br>    age = random.randint(<span class="hljs-number">19</span>,<span class="hljs-number">27</span>) <span class="hljs-comment"># 随机年龄</span><br>    job = [<span class="hljs-string">&quot;行政主管&quot;</span>,<span class="hljs-string">&quot;企业主管&quot;</span>,<span class="hljs-string">&quot;经理人&quot;</span>,<span class="hljs-string">&quot;土木营造监工&quot;</span>] <span class="hljs-comment"># 职业</span><br><br>    name_ = random.choice(name) <span class="hljs-comment"># 随机姓名</span><br>    job_ = random.choice(job)<br><br>    <span class="hljs-keyword">await</span> a.finish(<span class="hljs-string">f&quot;姓名:<span class="hljs-subst">&#123;name_&#125;</span>\n年龄:<span class="hljs-subst">&#123;age&#125;</span>\n职业:<span class="hljs-subst">&#123;job_&#125;</span>&quot;</span>) <span class="hljs-comment"># 结束事件并发送消息</span><br></code></pre></td></tr></table></figure>
-
 <p>以上为一个基础的插件 如不出意外 你会收到机器人回复</p>
 <p>我们可以进一步的改进一下 例如加一些等待</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> nonebot <span class="hljs-keyword">import</span> on_fullmatch<br><span class="hljs-keyword">import</span> random<br><span class="hljs-keyword">import</span> asyncio<br><br>a = on_fullmatch(<span class="hljs-string">&quot;随机人生&quot;</span>)<br><br><span class="hljs-meta">@a.handle()</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">_</span>():<br>    name = [<span class="hljs-string">&quot;大音希声&quot;</span>,<span class="hljs-string">&quot;恬静可人&quot;</span>,<span class="hljs-string">&quot;珞珞如石&quot;</span>] <span class="hljs-comment"># 姓名</span><br>    age = random.randint(<span class="hljs-number">19</span>,<span class="hljs-number">27</span>) <span class="hljs-comment"># 随机年龄</span><br>    job = [<span class="hljs-string">&quot;行政主管&quot;</span>,<span class="hljs-string">&quot;企业主管&quot;</span>,<span class="hljs-string">&quot;经理人&quot;</span>,<span class="hljs-string">&quot;土木营造监工&quot;</span>] <span class="hljs-comment"># 职业</span><br><br>    <span class="hljs-keyword">await</span> a.send(<span class="hljs-string">&quot;请稍等，正在生成中&quot;</span>) <span class="hljs-comment"># 发送一条消息</span><br>    <span class="hljs-keyword">await</span> asyncio.sleep(<span class="hljs-number">3</span>) <span class="hljs-comment"># 冷却3秒</span><br><br>    name_ = random.choice(name) <span class="hljs-comment"># 随机姓名</span><br>    job_ = random.choice(job)<br><br>    <span class="hljs-keyword">await</span> a.finish(<span class="hljs-string">f&quot;姓名:<span class="hljs-subst">&#123;name_&#125;</span>\n年龄:<span class="hljs-subst">&#123;age&#125;</span>\n职业:<span class="hljs-subst">&#123;job_&#125;</span>&quot;</span>) <span class="hljs-comment"># 结束事件并发送消息</span><br></code></pre></td></tr></table></figure>
-
 <p>这样更完美了 当然你也可以加一些数据进去</p>
 <p>这算是个基础插件编写了</p>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>下一篇 我会讲解如何去调用管理员权限 以及 写连续对话的插件</p>
+<h2 id="后记">后记</h2>
+<p>下一篇 我会讲解如何去调用管理员权限 以及 写连续对话的插件</p>
 
                 
               </div>
@@ -617,6 +615,11 @@
 
 
   
+
+
+  
+  
+
 
 
 
