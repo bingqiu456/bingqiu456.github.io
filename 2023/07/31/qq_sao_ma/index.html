@@ -1,0 +1,858 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.ico">
+  <link rel="icon" href="/img/fluid.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#36d984">
+  <meta name="author" content="bingyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前言 这是七月份最后一篇博客，这几天家里一直有事，所以没怎么写，然后我朋友找我有没有办法搞一个验证QQ号是否本人的东西，我第一时间想到了扫码登录 所以本期教程来写一个封装的扫码登录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QQ扫码登录抓取分析">
+<meta property="og:url" content="http://blog.bingyue.top/2023/07/31/qq_sao_ma/index.html">
+<meta property="og:site_name" content="冰月博客">
+<meta property="og:description" content="前言 这是七月份最后一篇博客，这几天家里一直有事，所以没怎么写，然后我朋友找我有没有办法搞一个验证QQ号是否本人的东西，我第一时间想到了扫码登录 所以本期教程来写一个封装的扫码登录">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s11.ax1x.com/2023/08/01/pP9zvEq.png">
+<meta property="article:published_time" content="2023-07-31T15:59:59.000Z">
+<meta property="article:modified_time" content="2023-12-15T12:55:13.021Z">
+<meta property="article:author" content="bingyue">
+<meta property="article:tag" content="code">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s11.ax1x.com/2023/08/01/pP9zvEq.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>QQ扫码登录抓取分析 - 冰月博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.bingyue.top","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1499a4a6751739c3ee13784b8a5271e5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?1499a4a6751739c3ee13784b8a5271e5";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>bingyue</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/link/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/notes/">
+                <i class="iconfont icon-books"></i>
+                <span>笔记</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/7777.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="QQ扫码登录抓取分析"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-07-31 23:59" pubdate>
+          2023年7月31日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          49 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">QQ扫码登录抓取分析</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年12月15日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="前言">前言</h2>
+<p>这是七月份最后一篇博客，这几天家里一直有事，所以没怎么写，然后我朋友找我有没有办法搞一个验证QQ号是否本人的东西，我第一时间想到了扫码登录</p>
+<p>所以本期教程来写一个封装的扫码登录</p>
+<span id="more"></span>
+<p>因为我很久不写php了 已经快忘光了 所以本期教程使用python</p>
+<h2 id="开始">开始</h2>
+<p>这里我选择<a target="_blank" rel="noopener" href="https://xw.qq.com/?f=c_news">腾讯网</a> 点右上角头像，就是我们想要的扫码登录了</p>
+<p><img src="https://s11.ax1x.com/2023/08/01/pP9qsyt.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://s11.ax1x.com/2023/08/01/pP9qyOP.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>这里就是二维码登录了</p>
+<p>我们<code>右键鼠标-&gt;检查-&gt;网络</code> 然后<code>刷新页面</code></p>
+<p><img src="https://s11.ax1x.com/2023/08/01/pP9qgw8.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>可以看到多了很多数据包</p>
+<h2 id="申请二维码登录">申请二维码登录</h2>
+<p>往下寻找 可以看到有个请求二维码的接口</p>
+<p><img src="https://s11.ax1x.com/2023/08/01/pP9q2TS.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://s11.ax1x.com/2023/08/01/pP9qWFg.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>再看看 请求头 我们可以看到它 返回一个<code>qrsig的cookie</code> 这个应该是签名密钥了 标记二维码信息</p>
+<p>这个api的信息是固定的 直接请求即可</p>
+<p><img src="https://s11.ax1x.com/2023/08/01/pP9qfYQ.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>我们目前得到了申请端的原理</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">url : <br>https://ssl.ptlogin2.qq.com/ptqrshow?appid=716027609&amp;e=2&amp;l=M&amp;s=3&amp;d=72&amp;v=4&amp;t=0.9719602746914588&amp;daid=383&amp;pt_3rd_aid=100383922&amp;u1=https%3A%2F%2Fgraph.qq.com%2Foauth2.0%2Flogin_jump<br>cookie: qrsig<br></code></pre></td></tr></table></figure>
+<h2 id="心跳包">心跳包</h2>
+<p>我们可以看到它请求了很多次这个链接 无非这个链接就是获取二维码状态了</p>
+<p><img src="https://s11.ax1x.com/2023/08/01/pP9qhWj.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>看看返回内容 果然是</p>
+<p><img src="https://s11.ax1x.com/2023/08/01/pP9q5Ss.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>再来看看它请求的参数 (我这边申请了两次二维码) 来看看有何不同</p>
+<p><img src="https://s11.ax1x.com/2023/08/01/pP9qIln.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>可以看到<code>ptqrtoken</code>和<code>action</code>发生了变化</p>
+<p>所以我们只需要解决这两个参数就能获取二维码状态了</p>
+<p>经过我在<code>fidder</code>的调试 发现<code>login_sig</code>不会影响结果 所以可以删掉<code>login_sig</code>这个参数 因此该api为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">https://ssl.ptlogin2.qq.com/ptqrlogin?u1=https%3A%2F%2Fgraph.qq.com%2Foauth2.0%2Flogin_jump&amp;ptqrtoken=&#123;&#125;&amp;ptredirect=0&amp;h=1&amp;t=1&amp;g=1&amp;from_ui=1&amp;ptlang=2052&amp;action=0-0-&#123;&#125;&amp;js_ver=23071715&amp;js_type=1&amp;pt_uistyle=40&amp;aid=716027609&amp;daid=383&amp;pt_3rd_aid=100383922&amp;has_onekey=1&amp;&amp;o1vId=271f9cd6edb6fcd5b0cdbfea4b2646a0&amp;pt_js_version=v1.46.0<br></code></pre></td></tr></table></figure>
+<p>这里的action不难看出 是一个13位的时间戳<code>0-0-&#123;13位时间戳&#125;</code></p>
+<p>那<code>ptqrtoken</code>呢 这个时候需要<code>js逆向</code>了 因为找遍了所有请求</p>
+<h2 id="解密ptqrtoken">解密ptqrtoken</h2>
+<p>切进去 这里就是js文件了</p>
+<p><img src="https://s11.ax1x.com/2023/08/01/pP9qoyq.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>全局搜索一下<code>ptqrtoken</code></p>
+<p><img src="https://pic.imgdb.cn/item/64c7fe141ddac507cca42800.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>发现只有一处 先打个断点调试一下</p>
+<p><img src="https://pic.imgdb.cn/item/64c7febb1ddac507cca50121.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>由上面图片得到 这里的i是一个链接 但是它后面调用一个叫<code>hash33</code>的函数 并且带上了<code>qrsig</code> 那就在<code>hash33</code>打个断点 跳转进去</p>
+<p><img src="https://pic.imgdb.cn/item/64c7ffb01ddac507cca6563c.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>在返回结果继续打个断点 看看是不是我们想要的<code>ptqrtoken</code></p>
+<p><img src="https://pic.imgdb.cn/item/64c800221ddac507cca6eb20.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>嗯 这就是我们想要的<code>ptqrtoken</code> 同时t函数是<code>qrsig</code> 将以下代码翻译为<code>python</code> 示例如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_ptqrtoken</span>(<span class="hljs-params">qsing: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">int</span>:<br>    a = <span class="hljs-built_in">len</span>(qsing)<br>    <span class="hljs-built_in">hash</span> = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,a):<br>        <span class="hljs-built_in">hash</span> += ((<span class="hljs-built_in">hash</span> &lt;&lt; <span class="hljs-number">5</span>) &amp; <span class="hljs-number">2147483647</span>) + <span class="hljs-built_in">ord</span>(qsing[i]) &amp; <span class="hljs-number">2147483647</span><br>        <span class="hljs-built_in">hash</span> &amp;= <span class="hljs-number">2147483647</span><br>		<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">hash</span> &amp; <span class="hljs-number">2147483647</span><br></code></pre></td></tr></table></figure>
+<p>但是你会发现 即使解开了加密 还是访问不了二维码状态的api</p>
+<h2 id="遇到问题">遇到问题</h2>
+<p>这里你如果没安装<code>httpx</code>模块 可以通过以下命令安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install httpx<br></code></pre></td></tr></table></figure>
+<p>这里笔者通过以下python代码进行了简单 封装</p>
+<p><code>这里为申请二维码的</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> httpx<br><br>a = httpx.get(<span class="hljs-string">&quot;https://ssl.ptlogin2.qq.com/ptqrshow?appid=716027609&amp;e=2&amp;l=M&amp;s=3&amp;d=72&amp;v=4&amp;t=0.9719602746914588&amp;daid=383&amp;pt_3rd_aid=100383922&amp;u1=https%3A%2F%2Fgraph.qq.com%2Foauth2.0%2Flogin_jump&quot;</span>)<br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;./qrcode.jpg&quot;</span>,<span class="hljs-string">&quot;wb&quot;</span>) <span class="hljs-keyword">as</span> f:<br>    f.write(a.content)<br>    f.close()<br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;qrsig&quot;</span>,<span class="hljs-string">&quot;w&quot;</span>,encoding=<span class="hljs-string">&quot;utf_8&quot;</span>) <span class="hljs-keyword">as</span> s:<br>    s.write(a.cookies[<span class="hljs-string">&quot;qrsig&quot;</span>])<br>    s.close()<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;获取二维码成功&quot;</span>)<br></code></pre></td></tr></table></figure>
+<p>获取<code>心跳包</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> httpx<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> time<br><br><span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.isfile(<span class="hljs-string">&quot;qrsig&quot;</span>) <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> os.path.isfile(<span class="hljs-string">&quot;qrcode.jpg&quot;</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;二维码信息读取失败,请打开get.py获取二维码&quot;</span>)<br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;qrsig&quot;</span>,<span class="hljs-string">&quot;r&quot;</span>,encoding=<span class="hljs-string">&quot;utf_8&quot;</span>) <span class="hljs-keyword">as</span> f:<br>    qrsig = f.read().strip()<br>    f.close()<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_ptqrtoken</span>(<span class="hljs-params">qsing: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">int</span>:<br>    a = <span class="hljs-built_in">len</span>(qsing)<br>    <span class="hljs-built_in">hash</span> = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,a):<br>        <span class="hljs-built_in">hash</span> += ((<span class="hljs-built_in">hash</span> &lt;&lt; <span class="hljs-number">5</span>) &amp; <span class="hljs-number">2147483647</span>) + <span class="hljs-built_in">ord</span>(qsing[i]) &amp; <span class="hljs-number">2147483647</span><br>        <span class="hljs-built_in">hash</span> &amp;= <span class="hljs-number">2147483647</span><br>		<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">hash</span> &amp; <span class="hljs-number">2147483647</span><br><br>time_ = <span class="hljs-built_in">int</span>(time.time() * <span class="hljs-number">1000</span>)<br>h = httpx.get(<span class="hljs-string">f&quot;https://ssl.ptlogin2.qq.com/ptqrlogin?u1=https%3A%2F%2Fgraph.qq.com%2Foauth2.0%2Flogin_jump&amp;ptqrtoken=<span class="hljs-subst">&#123;get_ptqrtoken(qrsig)&#125;</span>&amp;ptredirect=0&amp;h=1&amp;t=1&amp;g=1&amp;from_ui=1&amp;ptlang=2052&amp;action=0-0-<span class="hljs-subst">&#123;time_&#125;</span>&amp;js_ver=23071715&amp;js_type=1&amp;pt_uistyle=40&amp;aid=716027609&amp;daid=383&amp;pt_3rd_aid=100383922&amp;has_onekey=1&amp;&amp;o1vId=271f9cd6edb6fcd5b0cdbfea4b2646a0&amp;pt_js_version=v1.46.0&quot;</span>)<br><span class="hljs-built_in">print</span>(h.status_code)<br></code></pre></td></tr></table></figure>
+<p>如果不出意外 它会返回一个403的状态码 而不是200</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">403错误是禁止相应。是HTTP协议中的一个状态码(Status Code)。没有权限访问此站。403错误是网站访问过程中，常见的错误提示。<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">200状态码:表示请求已成功,请求所希望的响应头或数据体将随此响应返回<br></code></pre></td></tr></table></figure>
+<p>猜想应该是缺少了一个参数</p>
+<p>这个时候打开<code>fidder</code> 抓包软件</p>
+<p>对端口进行抓取 选择<code>重发并编辑</code> 这边我删掉了<code>login_sig</code>参数</p>
+<p><img src="https://s11.ax1x.com/2023/08/01/pP9xwY8.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>发现还是能正常运行 因此<code>login_sig</code>可以不填写</p>
+<p><img src="https://s11.ax1x.com/2023/08/01/pP9xsyj.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>那继续删掉cookie试试能不能访问 如果删掉cookie还能访问 那就是跟cookie无关 否则就是cookie问题</p>
+<p><img src="https://s11.ax1x.com/2023/08/01/pP9xcmn.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>发现403 看来不能访问跟cookie有关 <img src="https://s11.ax1x.com/2023/08/01/pP9xWkV.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>那接下来 在cookie里继续删减一些无关参数</p>
+<p>这里经过我的测试 最后只需要留qrsig就行了 删了其他参数不影响api访问</p>
+<p><img src="https://s11.ax1x.com/2023/08/01/pP9zP0I.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>在请求参数上面做了cookie 激动人心的200出现了</p>
+<p><img src="https://s11.ax1x.com/2023/08/01/pP9z8hT.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>再写一层封装就行了 最终代码如下面</p>
+<h2 id="示例代码">示例代码</h2>
+<p><code>get.py</code> 申请二维码登录的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> httpx<br><br>a = httpx.get(<span class="hljs-string">&quot;https://ssl.ptlogin2.qq.com/ptqrshow?appid=716027609&amp;e=2&amp;l=M&amp;s=3&amp;d=72&amp;v=4&amp;t=0.9719602746914588&amp;daid=383&amp;pt_3rd_aid=100383922&amp;u1=https%3A%2F%2Fgraph.qq.com%2Foauth2.0%2Flogin_jump&quot;</span>)<br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;./qrcode.jpg&quot;</span>,<span class="hljs-string">&quot;wb&quot;</span>) <span class="hljs-keyword">as</span> f:<br>    f.write(a.content)<br>    f.close()<br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;qrsig&quot;</span>,<span class="hljs-string">&quot;w&quot;</span>,encoding=<span class="hljs-string">&quot;utf_8&quot;</span>) <span class="hljs-keyword">as</span> s:<br>    s.write(a.cookies[<span class="hljs-string">&quot;qrsig&quot;</span>])<br>    s.close()<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;获取二维码成功&quot;</span>)<br></code></pre></td></tr></table></figure>
+<p>执行后 当前目录会生成一个二维码 以及保存一个qrsig 登录请使用扫一扫   <code>注意:不要使用二维码识别或者相册识别！！</code></p>
+<p><code>2.py</code> 获取二维码状态</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> httpx<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> time<br><br><span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.isfile(<span class="hljs-string">&quot;qrsig&quot;</span>) <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> os.path.isfile(<span class="hljs-string">&quot;qrcode.jpg&quot;</span>):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;二维码信息读取失败,请打开get.py获取二维码&quot;</span>)<br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;qrsig&quot;</span>,<span class="hljs-string">&quot;r&quot;</span>,encoding=<span class="hljs-string">&quot;utf_8&quot;</span>) <span class="hljs-keyword">as</span> f:<br>    qrsig = f.read().strip()<br>    f.close()<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_ptqrtoken</span>(<span class="hljs-params">qsing: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">int</span>:<br>    a = <span class="hljs-built_in">len</span>(qsing)<br>    <span class="hljs-built_in">hash</span> = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,a):<br>        <span class="hljs-built_in">hash</span> += ((<span class="hljs-built_in">hash</span> &lt;&lt; <span class="hljs-number">5</span>) &amp; <span class="hljs-number">2147483647</span>) + <span class="hljs-built_in">ord</span>(qsing[i]) &amp; <span class="hljs-number">2147483647</span><br>        <span class="hljs-built_in">hash</span> &amp;= <span class="hljs-number">2147483647</span><br>		<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">hash</span> &amp; <span class="hljs-number">2147483647</span><br><br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>    time_ = <span class="hljs-built_in">int</span>(time.time() * <span class="hljs-number">1000</span>)<br>    h = httpx.get(<span class="hljs-string">f&quot;https://ssl.ptlogin2.qq.com/ptqrlogin?u1=https%3A%2F%2Fgraph.qq.com%2Foauth2.0%2Flogin_jump&amp;ptqrtoken=<span class="hljs-subst">&#123;get_ptqrtoken(qrsig)&#125;</span>&amp;ptredirect=0&amp;h=1&amp;t=1&amp;g=1&amp;from_ui=1&amp;ptlang=2052&amp;action=0-0-<span class="hljs-subst">&#123;time_&#125;</span>&amp;js_ver=23071715&amp;js_type=1&amp;pt_uistyle=40&amp;aid=716027609&amp;daid=383&amp;pt_3rd_aid=100383922&amp;has_onekey=1&amp;&amp;o1vId=271f9cd6edb6fcd5b0cdbfea4b2646a0&amp;pt_js_version=v1.46.0&quot;</span>,cookies=&#123;<span class="hljs-string">&quot;qrsig&quot;</span>:qrsig&#125;)<br><br>    <span class="hljs-keyword">if</span> h.status_code != <span class="hljs-number">200</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;登录遇到问题&quot;</span>)<br>        <span class="hljs-keyword">break</span><br>    <br>    k = h.text.split(<span class="hljs-string">&quot;,&quot;</span>)<br><br>    <span class="hljs-keyword">if</span> k[<span class="hljs-number">0</span>] == <span class="hljs-string">&quot;ptuiCB(&#x27;65&#x27;&quot;</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;二维码已失效&quot;</span>)<br>        <span class="hljs-keyword">break</span><br><br>    <span class="hljs-keyword">if</span> k[<span class="hljs-number">0</span>] == <span class="hljs-string">&quot;ptuiCB(&#x27;67&#x27;&quot;</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;二维码已被扫描,等待被确认&quot;</span>)<br>        <br>    <span class="hljs-keyword">if</span> k[<span class="hljs-number">0</span>] == <span class="hljs-string">&quot;ptuiCB(&#x27;68&#x27;&quot;</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;二维码登录被拒绝&quot;</span>)<br>        <span class="hljs-keyword">break</span><br><br>    <span class="hljs-keyword">if</span> k[<span class="hljs-number">0</span>] == <span class="hljs-string">&quot;ptuiCB(&#x27;66&#x27;&quot;</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;等待扫描二维码,二维码未失效&quot;</span>)<br>    <br>    <span class="hljs-keyword">if</span> k[<span class="hljs-number">0</span>] == <span class="hljs-string">&quot;ptuiCB(&#x27;0&#x27;&quot;</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;登录成功\n以下是你的登录链接&quot;</span>)<br>        <span class="hljs-built_in">print</span>(k[<span class="hljs-number">2</span>])<br>        <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;按任意键退出\n&quot;</span>)<br>        <span class="hljs-keyword">break</span><br><br>    time.sleep(<span class="hljs-number">3</span>)<br></code></pre></td></tr></table></figure>
+<p>执行文件后 去扫描当前目录下的二维码 没有二维码请先执行<code>get.py</code> 如果没错误 则会返回一个登录链接 点进去就能登录了</p>
+<h2 id="源码下载">源码下载</h2>
+<p>这里我方便大家运行 我稍微改了一下 以下是传送门</p>
+<p>👇 👇 👇</p>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1_vOP6DYKvODvB8RdyMDHnw?pwd=9ajb">传送门</a></p>
+<p>👆 👆 👆</p>
+<h2 id="效果">效果</h2>
+<p><img src="https://s11.ax1x.com/2023/08/01/pP9zODs.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="后记">后记</h2>
+<p>这篇博文写了挺久的 希望能帮助到你 下期见！！！</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%88%AC%E8%99%AB/" class="category-chain-item">爬虫</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%88%AC%E8%99%AB/%E5%88%86%E6%9E%90/" class="category-chain-item">分析</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/code/">#code</a>
+      
+        <a href="/tags/%E7%BC%96%E7%A8%8B/">#编程</a>
+      
+        <a href="/tags/python/">#python</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>QQ扫码登录抓取分析</div>
+      <div>http://blog.bingyue.top/2023/07/31/qq_sao_ma/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>bingyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年7月31日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/08/03/qsign_1/" title="手把手教你配置签名服务器">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">手把手教你配置签名服务器</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/07/21/nonebot_guild_1/" title="Nonebot-金币管理系统(频道插件)">
+                        <span class="hidden-mobile">Nonebot-金币管理系统(频道插件)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"0f4c0af04f4a74a28ef8","clientSecret":"603e436965f1a09c74e485733b6b3593d6514a46","repo":"bingqiu456.github.io","owner":"bingqiu456","admin":["bingqiu456"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: 'fe1d34d28bcf97f93f1159c5977bcffd'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+    "ver":"1.1",
+    "log":"2023-06-17\n本次更新内容较多，可能比较费时间\n1.新增心跳开关（config.py）\n2.修复了群开关无反应\n3.修复了登录验证码bug",
+    "qq":"35***19417",
+    "files":["about.py", "accot.py","config.py", "group_1.py", "image_check.py", "image_download.py", "image_random.py", "lingp.py", "login.py", "login_token.py", "logo_acct.py", "menu.py", "trun_on.py", "xint.py", "yiyan.py","reboot.py","admin.py","image_updata.py"],
+    "db":["config.db","login.db","group_tf.db","lp.db","id","reboot.bat"],
+    "url":"https://cdn.bingyue.top/shouyun/files/"
+}
