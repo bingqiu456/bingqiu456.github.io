@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>OPPO/realme 无视端口限制 高版本root</title>
+    <link href="/2024/06/29/unlock_tool_/"/>
+    <url>/2024/06/29/unlock_tool_/</url>
+    
+    <content type="html"><![CDATA[<p>晚上好，自从去年夏天发了<code>oppo</code>解锁bl的教程后，可惜<code>oppo</code>在高版本之后屏蔽了端口，这下该怎么办呢</p><p><a href="https://blog.bingyue.top/2023/07/12/oppo_realme_bl/">往期教程</a></p><p>在万能的群友下，今天我们来用<code>unlocktool</code>这个工具，去无视<code>oppo</code>的端口锁，提取刷入分区</p><span id="more"></span><hr><h2 id="下载工具">下载工具</h2><p>打开网站<a href="https://unlocktool.net/download/">https://unlocktool.net/download/</a></p><p><img src="https://pic.imgdb.cn/item/667ec2aad9c307b7e9051c8e.png" alt=""></p><p>下载这个工具 并安装</p><p>然后出现四个国外网盘链接，这边我推荐挂加速器用谷歌云盘下载</p><p><a href="https://drive.google.com/file/d/1zDHqrtIo3udHtaMnKlVti1ElG-sYFA0p/view?usp=sharing">谷歌云盘链接</a></p><p><img src="https://pic.imgdb.cn/item/667ec372d9c307b7e906a40d.png" alt=""></p><p><img src="https://pic.imgdb.cn/item/667ec3d6d9c307b7e9077136.png" alt=""></p><p>如果显示出来这个画面，说明你安装成功了</p><hr><h2 id="账号">账号</h2><p>这里得去问你的朋友 去拿个账户 或者用其他渠道获取账户</p><p>我这里不一一列举了</p><hr><h2 id="正片">正片</h2><p>进入软件后</p><p><img src="https://pic.imgdb.cn/item/667edc56d9c307b7e935706f.png" alt=""></p><p>点点击上面的联发科，选择<code>mtk universal</code>，勾选这三个构，<code>第三个构选择realme/oppo v1</code></p><p>这里我第三个勾错了，现在勾回来了</p><p><img src="https://pic.imgdb.cn/item/667edcb5d9c307b7e9360cc8.png" alt=""></p><p>然后点击右边的<code>boot deivce</code>，按住你手机的电源+音量上+音量下，进入端口，如果连接无误，会出现一个分区表</p><p><img src="https://pic.imgdb.cn/item/667edd02d9c307b7e9368c34.png" alt=""></p><p>这里我提取的boot分区，按照图片上的提示就行了</p><p>同样写入分区就是选write，然后选择文件刷入</p><p>这里我就不一一演示了</p><p>到这里就结束了</p><hr><h2 id="隐藏章节-刷kernelsu">隐藏章节 刷kernelsu</h2><p>首先找到你机子的kernelsu的补丁包，并确认内核版本无误，不需要<code>twrp</code></p><p>下载该<a href="https://www.123pan.com/s/dNbHjv-U8MsA.html">软件</a></p><p>提取码:<code>loS2</code></p><p>打开之后 授予<code>root</code>权限 (如果没有root可以先刷面具)</p><p>第二步 再准备好原厂boot镜像，先用工具在本机刷入原厂boot，可以用<code>爱玩机工具箱或者搞机助手等等的工具</code></p><p>刷入原厂boot后别重启，点击菜单，刷写，选择手动刷写,选择你的内核补丁包 等待完成 完成后自动重启</p><p><img src="https://pic.imgdb.cn/item/667edfbad9c307b7e93c4ae4.png" alt=""></p><p>这样就大功告成了，开机之后安装<code>kernelsu</code>管理器</p><img src="https://pic.imgdb.cn/item/667edff2d9c307b7e93caf0c.jpg" style="zoom:50%;" /><p>出现工作中的字样代表成功了</p><h2 id="后记">后记</h2><p>这期教程就到这里，感谢你的收看</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>bootloader</category>
+      
+      <category>刷机</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>root</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>QQ音乐 sign参数逆向补环境破解</title>
     <link href="/2024/06/10/qqmusic_sign/"/>
     <url>/2024/06/10/qqmusic_sign/</url>
