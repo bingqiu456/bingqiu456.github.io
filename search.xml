@@ -4,6 +4,41 @@
   
     
     <entry>
+      <title>汽水音乐绕ssl验证，抓取歌曲信息-2024</title>
+      <link href="/2024/09/15/qishui_music/"/>
+      <url>/2024/09/15/qishui_music/</url>
+      
+        <content type="html"><![CDATA[<p>今天我们来整<strong>汽水音乐</strong>逆向绕过<code>ssl验证</code>抓包，以及抓取歌曲和解析歌曲<code>api</code>的信息，截至到发稿为止，网上的逆向教程比较少</p><span id="more"></span><hr><h2 id="汽水音乐">汽水音乐</h2><p>《汽水音乐》是一款音乐软件，由北京微播视界科技有限公司开发，其实就是抖音干的音乐软件，狗都不用，垃圾<code>app</code>，歌曲不多不少</p><p>先烧钱引流，然后割韭菜</p><p>垃圾<code>app</code>，狗都不用</p><hr><h2 id="环境">环境</h2><ul><li>一台电脑 <strong>装了ida</strong></li><li>一台手机 为了方便调试已<code>root</code></li></ul><hr><h2 id="抓包go">抓包go</h2><p>首先我们打开黄鸟，勾上系统代理，然后你会发现**<code>请求只有两个</code>**，而且响应的信息没啥用，这种大厂<code>APP</code></p><p><img src="https://pic.imgdb.cn/item/66e6e5a9d9c307b7e9dbb829.png" alt="如下图"></p><p>那我们该怎么办，那就搞<code>Android</code>端了</p><p>下载黄鸟手机版，然后去<code>magisk/kernelsu</code>，安装证书模块，博主这里已经安装好了</p><p><img src="https://pic.imgdb.cn/item/66e6e6a7d9c307b7e9dd21b0.jpg" alt=""></p><blockquote><p>注意，如果你是<code>kernelsu</code>用户，记得给黄鸟<code>root</code>权限</p></blockquote><img src="https://pic.imgdb.cn/item/66e6e866d9c307b7e9dfaa55.jpg" style="zoom:40%;" /><p>很不巧，出现了证书错误，这是因为<strong>汽水音乐</strong>使用了固定的证书，这里博主也尝试通过模块关闭<code>ssl</code>验证，但还是不行，看来只能逆向so了</p><blockquote><p>注：证书错误是因为触发了<code>ssl pining</code>，具体可以<a href="https://zhuanlan.zhihu.com/p/58204817">点我了解</a></p></blockquote><hr><h2 id="解决ssl-pining">解决ssl_pining</h2><p>首先在电脑下载汽水音乐的安装包，解压，去<code>lib</code>文件夹</p><p><img src="https://pic.imgdb.cn/item/66e6e95dd9c307b7e9e2b06d.png" alt=""></p><p>前往<code>arm64</code></p><p><img src="https://pic.imgdb.cn/item/66e6e98fd9c307b7e9e3622b.png" alt=""></p><p>找到<code>libsscronet.so</code></p><p><img src="https://pic.imgdb.cn/item/66e6e9d5d9c307b7e9e4633c.png" alt=""></p><p>打开<code>ida</code>，加载这个so文件</p><p><img src="https://pic.imgdb.cn/item/66e6ea21d9c307b7e9e599d2.png" alt=""></p><p>等到反编译完成</p><p>点击<code>search-&gt;text-&gt;输入VerifyCert</code>，记得勾选<code>find all</code></p><p><img src="https://pic.imgdb.cn/item/66e6eaf9d9c307b7e9e8c28e.png" alt=""></p><p>第一个，双击进去</p><p><img src="https://pic.imgdb.cn/item/66e6eb6ad9c307b7e9ea510c.png" alt=""></p><p>双击<code>sub_23FDD4+C8↓o</code></p><p><img src="https://pic.imgdb.cn/item/66e6eb89d9c307b7e9ea6ab4.png" alt=""></p><p>按下你键盘的<code>f5</code>，查看<code>c语言</code>代码，找到这个位置，我们抓包的时候过<code>ssl</code>，卡这里了，程序返回了<code>1</code>，根据<code>hook</code>，返回<code>0</code>才是正确的</p><blockquote><p>注：<code>1LL</code>是代表返回一个1，数据是<code>longlong</code>的，具体可以去学c</p></blockquote><p><img src="https://pic.imgdb.cn/item/66e6ebe5d9c307b7e9eac028.png" alt=""></p><p>用鼠标选中这里<code>return 1ll</code>，选择<code>Synchronize with-&gt; IDA view-A</code></p><p><img src="https://pic.imgdb.cn/item/66e6ecb1d9c307b7e9eb7af5.png" alt=""></p><p>对应是<code>loc_23FF10</code></p><p><img src="https://pic.imgdb.cn/item/66e6ed17d9c307b7e9ebce4e.png" alt=""></p><p>找到<code>mov w0,#1</code>修补成<code>mov w0,#0</code>，再看一次<code>c</code>代码，可以看到返回0了</p><p><img src="https://pic.imgdb.cn/item/66e6ed7fd9c307b7e9ec3179.png" alt=""></p><p><img src="https://pic.imgdb.cn/item/66e6ed7fd9c307b7e9ec3199.png" alt=""></p><p>当然，这只是第一处验证，还有两处的，我们滑到底部，返回函数点进去</p><p><img src="https://pic.imgdb.cn/item/66e6eeb8d9c307b7e9ed59e3.png" alt=""></p><p>首先是这里，要改成返回0</p><p><img src="https://pic.imgdb.cn/item/66e6ef37d9c307b7e9edd52a.png" alt=""></p><p>还有<code>return</code>这里</p><p><img src="https://pic.imgdb.cn/item/66e6ef85d9c307b7e9ee245f.png" alt=""></p><p>最后是编译出包了</p><p><img src="https://pic.imgdb.cn/item/66e6efd7d9c307b7e9ee713f.png" alt=""></p><p>回到手机上，把这个修改好的so，放去<code>data-&gt;app-&gt;汽水音乐</code>，<code>lib</code>文件夹里，覆盖掉，就能愉快抓包了</p><p><img src="https://pic.imgdb.cn/item/66e6f0dcd9c307b7e9ef7cf8.jpg" alt=""></p><hr><h2 id="修改好的so">修改好的so</h2><p>这里我分享下我修改好的so，需要的可以拿走</p><p><a href="https://www.123pan.com/s/dNbHjv-T8gsA">https://www.123pan.com/s/dNbHjv-T8gsA</a> 提取码:CqCZ</p><hr><h2 id="歌曲信息和解析">歌曲信息和解析</h2><p>待更新…</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> app逆向 </category>
+          
+          <category> 音乐类 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> code </tag>
+            
+            <tag> 编程 </tag>
+            
+            <tag> ida </tag>
+            
+            <tag> 音乐 </tag>
+            
+            <tag> 安卓逆向 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>2024新版有道web接口逆向</title>
       <link href="/2024/08/24/youdao_fanyi/"/>
       <url>/2024/08/24/youdao_fanyi/</url>
