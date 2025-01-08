@@ -7,8 +7,11 @@
 
 <head>
   <meta charset="UTF-8">
+
   <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.ico">
   <link rel="icon" href="/img/fluid.ico">
+  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -41,7 +44,7 @@
 <!-- 主题依赖的图标库，不要自行修改 -->
 <!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
 
 
 
@@ -62,7 +65,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"blog.bingyue.top","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1499a4a6751739c3ee13784b8a5271e5","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"blog.bingyue.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1499a4a6751739c3ee13784b8a5271e5","google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -86,10 +89,6 @@
         })();
       }
     </script>
-  
-
-  
-
   
 
   
@@ -134,7 +133,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -146,7 +145,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/archives/">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -158,7 +157,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -170,7 +169,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -182,7 +181,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -194,7 +193,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/link/">
+              <a class="nav-link" href="/link/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
                 <span>友链</span>
               </a>
@@ -206,9 +205,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/notes/">
+              <a class="nav-link" href="/notes/" target="_self">
                 <i class="iconfont icon-books"></i>
-                <span>笔记</span>
+                <span>notes</span>
               </a>
             </li>
           
@@ -278,18 +277,98 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/06/17/nonebot_teach_1/" target="_self">
+          <img src="https://s11.ax1x.com/2023/06/29/pCwQ0YR.png" srcset="/img/loading.gif" lazyload alt="nonebot2 手把手教程 前言">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/06/17/nonebot_teach_1/" target="_self">
+          nonebot2 手把手教程 前言
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt " href="/2023/06/17/nonebot_teach_1/" target="_self">
+        <div>
+          前言 今天是六月十七号，在未来会迎来暑假，所以本人在暑假的时候会开一个专栏，去专门讲解nonebot2的插件编写 将在6月27号开始连载第一篇 专门为python0基础的小白提供环境
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-06-17 21:13" pubdate>
+              2023-06-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/qq%E6%9C%BA%E5%99%A8%E4%BA%BA/" class="category-chain-item">qq机器人</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/qq%E6%9C%BA%E5%99%A8%E4%BA%BA/nonebot%E6%95%99%E7%A8%8B/" class="category-chain-item">nonebot教程</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/bot/">#bot</a>
+            
+              <a href="/tags/qq%E6%9C%BA%E5%99%A8%E4%BA%BA/">#qq机器人</a>
+            
+              <a href="/tags/code/">#code</a>
+            
+              <a href="/tags/%E7%BC%96%E7%A8%8B/">#编程</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2023/05/13/shouyun%20zs/" target="_self">
           <img src="https://s11.ax1x.com/2023/05/13/p969OMV.png" srcset="/img/loading.gif" lazyload alt="兽云1.0 nonebot2插件发布">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2023/05/13/shouyun%20zs/" target="_self">
           兽云1.0 nonebot2插件发布
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt " href="/2023/05/13/shouyun%20zs/" target="_self">
@@ -353,12 +432,12 @@
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2023/04/28/wifi_td_2/" target="_self">
           随身wifi玩机篇2 刷机
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt " href="/2023/04/28/wifi_td_2/" target="_self">
@@ -433,12 +512,12 @@
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2023/04/22/wifi_td_1/" target="_self">
           随身wifi玩机篇1 备份分区
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt " href="/2023/04/22/wifi_td_1/" target="_self">
@@ -502,12 +581,12 @@
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2023/04/16/shouyun_strat/" target="_self">
           兽云nonebot2配置教程
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt " href="/2023/04/16/shouyun_strat/" target="_self">
@@ -571,12 +650,12 @@
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2023/04/09/leetcode17/" target="_self">
           Leetcode 17.电话号码的字母组合
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt " href="/2023/04/09/leetcode17/" target="_self">
@@ -644,12 +723,12 @@
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2023/04/08/leetcode1014/" target="_self">
           Leetcode 1014.最佳观光组合
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt " href="/2023/04/08/leetcode1014/" target="_self">
@@ -715,12 +794,12 @@
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2023/04/05/leetcode53/" target="_self">
           Leetcode 53.最大子数组和题解
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt " href="/2023/04/05/leetcode53/" target="_self">
@@ -786,12 +865,12 @@
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2023/04/04/leetcode62/" target="_self">
           Leetcode 62.不同路径题解
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt " href="/2023/04/04/leetcode62/" target="_self">
@@ -857,12 +936,12 @@
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2023/04/04/leetcode70/" target="_self">
           Leetcode 70.爬楼梯题解
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt " href="/2023/04/04/leetcode70/" target="_self">
@@ -911,75 +990,6 @@
               <a href="/tags/code/">#code</a>
             
               <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">#动态规划</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/04/01/leetcode831/" target="_self">
-          <img src="https://s11.ax1x.com/2023/06/29/pCwQfkd.png" srcset="/img/loading.gif" lazyload alt="Leetcode 831.隐藏个人信息">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/01/leetcode831/" target="_self">
-          Leetcode 831.隐藏个人信息
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt " href="/2023/04/01/leetcode831/" target="_self">
-        <div>
-          题意描述 题目:隐藏个人信息
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-01 18:21" pubdate>
-              2023-04-01
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/leetcode/" class="category-chain-item">leetcode</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/leetcode/">#leetcode</a>
-            
-              <a href="/tags/%E6%A8%A1%E6%8B%9F/">#模拟</a>
             
           </div>
         
@@ -1043,7 +1053,6 @@
     <div class="footer-content">
        <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
     </div>
-  
   
   
   
