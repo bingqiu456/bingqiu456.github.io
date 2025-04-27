@@ -1,0 +1,792 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.ico">
+  <link rel="icon" href="/img/fluid.ico">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#36d984">
+  <meta name="author" content="bingyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="介绍 今天利用空闲时间写了一个金币的插件，做到优先同步内存，再同步数据库，在用户1000+的高频率使用下，已经做到毫无压力了，主要思路如下  开机做好预处理，把全部用户数据加载出来，并缓存在内存中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nonebot-金币管理系统(频道插件)">
+<meta property="og:url" content="http://blog.bingyue.top/2023/07/21/nonebot_guild_1/index.html">
+<meta property="og:site_name" content="冰月博客">
+<meta property="og:description" content="介绍 今天利用空闲时间写了一个金币的插件，做到优先同步内存，再同步数据库，在用户1000+的高频率使用下，已经做到毫无压力了，主要思路如下  开机做好预处理，把全部用户数据加载出来，并缓存在内存中">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s11.ax1x.com/2023/07/21/pCbY6mD.png">
+<meta property="article:published_time" content="2023-07-21T10:15:19.000Z">
+<meta property="article:modified_time" content="2023-12-15T12:55:13.017Z">
+<meta property="article:author" content="bingyue">
+<meta property="article:tag" content="bot">
+<meta property="article:tag" content="qq机器人">
+<meta property="article:tag" content="code">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s11.ax1x.com/2023/07/21/pCbY6mD.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Nonebot-金币管理系统(频道插件) - 冰月博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.bingyue.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1499a4a6751739c3ee13784b8a5271e5","google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?1499a4a6751739c3ee13784b8a5271e5";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>bingyue</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/link/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/notes/" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>notes</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/7777.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Nonebot-金币管理系统(频道插件)"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-07-21 18:15" pubdate>
+          2023年7月21日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          751 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          7 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Nonebot-金币管理系统(频道插件)</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2023年12月15日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="介绍">介绍</h2>
+<p>今天利用空闲时间写了一个金币的插件，做到优先同步内存，再同步数据库，在用户1000+的高频率使用下，已经做到毫无压力了，主要思路如下</p>
+<ul>
+<li>开机做好预处理，把全部用户数据加载出来，并缓存在内存中</li>
+</ul>
+<span id="more"></span>
+<ul>
+<li>
+<p>动态维护 对内存里的数据进行加减</p>
+</li>
+<li>
+<p>再统一提交给数据库</p>
+</li>
+</ul>
+<h2 id="如何使用">如何使用</h2>
+<p>本插件下载链接 👇 👇</p>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1jF7TRDURJzil_ZX_i2S1Dg?pwd=ctr8">传送门</a></p>
+<p>☝ ☝ ☝</p>
+<p>添加到你的频道插件目录下 并在 <code>pyproject.toml</code>里添加该文件夹</p>
+<p><img src="https://s11.ax1x.com/2023/07/21/pCbYmwQ.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>我这里把插件放在plugin文件夹里了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">plugin_dirs = [<span class="hljs-string">&quot;plugin&quot;</span>] <span class="hljs-comment"># 添加该插件所在的文件夹</span><br></code></pre></td></tr></table></figure>
+<h2 id="代码展示">代码展示</h2>
+<p>1.核心代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">## 作者:bingyue</span><br><span class="hljs-comment">## QQ: 35***19417</span><br><span class="hljs-comment">## 一个高效率的写法，适合用于金币好感度</span><br><br><span class="hljs-keyword">from</span> nonebot <span class="hljs-keyword">import</span> on_command, on_fullmatch<br><span class="hljs-keyword">from</span> nonebot.permission <span class="hljs-keyword">import</span> SUPERUSER<br><span class="hljs-keyword">from</span> nonebot.params <span class="hljs-keyword">import</span> CommandArg<br><span class="hljs-keyword">from</span> nonebot.adapters.qqguild <span class="hljs-keyword">import</span> Message, MessageEvent<br><span class="hljs-keyword">from</span> . <span class="hljs-keyword">import</span> sqlite_conn<br><br>a = on_command(<span class="hljs-string">&quot;增加金币&quot;</span>,permission=SUPERUSER)<br>b = on_command(<span class="hljs-string">&quot;减少金币&quot;</span>,permission=SUPERUSER)<br>c = on_fullmatch(<span class="hljs-string">&quot;查询金币&quot;</span>)<br><br><span class="hljs-meta">@a.handle()</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">_</span>(<span class="hljs-params">b: Message = CommandArg(<span class="hljs-params"></span>)</span>):<br>    c = <span class="hljs-built_in">list</span>(b)<br>    <span class="hljs-keyword">await</span> add_jb(c[<span class="hljs-number">0</span>].data[<span class="hljs-string">&quot;user_id&quot;</span>],<span class="hljs-built_in">int</span>(c[<span class="hljs-number">1</span>].data[<span class="hljs-string">&quot;text&quot;</span>].strip()))<br>    <span class="hljs-keyword">await</span> a.finish(<span class="hljs-string">&quot;添加金币成功！&quot;</span>)<br><br><span class="hljs-meta">@b.handle()</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">_</span>(<span class="hljs-params">d: Message = CommandArg(<span class="hljs-params"></span>)</span>):<br>    c = <span class="hljs-built_in">list</span>(d)<br>    <span class="hljs-keyword">await</span> del_jb(c[<span class="hljs-number">0</span>].data[<span class="hljs-string">&quot;user_id&quot;</span>],<span class="hljs-built_in">int</span>(c[<span class="hljs-number">1</span>].data[<span class="hljs-string">&quot;text&quot;</span>]))<br>    <span class="hljs-keyword">await</span> b.finish(<span class="hljs-string">&quot;减少金币成功&quot;</span>)<br><br><span class="hljs-meta">@c.handle()</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">_</span>(<span class="hljs-params">event: MessageEvent</span>):<br>    j = <span class="hljs-keyword">await</span> find_jb(event.get_user_id())<br>    <span class="hljs-keyword">if</span> j <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>        <span class="hljs-keyword">await</span> c.finish(<span class="hljs-string">&quot;你目前的金币为0&quot;</span>)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">await</span> c.finish(<span class="hljs-string">f&quot;你目前的金币为<span class="hljs-subst">&#123;j&#125;</span>&quot;</span>)<br><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">add_jb</span>(<span class="hljs-params"><span class="hljs-built_in">id</span>:<span class="hljs-built_in">str</span>, e:<span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-literal">None</span>:<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    增加好感度</span><br><span class="hljs-string"></span><br><span class="hljs-string">    id: 你的频道号</span><br><span class="hljs-string">    </span><br><span class="hljs-string">    e: 增加的具体数据</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    j = <span class="hljs-keyword">await</span> find_jb(<span class="hljs-built_in">id</span>)<br>    <span class="hljs-keyword">if</span> j <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>        sqlite_conn.conn_jb.cursor().execute(<span class="hljs-string">f&#x27;insert into `jb` (`id`,`jb`) values(&quot;<span class="hljs-subst">&#123;<span class="hljs-built_in">id</span>&#125;</span>&quot;,<span class="hljs-subst">&#123;e&#125;</span>)&#x27;</span>)<br>        sqlite_conn.h[<span class="hljs-built_in">id</span>] = e<br>    <span class="hljs-keyword">else</span>:<br>        sqlite_conn.conn_jb.cursor().execute(<span class="hljs-string">f&#x27;UPDATE `jb` SET jb=<span class="hljs-subst">&#123;j+e&#125;</span> WHERE id=&quot;<span class="hljs-subst">&#123;<span class="hljs-built_in">id</span>&#125;</span>&quot;&#x27;</span>)<br>        sqlite_conn.h[<span class="hljs-built_in">id</span>] += e<br><br><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">find_jb</span>(<span class="hljs-params"><span class="hljs-built_in">id</span>:<span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">int</span>:<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    查询好感度</span><br><span class="hljs-string"></span><br><span class="hljs-string">    id: 你的频道号id</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">id</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> sqlite_conn.h:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> sqlite_conn.h[<span class="hljs-built_in">id</span>]<br><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">del_jb</span>(<span class="hljs-params"><span class="hljs-built_in">id</span>:<span class="hljs-built_in">str</span>, e:<span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-literal">None</span>:<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    减少好感度</span><br><span class="hljs-string"></span><br><span class="hljs-string">    id: 你的频道号</span><br><span class="hljs-string"></span><br><span class="hljs-string">    e: 减少的具体数据</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    j = <span class="hljs-keyword">await</span> find_jb(<span class="hljs-built_in">id</span>)<br>    <span class="hljs-keyword">if</span> j <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>        sqlite_conn.conn_jb.cursor().execute(<span class="hljs-string">f&#x27;insert into `jb` (`id`,`jb`) values(&quot;<span class="hljs-subst">&#123;<span class="hljs-built_in">id</span>&#125;</span>&quot;,<span class="hljs-subst">&#123;-e&#125;</span>)&#x27;</span>)<br>        sqlite_conn.h[<span class="hljs-built_in">id</span>] = -e<br>    <span class="hljs-keyword">else</span>:<br>        sqlite_conn.conn_jb.cursor().execute(<span class="hljs-string">f&#x27;UPDATE `jb` SET jb=<span class="hljs-subst">&#123;j-e&#125;</span> WHERE id=&quot;<span class="hljs-subst">&#123;<span class="hljs-built_in">id</span>&#125;</span>&quot;&#x27;</span>)<br>        sqlite_conn.h[<span class="hljs-built_in">id</span>] -= e<br></code></pre></td></tr></table></figure>
+<p>2.连接数据库，预处理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">## 作者:bingyue</span><br><span class="hljs-comment">## QQ: 35***19417</span><br><span class="hljs-comment">## 一个高效率的写法，适合用于金币好感度</span><br><br><span class="hljs-keyword">from</span> nonebot.log <span class="hljs-keyword">import</span> logger<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> sqlite3<br><br>h = &#123;&#125;<br><br><span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.isdir(<span class="hljs-string">&quot;data&quot;</span>):<br>    logger.error(<span class="hljs-string">&quot;未检测到data文件,正在创建&quot;</span>)<br>    os.mkdir(<span class="hljs-string">&quot;data&quot;</span>)<br>    logger.success(<span class="hljs-string">&quot;创建data文件夹成功&quot;</span>)<br>    <br><span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.isfile(<span class="hljs-string">&quot;data/jb.db&quot;</span>):<br>    conn_jb = sqlite3.connect(<span class="hljs-string">&quot;data/jb.db&quot;</span>)<br>    logger.warning(<span class="hljs-string">&quot;正在加载数据库！！&quot;</span>)<br>    conn_jb.cursor().execute(<span class="hljs-string">f&quot;CREATE TABLE `jb` (`id` text, `jb` int(12))&quot;</span>)<br>    conn_jb.commit()<br>    logger.success(<span class="hljs-string">&quot;创建表格完毕&quot;</span>)<br><br>conn_jb = sqlite3.connect(<span class="hljs-string">&quot;data/jb.db&quot;</span>)<br><br>q = conn_jb.cursor().execute(<span class="hljs-string">f&quot;SELECT * from `jb`&quot;</span>).fetchall()<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> q:<br>    h[i[<span class="hljs-number">0</span>]] = i[<span class="hljs-number">1</span>]<br><br></code></pre></td></tr></table></figure>
+<p>3.定时同步给数据库</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Py"><span class="hljs-comment">## 作者:bingyue</span><br><span class="hljs-comment">## QQ: 35***19417</span><br><span class="hljs-comment">## 一个高效率的写法，适合用于金币好感度</span><br><br><span class="hljs-keyword">from</span> nonebot_plugin_apscheduler <span class="hljs-keyword">import</span> scheduler<br><span class="hljs-keyword">from</span> . <span class="hljs-keyword">import</span> sqlite_conn<br><span class="hljs-keyword">from</span> nonebot.log <span class="hljs-keyword">import</span> logger<br><br><span class="hljs-meta">@scheduler.scheduled_job(<span class="hljs-params"><span class="hljs-string">&#x27;interval&#x27;</span>, seconds=<span class="hljs-number">60</span></span>)</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">eveny_day</span>() -&gt; <span class="hljs-literal">None</span>:<br>    sqlite_conn.conn_jb.commit()<br>    logger.success(<span class="hljs-string">&quot;同步数据成功！&quot;</span>)<br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/qq%E9%A2%91%E9%81%93/" class="category-chain-item">qq频道</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/bot/" class="print-no-link">#bot</a>
+      
+        <a href="/tags/qq%E6%9C%BA%E5%99%A8%E4%BA%BA/" class="print-no-link">#qq机器人</a>
+      
+        <a href="/tags/code/" class="print-no-link">#code</a>
+      
+        <a href="/tags/%E7%BC%96%E7%A8%8B/" class="print-no-link">#编程</a>
+      
+        <a href="/tags/python/" class="print-no-link">#python</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Nonebot-金币管理系统(频道插件)</div>
+      <div>http://blog.bingyue.top/2023/07/21/nonebot_guild_1/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>bingyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年7月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/07/31/qq_sao_ma/" title="QQ扫码登录抓取分析">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">QQ扫码登录抓取分析</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/07/20/nonebot_guild/" title="nonebot-qq频道适配器教程">
+                        <span class="hidden-mobile">nonebot-qq频道适配器教程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"0f4c0af04f4a74a28ef8","clientSecret":"603e436965f1a09c74e485733b6b3593d6514a46","repo":"bingqiu456.github.io","owner":"bingqiu456","admin":["bingqiu456"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: '73621bc24ed8fc9f1785962d16c8ee93'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

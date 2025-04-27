@@ -1,0 +1,826 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.ico">
+  <link rel="icon" href="/img/fluid.ico">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#36d984">
+  <meta name="author" content="bingyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="开始之前 在本期教程开始之前，虽然网络上有很多有道翻译的解密，但是在一年前，有道换了新的ui，加入了ai翻译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2024新版有道web接口逆向">
+<meta property="og:url" content="http://blog.bingyue.top/2024/08/24/youdao_fanyi/index.html">
+<meta property="og:site_name" content="冰月博客">
+<meta property="og:description" content="开始之前 在本期教程开始之前，虽然网络上有很多有道翻译的解密，但是在一年前，有道换了新的ui，加入了ai翻译">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.imgdb.cn/item/66c96d7ed9c307b7e9d4ace7.png">
+<meta property="article:published_time" content="2024-08-24T05:19:06.000Z">
+<meta property="article:modified_time" content="2024-08-24T05:20:05.669Z">
+<meta property="article:author" content="bingyue">
+<meta property="article:tag" content="code">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="js逆向">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pic.imgdb.cn/item/66c96d7ed9c307b7e9d4ace7.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>2024新版有道web接口逆向 - 冰月博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.bingyue.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1499a4a6751739c3ee13784b8a5271e5","google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?1499a4a6751739c3ee13784b8a5271e5";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>bingyue</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/link/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/notes/" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>notes</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/7777.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="2024新版有道web接口逆向"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-08-24 13:19" pubdate>
+          2024年8月24日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">2024新版有道web接口逆向</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年8月24日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="开始之前">开始之前</h2>
+<p>在本期教程开始之前，虽然网络上有很多<code>有道翻译</code>的解密，但是在一年前，有道换了新的ui，加入了ai翻译</p>
+<span id="more"></span>
+<p>那关于新版本如何解密呢，本期教程就给大家揭晓</p>
+<hr>
+<h2 id="抓包-数据分析">抓包&amp;数据分析</h2>
+<p>首先我们打开有道翻译，<a target="_blank" rel="noopener" href="https://fanyi.youdao.com">点我</a>同时右键<code>f12</code>打开浏览器的<strong>抓包</strong>，过滤一下，可以看到有这两个请求</p>
+<p><img src="https://pic.imgdb.cn/item/66c8b4d4d9c307b7e9ee1453.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>从数据的返回上看，这两个api是连在一起的，一个是生成解密密钥，一个是用密钥解密密文</p>
+<p><img src="https://pic.imgdb.cn/item/66c8b537d9c307b7e9ef4ab5.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://pic.imgdb.cn/item/66c8b560d9c307b7e9f0397a.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>所以我们先把目光放到生成密钥这个<code>api</code>上</p>
+<p><img src="https://pic.imgdb.cn/item/66c8b5aed9c307b7e9f09f4c.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<hr>
+<h2 id="解密生成key的sign">解密生成key的sign</h2>
+<p>从上面请求的数据来看，经过多次访问，只有<code>mysticTime</code>和<code>sign</code>发生了变化，第二次参数不难搞，就是当前的时间戳</p>
+<p>那么我们看一下<code>js</code>看看他把<code>sign</code>写在那里了</p>
+<p><img src="https://pic.imgdb.cn/item/66c8b647d9c307b7e9f15fe7.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>全局搜索<code>sign</code>这个参数</p>
+<p><img src="https://pic.imgdb.cn/item/66c8b979d9c307b7e9f5108e.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>从这个<code>getsign</code>函数来看，我们可以找到该函数的位置，同时查看<code>t</code>函数，<code>t</code>函数是加密的内容</p>
+<p><img src="https://pic.imgdb.cn/item/66c8b9c1d9c307b7e9f55a70.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>从报错信息得知，加密藏于<code>app.js</code>，从这个文件一路打断点，找到<code>sign</code>函数的入口了，同时<code>o</code>函数是请求的时间戳，<code>e</code>函数是固定值内容为<code>asdjnjfenknafdfsdfsd</code></p>
+<p><img src="https://pic.imgdb.cn/item/66c8ba98d9c307b7e9f60806.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>从<code>function s</code>直接断点得到如下信息</p>
+<p><img src="https://pic.imgdb.cn/item/66c8bb54d9c307b7e9f6a4ae.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><code>d</code>函数是<code>fanyideskweb</code>，<code>e</code>函数是<code>时间戳</code>，<code>u</code>函数是<code>webfanyi</code>，<code>t</code>函数是<code>asdjnjfenknafdfsdfsd</code>，同时调用的<code>_</code>函数也在上面了，是个<code>md5</code>加密，综上所述，加密公式为</p>
+<p>这里的时间戳为<code>13</code>位的时间戳</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">client=fanyideskweb&amp;mysticTime=0000000000000&amp;product=webfanyi&amp;key=asdjnjfenknafdfsdfsd<br></code></pre></td></tr></table></figure>
+<p><img src="https://pic.imgdb.cn/item/66c8bd3ad9c307b7e9f8b84b.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>和官方加密的一致</p>
+<hr>
+<h2 id="成品1">成品1</h2>
+<p><strong>Typescript</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">CryptoJS</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;crypto-js&#x27;</span>;<br><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">get_sign</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-keyword">var</span> headers : <span class="hljs-built_in">any</span> = &#123;<br>        <span class="hljs-string">&quot;Referer&quot;</span>: <span class="hljs-string">&quot;https://fanyi.youdao.com/&quot;</span>,<br>        <span class="hljs-string">&quot;User-agent&quot;</span>: <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36&quot;</span>,<br>    &#125;<br>    <span class="hljs-keyword">var</span> mysticTime : <span class="hljs-built_in">number</span> = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>())<br>    <span class="hljs-keyword">var</span> <span class="hljs-attr">sign</span>: <span class="hljs-built_in">string</span> = <span class="hljs-title class_">CryptoJS</span>.<span class="hljs-title class_">MD5</span>(<span class="hljs-string">`client=fanyideskweb&amp;mysticTime=<span class="hljs-subst">$&#123;mysticTime&#125;</span>&amp;product=webfanyi&amp;key=asdjnjfenknafdfsdfsd`</span>).<span class="hljs-title function_">toString</span>()<br>    <span class="hljs-keyword">var</span> url : <span class="hljs-built_in">string</span> =  <span class="hljs-string">&quot;https://dict.youdao.com/webtranslate/key?&quot;</span> +<br>        <span class="hljs-string">&quot;keyid=webfanyi-key-getter&quot;</span>+<br>        <span class="hljs-string">`&amp;sign=<span class="hljs-subst">$&#123;sign&#125;</span>`</span>+<br>        <span class="hljs-string">&quot;&amp;client=fanyideskweb&quot;</span>+<br>        <span class="hljs-string">&quot;&amp;product=webfanyi&quot;</span>+<br>        <span class="hljs-string">&quot;&amp;appVersion=1.0.0&amp;vendor=web&quot;</span>+<br>        <span class="hljs-string">&quot;&amp;pointParam=client,mysticTime,product&quot;</span>+<br>        <span class="hljs-string">`&amp;mysticTime=<span class="hljs-subst">$&#123;mysticTime&#125;</span>&amp;keyfrom=fanyi.web`</span>+<br>        <span class="hljs-string">&quot;&amp;mid=1&quot;</span>+<br>        <span class="hljs-string">&quot;&amp;screen=1&quot;</span>+<br>        <span class="hljs-string">&quot;&amp;model=1&quot;</span>+<br>        <span class="hljs-string">&quot;&amp;network=wifi&quot;</span>+<br>        <span class="hljs-string">&quot;&amp;abtest=0&quot;</span>+<br>        <span class="hljs-string">&quot;&amp;yduuid=abcdefg&quot;</span><br>    <br>    <span class="hljs-keyword">var</span> requset = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(url, headers)<br>    <span class="hljs-keyword">var</span> json_data = <span class="hljs-keyword">await</span> requset.<span class="hljs-title function_">json</span>()<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(json_data[<span class="hljs-string">&quot;data&quot;</span>])<br>&#125;<br><br><span class="hljs-title function_">get_sign</span>()<br></code></pre></td></tr></table></figure>
+<p><strong>Python</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> hashlib<br><span class="hljs-keyword">import</span> httpx<br><span class="hljs-keyword">import</span> time<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_sign</span>():<br>    mysticTime = <span class="hljs-built_in">int</span>(time.time() * <span class="hljs-number">1000</span>)<br>    sign = hashlib.md5(<span class="hljs-string">f&quot;client=fanyideskweb&amp;mysticTime=<span class="hljs-subst">&#123;mysticTime&#125;</span>&amp;product=webfanyi&amp;key=asdjnjfenknafdfsdfsd&quot;</span>.encode(encoding=<span class="hljs-string">&#x27;UTF-8&#x27;</span>)).hexdigest()<br>    a = httpx.get(<br>        url=<span class="hljs-string">&quot;https://dict.youdao.com/webtranslate/key?keyid=webfanyi-key-getter&quot;</span>\<br>        <span class="hljs-string">f&quot;&amp;sign=<span class="hljs-subst">&#123;sign&#125;</span>&quot;</span>\<br>        <span class="hljs-string">&quot;&amp;client=fanyideskweb&quot;</span>\<br>        <span class="hljs-string">&quot;&amp;product=webfanyi&quot;</span>\<br>        <span class="hljs-string">&quot;&amp;appVersion=1.0.0&quot;</span>\<br>        <span class="hljs-string">&quot;&amp;vendor=web&quot;</span>\<br>        <span class="hljs-string">&quot;&amp;pointParam=client,mysticTime,product&quot;</span>\<br>        <span class="hljs-string">f&quot;&amp;mysticTime=<span class="hljs-subst">&#123;mysticTime&#125;</span>&quot;</span>\<br>        <span class="hljs-string">&quot;&amp;keyfrom=fanyi.web&quot;</span>\<br>        <span class="hljs-string">&quot;&amp;mid=1&quot;</span>\<br>        <span class="hljs-string">&quot;&amp;screen=1&quot;</span>\<br>        <span class="hljs-string">&quot;&amp;model=1&quot;</span>\<br>        <span class="hljs-string">&quot;&amp;network=wifi&quot;</span>\<br>        <span class="hljs-string">&quot;&amp;abtest=0&quot;</span>\<br>        <span class="hljs-string">&quot;&amp;yduuid=abcdefg&quot;</span>,<br>        headers= &#123;<br>            <span class="hljs-string">&quot;Referer&quot;</span>: <span class="hljs-string">&quot;https://fanyi.youdao.com/&quot;</span>,<br>            <span class="hljs-string">&quot;User-agent&quot;</span>: <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36&quot;</span>,<br>        &#125;<br>    )<br>    <span class="hljs-keyword">return</span> a.json()[<span class="hljs-string">&quot;data&quot;</span>]<br><br><span class="hljs-built_in">print</span>(get_sign())<br></code></pre></td></tr></table></figure>
+<hr>
+<h2 id="解密密文">解密密文</h2>
+<p>那我们搞定了<code>key</code>这个<code>api</code>后，现在开始分析<code>webtranslate</code>这个<code>api</code>，首先我们先看发送的内容</p>
+<p><img src="https://pic.imgdb.cn/item/66c8c558d9c307b7e908aba8.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>这里的<code>i</code>函数就是我们翻译的内容，<code>sign</code>参数又来了，那我们在原来的地方打个断点，拿签名</p>
+<p><img src="https://pic.imgdb.cn/item/66c8c4f5d9c307b7e9083c7d.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>然后你会发现只是<code>t</code>函数变了，其他没变，套用第一次分析的公式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">client=fanyideskweb&amp;mysticTime=0000000000000&amp;product=webfanyi&amp;key=fsdsogkndfokasodnaso<br></code></pre></td></tr></table></figure>
+<p>这样第一层就搞定了，我们现在要找密文解密的地方，全网就复杂在这里</p>
+<p>按照原理来说，<code>js</code>会请求<code>api</code>，再解密，所以我们要找到请求的地方</p>
+<p><img src="https://pic.imgdb.cn/item/66c8c8bad9c307b7e90b4d0e.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>从这里开始发起请求，回到<code>app.js</code>，搜索一下发送请求的<code>url</code>，然后我们就找到了这些</p>
+<p><img src="https://pic.imgdb.cn/item/66c8d30fd9c307b7e91b5da5.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>这里是个<code>aes</code>的加密，<code>l</code>也是解密的密文，我们就要开始分析了</p>
+<p>首先<code>e</code>是密文，<code>t</code>是<code>key_api</code>的<code>aeskey</code>，<code>o</code>是<code>key_api</code>的<code>aesiv</code>，<code>忘记说了，t函数是md5加密</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> a = s.<span class="hljs-title function_">alloc</span>(<span class="hljs-number">16</span>, <span class="hljs-title function_">T</span>(t))<br>                 , n = s.<span class="hljs-title function_">alloc</span>(<span class="hljs-number">16</span>, <span class="hljs-title function_">T</span>(o))<br>                 , r = i.<span class="hljs-title function_">createDecipheriv</span>(<span class="hljs-string">&quot;aes-128-cbc&quot;</span>, a, n);<br>               <span class="hljs-keyword">let</span> l = r.<span class="hljs-title function_">update</span>(e, <span class="hljs-string">&quot;base64&quot;</span>, <span class="hljs-string">&quot;utf-8&quot;</span>);<br>               <span class="hljs-keyword">return</span> l += r.<span class="hljs-title function_">final</span>(<span class="hljs-string">&quot;utf-8&quot;</span>),<br></code></pre></td></tr></table></figure>
+<p>我们把这一段代码拷贝到ide，根据自己学的<code>ts</code>，改了一下，这里网易使用了<code>aes-128-cbc</code>加密</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123; createHash,createDecipheriv &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;crypto&#x27;</span>;<br><br><br><span class="hljs-keyword">var</span> t = <span class="hljs-string">&quot;ydsecret://query/key/B*RGygVywfNBwpmBaZg*WT7SIOUP2T0C9WHMZN39j^DAdaZhAnxvGcCY6VYFwnHl&quot;</span><br><span class="hljs-keyword">var</span> o = <span class="hljs-string">&quot;ydsecret://query/iv/C@lZe2YzHtZ2CYgaXKSVfsb7Y4QWHjITPPZ0nQp87fBeJ!Iv6v^6fvi2WN@bYpJ4&quot;</span><br><span class="hljs-keyword">var</span> e = <span class="hljs-string">&quot;Z21kD9ZK1ke6ugku2ccWu4n6eLnvoDT0YgGi0y3g-v0B9sYqg8L9D6UERNozYOHq0tIY5zg2_G3Njo5Qsw98fEghPM5cT9RqLsGBQW5jSVzv635HhMVrRZ6XpfYk0jtdgCf21MHrt_Gv94m_MLKUmBr8wSktKe6dvgvAHa5JFYxZjBINiTLwCUM5uFfL230YCw4OOj_f5cgK75GSOgS76xYGS0AcczPyGKkqErEunfjU5J0ztwhHESgwX6aE1qleQphl7R8HfR51CDtqzeL9XhzMjPgetz6gBaXdjYYC00T_ELg1AFx4dqu1N9BZ2wxHxKZ4StKqRDTZcVX5XU13ffSHHnhGva7SKIUpOZgtbz8950OQ92Gm9VkHLeKyWXCtNhms9O8gbr88hXT1oHrLqSduzlKgqHq_LnjsvTOraZRSVuiugeaWVgh2iF-CPnFPsgp2CjeQ9gEgBXwbkn1iDg0uFGRmT_h6mO3mzoaamxNMKWjNlHqXeRNQtsiKwpUCN-VE0IFe5zSKeYN_6y5MVH5zehnMjHbBd-K0f9ESoM-9a5-PDPMUqXxS5dB5gCAh&quot;</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">T</span>(<span class="hljs-params">o : <span class="hljs-built_in">string</span></span>)&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_">createHash</span>(<span class="hljs-string">&#x27;md5&#x27;</span>).<span class="hljs-title function_">update</span>(o).<span class="hljs-title function_">digest</span>();<br>&#125;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">T</span>(o).<span class="hljs-title function_">toJSON</span>().<span class="hljs-property">data</span>)<br><span class="hljs-keyword">const</span> a = <span class="hljs-title class_">Buffer</span>.<span class="hljs-title function_">from</span>(<span class="hljs-title function_">T</span>(t).<span class="hljs-title function_">toJSON</span>().<span class="hljs-property">data</span>)<br><span class="hljs-keyword">const</span> n = <span class="hljs-title class_">Buffer</span>.<span class="hljs-title function_">from</span>(<span class="hljs-title function_">T</span>(o).<span class="hljs-title function_">toJSON</span>().<span class="hljs-property">data</span>)<br><span class="hljs-keyword">const</span> r = <span class="hljs-title function_">createDecipheriv</span>(<span class="hljs-string">&#x27;aes-128-cbc&#x27;</span>, a, n);<br><span class="hljs-keyword">let</span> l = r.<span class="hljs-title function_">update</span>(e, <span class="hljs-string">&#x27;base64&#x27;</span>, <span class="hljs-string">&#x27;utf-8&#x27;</span>); <br>l += r.<span class="hljs-title function_">final</span>(<span class="hljs-string">&#x27;utf-8&#x27;</span>);<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a,n)<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(l)<br></code></pre></td></tr></table></figure>
+<p>这样就输出正确的结果了，所以我们可以得知代码正确的内容了</p>
+<p>同理，我们把上面获取密钥结合在一起，就行了</p>
+<hr>
+<h2 id="成品2">成品2</h2>
+<p><strong>Typescript</strong></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123; createHash,createDecipheriv &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;crypto&#x27;</span>;<br><span class="hljs-keyword">import</span> &#123; access &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;fs&#x27;</span>;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">get_sign</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-keyword">var</span> headers : <span class="hljs-built_in">any</span> = &#123;<br>        <span class="hljs-string">&quot;Referer&quot;</span>: <span class="hljs-string">&quot;https://fanyi.youdao.com/&quot;</span>,<br>        <span class="hljs-string">&quot;User-agent&quot;</span>: <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36&quot;</span>,<br>    &#125;<br>    <span class="hljs-keyword">var</span> mysticTime : <span class="hljs-built_in">number</span> = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>())<br>    <span class="hljs-keyword">var</span> <span class="hljs-attr">sign</span>: <span class="hljs-built_in">string</span> =<span class="hljs-title function_">createHash</span>(<span class="hljs-string">&#x27;md5&#x27;</span>).<span class="hljs-title function_">update</span>(<span class="hljs-string">`client=fanyideskweb&amp;mysticTime=<span class="hljs-subst">$&#123;mysticTime&#125;</span>&amp;product=webfanyi&amp;key=asdjnjfenknafdfsdfsd`</span>).<span class="hljs-title function_">digest</span>(<span class="hljs-string">&quot;hex&quot;</span>)<br>    <span class="hljs-keyword">var</span> url : <span class="hljs-built_in">string</span> =  <span class="hljs-string">&quot;https://dict.youdao.com/webtranslate/key?&quot;</span> +<br>        <span class="hljs-string">&quot;keyid=webfanyi-key-getter&quot;</span>+<br>        <span class="hljs-string">`&amp;sign=<span class="hljs-subst">$&#123;sign&#125;</span>`</span>+<br>        <span class="hljs-string">&quot;&amp;client=fanyideskweb&quot;</span>+<br>        <span class="hljs-string">&quot;&amp;product=webfanyi&quot;</span>+<br>        <span class="hljs-string">&quot;&amp;appVersion=1.0.0&amp;vendor=web&quot;</span>+<br>        <span class="hljs-string">&quot;&amp;pointParam=client,mysticTime,product&quot;</span>+<br>        <span class="hljs-string">`&amp;mysticTime=<span class="hljs-subst">$&#123;mysticTime&#125;</span>&amp;keyfrom=fanyi.web`</span>+<br>        <span class="hljs-string">&quot;&amp;mid=1&quot;</span>+<br>        <span class="hljs-string">&quot;&amp;screen=1&quot;</span>+<br>        <span class="hljs-string">&quot;&amp;model=1&quot;</span>+<br>        <span class="hljs-string">&quot;&amp;network=wifi&quot;</span>+<br>        <span class="hljs-string">&quot;&amp;abtest=0&quot;</span>+<br>        <span class="hljs-string">&quot;&amp;yduuid=abcdefg&quot;</span><br>    <br>    <span class="hljs-keyword">var</span> requset = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(url, headers)<br>    <span class="hljs-keyword">var</span> json_data = <span class="hljs-keyword">await</span> requset.<span class="hljs-title function_">json</span>()<br>    <span class="hljs-keyword">return</span> json_data[<span class="hljs-string">&quot;data&quot;</span>]<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">T</span>(<span class="hljs-params">o : <span class="hljs-built_in">string</span></span>)&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-title function_">createHash</span>(<span class="hljs-string">&#x27;md5&#x27;</span>).<span class="hljs-title function_">update</span>(o).<span class="hljs-title function_">digest</span>(); <br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">get_translation_result</span>(<span class="hljs-params">target: <span class="hljs-built_in">string</span></span>) &#123;<br>    <span class="hljs-keyword">const</span> v : <span class="hljs-built_in">any</span> = <span class="hljs-keyword">await</span> <span class="hljs-title function_">get_sign</span>()<br>    <span class="hljs-keyword">var</span> aeskey : <span class="hljs-built_in">string</span> = v[<span class="hljs-string">&quot;aesKey&quot;</span>]<br>    <span class="hljs-keyword">var</span> aesiv : <span class="hljs-built_in">string</span> = v[<span class="hljs-string">&quot;aesIv&quot;</span>]<br>    <span class="hljs-keyword">var</span> url : <span class="hljs-built_in">string</span> = <span class="hljs-string">&quot;https://dict.youdao.com/webtranslate&quot;</span><br>    <span class="hljs-keyword">var</span> mysticTime : <span class="hljs-built_in">number</span> = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">floor</span>(<span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>())<br>    <span class="hljs-keyword">var</span> <span class="hljs-attr">sign</span>: <span class="hljs-built_in">string</span> =<span class="hljs-title function_">createHash</span>(<span class="hljs-string">&#x27;md5&#x27;</span>).<span class="hljs-title function_">update</span>(<span class="hljs-string">`client=fanyideskweb&amp;mysticTime=<span class="hljs-subst">$&#123;mysticTime&#125;</span>&amp;product=webfanyi&amp;key=fsdsogkndfokasodnaso`</span>).<span class="hljs-title function_">digest</span>(<span class="hljs-string">&quot;hex&quot;</span>)<br>    <span class="hljs-keyword">var</span> m : <span class="hljs-built_in">string</span> = <span class="hljs-string">`i=<span class="hljs-subst">$&#123;target&#125;</span>&amp;from=auto&amp;to=&amp;useTerm=false&amp;dictResult=true&amp;keyid=webfanyi&amp;sign=<span class="hljs-subst">$&#123;sign&#125;</span>&amp;client=fanyideskweb&amp;product=webfanyi&amp;appVersion=1.0.0&amp;vendor=web&amp;pointParam=client%2CmysticTime%2Cproduct&amp;mysticTime=<span class="hljs-subst">$&#123;mysticTime&#125;</span>&amp;keyfrom=fanyi.web&amp;mid=1&amp;screen=1&amp;model=1&amp;network=wifi&amp;abtest=0&amp;yduuid=abcdefg`</span><br>    <span class="hljs-keyword">var</span> header : <span class="hljs-built_in">any</span> = &#123;<br>        method : <span class="hljs-string">&quot;POST&quot;</span>,<br>        headers : &#123;<br>            <span class="hljs-string">&quot;Content-type&quot;</span>: <span class="hljs-string">&quot;application/x-www-form-urlencoded&quot;</span>,<br>            <span class="hljs-string">&quot;User-agent&quot;</span>: <span class="hljs-string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36&quot;</span>,<br>            <span class="hljs-string">&quot;Referer&quot;</span>: <span class="hljs-string">&quot;https://fanyi.youdao.com/&quot;</span>,<br>            <span class="hljs-string">&quot;Cookie&quot;</span>: <span class="hljs-string">&quot;OUTFOX_SEARCH_USER_ID=11560287@1.1.1.1; OUTFOX_SEARCH_USER_ID_NCOO=1; &quot;</span><br>        &#125;,<br>        <span class="hljs-attr">body</span>:<br>            m<br>    &#125;<br>    <span class="hljs-keyword">const</span> resp = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(url, header)<br>    <span class="hljs-keyword">const</span> resp_text = <span class="hljs-keyword">await</span> resp.<span class="hljs-title function_">text</span>()<br>    <span class="hljs-keyword">const</span> a = <span class="hljs-title class_">Buffer</span>.<span class="hljs-title function_">from</span>(<span class="hljs-title function_">T</span>(aeskey).<span class="hljs-title function_">toJSON</span>().<span class="hljs-property">data</span>)<br>    <span class="hljs-keyword">const</span> n = <span class="hljs-title class_">Buffer</span>.<span class="hljs-title function_">from</span>(<span class="hljs-title function_">T</span>(aesiv).<span class="hljs-title function_">toJSON</span>().<span class="hljs-property">data</span>)<br>    <span class="hljs-keyword">const</span> r = <span class="hljs-title function_">createDecipheriv</span>(<span class="hljs-string">&#x27;aes-128-cbc&#x27;</span>, a, n);<br>    <span class="hljs-keyword">let</span> l = r.<span class="hljs-title function_">update</span>(resp_text, <span class="hljs-string">&#x27;base64&#x27;</span>, <span class="hljs-string">&#x27;utf-8&#x27;</span>); <br>    l += r.<span class="hljs-title function_">final</span>(<span class="hljs-string">&#x27;utf-8&#x27;</span>);<br>    <span class="hljs-keyword">var</span> t = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(l)<br>    <span class="hljs-keyword">var</span> ans : <span class="hljs-built_in">string</span> = <span class="hljs-string">&quot;&quot;</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> index = <span class="hljs-number">0</span>; index &lt; t[<span class="hljs-string">&quot;translateResult&quot;</span>].<span class="hljs-property">length</span>; index++) &#123;<br>        ans+=t[<span class="hljs-string">&quot;translateResult&quot;</span>][index][<span class="hljs-number">0</span>][<span class="hljs-string">&quot;tgt&quot;</span>]<br>    &#125;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(ans)<br>&#125;<br><br><span class="hljs-title function_">get_translation_result</span>(<span class="hljs-string">&quot;你好&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/web%E9%80%86%E5%90%91/" class="category-chain-item">web逆向</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/web%E9%80%86%E5%90%91/%E7%BF%BB%E8%AF%91%E7%B1%BB/" class="category-chain-item">翻译类</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/code/" class="print-no-link">#code</a>
+      
+        <a href="/tags/%E7%BC%96%E7%A8%8B/" class="print-no-link">#编程</a>
+      
+        <a href="/tags/js%E9%80%86%E5%90%91/" class="print-no-link">#js逆向</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>2024新版有道web接口逆向</div>
+      <div>http://blog.bingyue.top/2024/08/24/youdao_fanyi/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>bingyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年8月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/09/15/qishui_music/" title="汽水音乐绕ssl验证，抓取歌曲信息-2024">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">汽水音乐绕ssl验证，抓取歌曲信息-2024</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/08/05/bingyue_dic_new/" title="bingyue_dic_new 开发文档">
+                        <span class="hidden-mobile">bingyue_dic_new 开发文档</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"0f4c0af04f4a74a28ef8","clientSecret":"603e436965f1a09c74e485733b6b3593d6514a46","repo":"bingqiu456.github.io","owner":"bingqiu456","admin":["bingqiu456"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: '0065f6b694101c7e9f6cf661d5f4c370'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

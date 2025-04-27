@@ -1,0 +1,838 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.ico">
+  <link rel="icon" href="/img/fluid.ico">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#36d984">
+  <meta name="author" content="bingyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前言 因为腾讯的限制 现在使用go-cqhttp需要签名服务器了 今天就来教大家手把手搭建一个签名服务器 支持Windows和Linux 在开始之前你要具备以下条件  一台电脑 熟悉使用Linux 懂得自己解决问题  Windows 1.首先安装jdk17 我这里默认装的17 当然你也可以装更高版本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手把手教你配置签名服务器">
+<meta property="og:url" content="http://blog.bingyue.top/2023/08/03/qsign_1/index.html">
+<meta property="og:site_name" content="冰月博客">
+<meta property="og:description" content="前言 因为腾讯的限制 现在使用go-cqhttp需要签名服务器了 今天就来教大家手把手搭建一个签名服务器 支持Windows和Linux 在开始之前你要具备以下条件  一台电脑 熟悉使用Linux 懂得自己解决问题  Windows 1.首先安装jdk17 我这里默认装的17 当然你也可以装更高版本">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s11.ax1x.com/2023/08/03/pPFVDMR.png">
+<meta property="article:published_time" content="2023-08-03T12:29:25.000Z">
+<meta property="article:modified_time" content="2023-12-15T12:55:13.022Z">
+<meta property="article:author" content="bingyue">
+<meta property="article:tag" content="qq机器人">
+<meta property="article:tag" content="cqhttp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s11.ax1x.com/2023/08/03/pPFVDMR.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>手把手教你配置签名服务器 - 冰月博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.bingyue.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1499a4a6751739c3ee13784b8a5271e5","google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?1499a4a6751739c3ee13784b8a5271e5";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>bingyue</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/link/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/notes/" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>notes</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/7777.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="手把手教你配置签名服务器"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-08-03 20:29" pubdate>
+          2023年8月3日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          856 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          8 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">手把手教你配置签名服务器</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2023年12月15日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="前言">前言</h2>
+<p>因为腾讯的限制 现在使用<code>go-cqhttp</code>需要签名服务器了 今天就来教大家手把手搭建一个签名服务器 支持<code>Windows</code>和<code>Linux</code> 在开始之前你要具备以下条件</p>
+<ul>
+<li>一台电脑</li>
+<li>熟悉使用Linux</li>
+<li>懂得自己解决问题</li>
+</ul>
+<h2 id="Windows">Windows</h2>
+<p>1.首先安装jdk17 我这里默认装的17 当然你也可以装更高版本</p>
+<span id="more"></span>
+<p><a target="_blank" rel="noopener" href="https://download.oracle.com/java/17/latest/jdk-17_windows-x64_bin.exe">jdk17下载链接</a></p>
+<p>下载之后 根据提示一步一步安装</p>
+<p><img src="https://s11.ax1x.com/2023/08/03/pPFiopn.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>我这里不演示了</p>
+<p>然后去下载qsign 这里如果你是萌新小白</p>
+<p>我自己做了一个懒人启动版 你是大佬也可以用官方的</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/fuqiuluo/unidbg-fetch-qsign">官方下载 </a></p>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1_FFXFa2PwHJZJYNJTcXgyQ?pwd=749f">懒人启动版下载</a></p>
+<p>下载之后 解压文件</p>
+<p>打开<code>txlib</code>文件夹</p>
+<p><img src="https://s11.ax1x.com/2023/08/03/pPFk8r6.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>这里有三个版本的qq 请选择对应的协议版本</p>
+<p>我这里用的是8963版本</p>
+<p>打开<code>8.9.63</code>文件夹 找到<code>config.json</code>打开</p>
+<p><img src="https://s11.ax1x.com/2023/08/03/pPFkNIe.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><code>host</code> 改成<code>127.0.0.1</code> 如果你想本地搭建的话 你要部署到外网就填写 <code>0.0.0.0</code></p>
+<p><code>port</code>是端口号 我这里改成3301了</p>
+<p><code>key</code> 看你喜欢 随便取一个key</p>
+<p>改完之后记住这三个参数 分别是<code>host</code> <code>port</code> <code>key</code></p>
+<p><img src="https://s11.ax1x.com/2023/08/03/pPFksqf.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>这是我改的</p>
+<p>然后返回文件夹</p>
+<p><img src="https://s11.ax1x.com/2023/08/03/pPFk5Mq.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>如果你下的是我的懒人启动版 直接打开<code>start.bat</code> 输入版本号就能运行</p>
+<p><code>官方的启动</code>方法如下</p>
+<p>按住键盘上的shift+鼠标右键 选择打开<code>powershell</code></p>
+<p>输入如下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">bin\unidbg-fetch-qsign.bat --basePath=txlib\qq版本<br></code></pre></td></tr></table></figure>
+<p>这样你的签名服务器就启动成功了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">注意:请一定要记住你设置的 host port key<br>注意:请一定要记住你设置的 host port key<br>注意:请一定要记住你设置的 host port key<br></code></pre></td></tr></table></figure>
+<p>然后在右边点<code>配置go-cqhttp</code> 跳转到配置部分 下面是Linux安装部分</p>
+<h2 id="Linux">Linux</h2>
+<p>这里我以纯shell操作 装了桌面端的操作类似于Windows吧</p>
+<p>首先是安装<code>jdk</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt update &amp;&amp; sudo apt upgrade -y<br>sudo apt-get install openjdk-11-jre<br>sudo apt-get install openjdk-11-jdk<br></code></pre></td></tr></table></figure>
+<p>执行如上三条命令 选择<code>y</code></p>
+<p>最后输入<code>java --version</code> 如果和下图一样 说明jdk安装成功</p>
+<p><img src="https://s11.ax1x.com/2023/08/03/pPFA9eK.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>然后去下载<code>qsign</code></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/fuqiuluo/unidbg-fetch-qsign">官方下载 </a></p>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1_FFXFa2PwHJZJYNJTcXgyQ?pwd=749f">懒人启动版下载</a></p>
+<p>这里推荐下载懒人启动版 然后通过一些方式把文件传到Linux里</p>
+<p>然后cd进去 文件夹</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> unidbg-fetch-qsign-1.1.7<br><span class="hljs-built_in">cd</span> txlib<br><span class="hljs-built_in">cd</span> qq版本<br>有如下版本<br>8.9.63<br>8.9.68<br>8.9.70<br></code></pre></td></tr></table></figure>
+<p>然后安装vim编辑器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt install vim<br></code></pre></td></tr></table></figure>
+<p>编辑<code>config.json</code>文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim config.json<br></code></pre></td></tr></table></figure>
+<p>按<code>i</code>键进入编辑模式</p>
+<p>然后去修改<code>host</code> <code>port</code> <code>key</code></p>
+<p><img src="https://s11.ax1x.com/2023/08/03/pPFEVNF.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>我这里已经改好了 然后按<code>esc</code>键 退出编辑模式 输入<code>:wq</code> 保存并退出</p>
+<p>然后退出跟目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ../../<br></code></pre></td></tr></table></figure>
+<p>如果你下的是我的懒人启版只需要执行下面命令即可</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">chmod</span> +x ./start.sh<br>./start.sh<br></code></pre></td></tr></table></figure>
+<p>官方的 输入如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">bash bin\unidbg-fetch-qsign.bat --basePath=txlib\qq版本<br></code></pre></td></tr></table></figure>
+<p>这样你的签名服务器就启动成功了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">注意:请一定要记住你设置的 host port key<br>注意:请一定要记住你设置的 host port key<br>注意:请一定要记住你设置的 host port key<br></code></pre></td></tr></table></figure>
+<h2 id="配置go-cqhttp">配置go-cqhttp</h2>
+<p>正式发行版的cq是不支持签名服务器的 因此我们要下载dev分支的<code>go-cqhttp</code></p>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1eooOkMrWynfNBgRbpsR3zA?pwd=iw2r">windows版本下载</a></p>
+<p><code>Linux用户自己想办法 去官方GitHub看看</code></p>
+<p>配置cq的教程前面说了  👉<a href="https://blog.bingyue.top/2022/10/03/cq_1/">传送门</a></p>
+<p>我们只需在<code>config.yml</code>下 找到签名服务器的内容</p>
+<p><img src="https://s11.ax1x.com/2023/08/03/pPFEq29.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>按照如下格式设置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sign-server: <span class="hljs-string">&#x27;http:&#123;你设置的host&#125;:&#123;你设置的port&#125;&#x27;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">key: <span class="hljs-string">&#x27;你设置的key&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>然后保存退出 打开go-cqhttp点登录</p>
+<h2 id="遇到问题">遇到问题</h2>
+<p>去下面评论</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/qq%E6%9C%BA%E5%99%A8%E4%BA%BA/" class="category-chain-item">qq机器人</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/qq%E6%9C%BA%E5%99%A8%E4%BA%BA/" class="print-no-link">#qq机器人</a>
+      
+        <a href="/tags/cqhttp/" class="print-no-link">#cqhttp</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>手把手教你配置签名服务器</div>
+      <div>http://blog.bingyue.top/2023/08/03/qsign_1/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>bingyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年8月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/08/16/jiao_cheng_hexo/" title="使用hexo搭建个人博客并推送git">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">使用hexo搭建个人博客并推送git</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/07/31/qq_sao_ma/" title="QQ扫码登录抓取分析">
+                        <span class="hidden-mobile">QQ扫码登录抓取分析</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"0f4c0af04f4a74a28ef8","clientSecret":"603e436965f1a09c74e485733b6b3593d6514a46","repo":"bingqiu456.github.io","owner":"bingqiu456","admin":["bingqiu456"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: 'f9a7951dbbaffa056ba1742f8cccab2e'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

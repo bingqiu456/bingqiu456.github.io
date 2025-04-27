@@ -1,0 +1,853 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.ico">
+  <link rel="icon" href="/img/fluid.ico">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#36d984">
+  <meta name="author" content="bingyue">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前言 今天我们来讲安卓逆向，本期博客讲两种最基础的破解方法，两个日历软件的高级会员获取 准备如下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安卓入门逆向实战第一期，破解两个日历软件vip">
+<meta property="og:url" content="http://blog.bingyue.top/2024/10/04/an_zhuo_ni_xiang_shi_zhan_1/index.html">
+<meta property="og:site_name" content="冰月博客">
+<meta property="og:description" content="前言 今天我们来讲安卓逆向，本期博客讲两种最基础的破解方法，两个日历软件的高级会员获取 准备如下">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.imgdb.cn/item/66ff8d9dd29ded1a8ca69427.jpg">
+<meta property="article:published_time" content="2024-10-04T06:38:09.000Z">
+<meta property="article:modified_time" content="2024-10-04T06:39:39.641Z">
+<meta property="article:author" content="bingyue">
+<meta property="article:tag" content="安卓逆向">
+<meta property="article:tag" content="frida">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pic.imgdb.cn/item/66ff8d9dd29ded1a8ca69427.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>安卓入门逆向实战第一期，破解两个日历软件vip - 冰月博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.bingyue.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1499a4a6751739c3ee13784b8a5271e5","google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?1499a4a6751739c3ee13784b8a5271e5";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>bingyue</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/link/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/notes/" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>notes</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/7777.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="安卓入门逆向实战第一期，破解两个日历软件vip"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-10-04 14:38" pubdate>
+          2024年10月4日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">安卓入门逆向实战第一期，破解两个日历软件vip</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    本文最后更新于 2024年10月4日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="前言">前言</h2>
+<p>今天我们来讲安卓逆向，本期博客讲两种最基础的破解方法，两个日历软件的高级会员获取</p>
+<p>准备如下</p>
+<span id="more"></span>
+<ul>
+<li>一台电脑</li>
+<li><code>frida</code>框架</li>
+<li>一台已<code>root</code>的手机</li>
+<li><code>jadx</code></li>
+<li>抓包软件</li>
+</ul>
+<blockquote>
+<p>注：本博文仅研究逆向学习之类的方法，如果侵犯你的权益，请第一时间找我删除文章</p>
+</blockquote>
+<hr>
+<h2 id="365日历">365日历</h2>
+<p>我们首先打开<code>app</code>，登录之后要开通<code>vip</code>，我们打开抓包软件去查看</p>
+<p><img src="https://pic.imgdb.cn/item/66fe2ea30a206445e3a795c9.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>可以看到这里抓包出来有两个获取<code>vip</code>数据包的，这里我用黄鸟修改了<strong>返回数据</strong>，但是开屏广告还是存在</p>
+<p>而且用抓包的方法破解，这样使用起来不方便，每次打开<code>app</code>都要开抓包，所以接下来我们使用<code>frida</code></p>
+<hr>
+<h2 id="frida-hook">frida_hook</h2>
+<p>在进行<strong>hook</strong>，进行hook之前，我们首先要找到离方法最近的地方，这样<strong>hook</strong>起来容易，而且资源开销也不大，我们把<code>app</code>拆包</p>
+<p>先去查一下有没有加固，我这里用的是<code>app_msg</code><a target="_blank" rel="noopener" href="https://github.com/sulab999/AppMessenger?tab=readme-ov-file">点我</a>，可以看到没有加固的</p>
+<p><img src="https://pic.imgdb.cn/item/66fe31e70a206445e3aa59d9.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>好，接下来我们使用<code>jadx</code>，对<code>app</code>，进行<code>反编译</code>操作，我们的目标是定位<code>vip</code>的判断逻辑</p>
+<p><img src="https://pic.imgdb.cn/item/66fe330e0a206445e3ab9c06.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>点进去，第二个</p>
+<p><img src="https://pic.imgdb.cn/item/66fe334d0a206445e3abcf67.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>从逻辑上推断，他应该是访问了一个<code>api</code>，然后开始解析数据，通过刚才的黄鸟抓包，我们知道改数据包是走不通的，那有没有更好的方法呢？</p>
+<p>我们可以直接打开<code>app</code>，在未开会员情况下，去使用会员功能</p>
+<img src="https://pic.imgdb.cn/item/66fe33d10a206445e3ac456c.png" srcset="/img/loading.gif" lazyload style="zoom: 33%;" />
+<p>有个弹窗，那我们就从弹窗下手吧，去搜索对应的字符串</p>
+<p><img src="https://pic.imgdb.cn/item/66fe34420a206445e3acaa62.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>从这个<code>onclick</code>上看是点击后触发的代码，那么点击的时候肯定会判断是不是<code>vip</code>，所以我们点进去，看下内部结构</p>
+<p><img src="https://pic.imgdb.cn/item/66fe349d0a206445e3acee3e.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>这里做了一个基础的判断，如果<code>o</code>返回<code>false</code>就是提示开通会员，那我们把<code>o</code>返回成<code>true</code>就行，按住<code>ctrl</code>进入<code>o</code>类</p>
+<p><img src="https://pic.imgdb.cn/item/66fe35030a206445e3ad4320.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>这里的<code>o</code>函数返回了一个<code>bool</code>类型的数据，而且不需要<strong>传参</strong>，那我们开始写<code>hook</code>代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">hook_vip</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-title class_">Java</span>.<span class="hljs-title function_">perform</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">let</span> v0 = <span class="hljs-title class_">Java</span>.<span class="hljs-title function_">use</span>(<span class="hljs-string">&quot;com.when.coco.o0.v0&quot;</span>); <span class="hljs-comment">// 首先指定好包名，从package xxxx 就能看到 进入class</span><br>        <span class="hljs-keyword">if</span>(v0)&#123;<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;hook start......&quot;</span>)<br>            v0.<span class="hljs-property">o</span>.<span class="hljs-property">implementation</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123; <span class="hljs-comment">// 拦截o函数 </span><br>                <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;hook vip success!&quot;</span>)<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-comment">// 修改返回值</span><br>            &#125;;<br>        &#125;<br>    &#125;);<br>&#125;<br><span class="hljs-title function_">setImmediate</span>(<span class="hljs-title function_">hook_vip</span>())<br></code></pre></td></tr></table></figure>
+<p>这样就大功告成了</p>
+<p><img src="https://pic.imgdb.cn/item/66fe36ae0a206445e3aeaba1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<hr>
+<h2 id="一叶日历">一叶日历</h2>
+<p>首先先查壳</p>
+<p><img src="https://pic.imgdb.cn/item/66fe693b335a200d6a8e2af2.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>也是没加固的，那我们直接用<code>jadx</code>反编译</p>
+<p><img src="https://pic.imgdb.cn/item/66fe69f6335a200d6a8eccdd.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>遇到混淆了，我们不用慌，直接打开反混淆</p>
+<p><img src="https://pic.imgdb.cn/item/66fe6a48335a200d6a8f1a21.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>打开<code>app</code>，点开高级会员，有给钱，也有使用激活码的，我们就从激活码这里下手，内购太难用了，先随便输入一个激活码，返回找不到激活码</p>
+<p><img src="https://pic.imgdb.cn/item/66fe6b6a335a200d6a903115.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://pic.imgdb.cn/item/66fe6dab335a200d6a920aad.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>并没有搜到，看来他对字符串也做了处理，那我们就搜一下其他的字符</p>
+<p><img src="https://pic.imgdb.cn/item/66fe6e03335a200d6a9252e6.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>字符都是从这个一个<code>getString</code>类获取的，我们断进去</p>
+<p><img src="https://pic.imgdb.cn/item/66fe6e53335a200d6a9296e1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>发现这个是传递了一个id，然后返回字符的，那我们直接hook看一下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">hook_main</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-title class_">Java</span>.<span class="hljs-title function_">perform</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>        <span class="hljs-keyword">let</span> <span class="hljs-title class_">Fragment</span> = <span class="hljs-title class_">Java</span>.<span class="hljs-title function_">use</span>(<span class="hljs-string">&quot;androidx.fragment.app.Fragment&quot;</span>);<br>        <span class="hljs-title class_">Fragment</span>.<span class="hljs-property">getString</span>.<span class="hljs-title function_">overload</span>(<span class="hljs-string">&#x27;int&#x27;</span>).<span class="hljs-property">implementation</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">i10</span>) &#123;<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Fragment.getString is called: i10=<span class="hljs-subst">$&#123;i10&#125;</span>`</span>);<br>            <span class="hljs-keyword">let</span> result = <span class="hljs-variable language_">this</span>[<span class="hljs-string">&quot;getString&quot;</span>](i10);<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Fragment.getString result=<span class="hljs-subst">$&#123;result&#125;</span>`</span>);<br>            <span class="hljs-keyword">return</span> result;<br>        &#125;;<br>    &#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img src="https://pic.imgdb.cn/item/66fe6f1e335a200d6a933a62.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>激活码的字符串id也出来了，是一个<code>2131886116</code>，那我们直接搜索这个<code>2131886116</code>，找到对应的字段再去搜索</p>
+<p><img src="https://pic.imgdb.cn/item/66fe6fa5335a200d6a93aac2.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>一个是<code>c</code>类，一个是<code>j</code>类，而且<code>c</code>和<code>j</code>的代码差不多，经过<code>hook</code>程序调用的是<code>j</code>类的代码</p>
+<p><img src="https://pic.imgdb.cn/item/66fe6ff2335a200d6a93e84c.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>但是这里混淆的太厉害了，经过一顿断点都毫无线索，那我们往弹窗上搞呢</p>
+<p>废话不多说，我们直接在没有会员情况下，使用会员的功能</p>
+<p>发现这里有个试用的按钮，那我们直接从试用上下手吧</p>
+<img src="https://pic.imgdb.cn/item/66fe714a335a200d6a950045.png" srcset="/img/loading.gif" lazyload style="zoom:33%;" />
+<p>点击试用，发现竟然没有返回东西，可以反编译包里的<code>arsc</code>，得知<strong>试用</strong>的英文是<code>trial</code>，去搜索<code>trial</code></p>
+<p><img src="https://pic.imgdb.cn/item/66ff88b9d29ded1a8ca236b4.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>点这个<code>istrial</code>(意思为是否试用状态)</p>
+<p><img src="https://pic.imgdb.cn/item/66ff8894d29ded1a8ca21383.png" srcset="/img/loading.gif" lazyload alt="w"></p>
+<p>这里应该是判断是否是<code>vip</code>的代码，我们看这个<code>needShowProDialog</code>代表是否弹窗，那么得到以下结果</p>
+<ul>
+<li><code>C6256a0.f14286a.m25077d()</code> 这个是获取是否为永久会员</li>
+<li><code>isTrial(scene)</code> 这个是获取是否试用会员</li>
+<li><code> C6262d0.f14311a.m25111f().getRewardTime() &gt;= System.currentTimeMillis()</code> 这个是获取会员是否到期，看来这软件之前还不是买永久会员的</li>
+</ul>
+<p>我们进入<code>C6256a0.f14286a.m25077d()</code>，一探究竟</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">m25077d</span><span class="hljs-params">()</span> &#123;<br>       <span class="hljs-keyword">return</span> C6262d0.f14311a.m25111f().getIsPro();<br>   &#125;<br></code></pre></td></tr></table></figure>
+<p>这是返回了一个<code>bool</code>类型的参数，我们让他<code>true</code>就代表有会员了，接下来可以写<code>hook</code>代码了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">hook_main</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-title class_">Java</span>.<span class="hljs-title function_">perform</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>        <span class="hljs-keyword">let</span> a = <span class="hljs-title class_">Java</span>.<span class="hljs-title function_">use</span>(<span class="hljs-string">&quot;&quot;</span>w5.<span class="hljs-property">a0</span><span class="hljs-string">&quot;);</span><br><span class="hljs-string">        a.d.implementation = function () &#123;</span><br><span class="hljs-string">            return true;</span><br><span class="hljs-string">        &#125;;</span><br><span class="hljs-string">    &#125;)</span><br><span class="hljs-string">&#125;</span><br></code></pre></td></tr></table></figure>
+<p>完事，用<code>frida</code>运行一下就有<code>vip</code>了</p>
+<hr>
+<h2 id="后">后</h2>
+<p>我们现在得知了，<code>vip</code>具体函数的位置，但<code>frida</code>适合临时调试，如果我们要日常使用，这边可以把<code>frida</code>的脚本，转写成<code>lsposed</code>模块</p>
+<p>关于<code>lsp</code>模块的编写，这里篇幅有限</p>
+<p>我这里已经写好了，代码仓库<a target="_blank" rel="noopener" href="https://github.com/bingqiu456/xposed_module_hook_vip_test">-&gt;点我</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/app%E9%80%86%E5%90%91/" class="category-chain-item">app逆向</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/app%E9%80%86%E5%90%91/%E6%97%A5%E5%B8%B8%E7%B1%BB/" class="category-chain-item">日常类</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91/" class="print-no-link">#安卓逆向</a>
+      
+        <a href="/tags/frida/" class="print-no-link">#frida</a>
+      
+        <a href="/tags/JavaScript/" class="print-no-link">#JavaScript</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>安卓入门逆向实战第一期，破解两个日历软件vip</div>
+      <div>http://blog.bingyue.top/2024/10/04/an_zhuo_ni_xiang_shi_zhan_1/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>bingyue</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年10月4日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/10/16/an_zhuo_ni_xiang_shi_zhan_fan_wai_1/" title="安卓入门逆向实战番外篇(一) 某数日软件 破解内购，过服务器验证，对抗dex混淆">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">安卓入门逆向实战番外篇(一) 某数日软件 破解内购，过服务器验证，对抗dex混淆</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/09/17/koishi_send_keyborad/" title="Koishi如何发送纯按钮消息">
+                        <span class="hidden-mobile">Koishi如何发送纯按钮消息</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"0f4c0af04f4a74a28ef8","clientSecret":"603e436965f1a09c74e485733b6b3593d6514a46","repo":"bingqiu456.github.io","owner":"bingqiu456","admin":["bingqiu456"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: 'ab5e8847da0464619e858d9d40c80a9a'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
