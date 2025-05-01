@@ -4,6 +4,64 @@
   
     
     <entry>
+      <title>Koishi从0入门 01 搭建环境与绑定框架</title>
+      <link href="/2025/05/01/koishi_01_teach/"/>
+      <url>/2025/05/01/koishi_01_teach/</url>
+      
+        <content type="html"><![CDATA[<h2 id="搭建Koishi运行的环境">搭建Koishi运行的环境</h2><p>由于<code>Koishi</code>框架是用ts写的，运行需要nodejs，所以我们要先安装nodejs</p><p>第一步打开<a href="https://nodejs.org/en">官网</a></p><p><img src="https://s11.ax1x.com/2023/08/16/pPlkbVO.png" alt="官网"></p><p>这里有两个版本 分别是<code>lts</code>版和<code>current</code>版 随便选择一个即可 我这里下的是<code>lts</code>版</p><p>如果你下载速度慢可以选择国内源 <code>这里下面是传送门</code></p><p><a href="https://npmmirror.com/mirrors/node/v22.15.0/node-v22.15.0-x64.msi">国内源lts</a></p><p><a href="https://npmmirror.com/mirrors/node/v23.11.0/node-v23.11.0-x64.msi">国内源current</a></p><p><img src="https://s11.ax1x.com/2023/08/16/pPlAns0.png" alt=""></p><p>按着步骤安装就行了</p><p><img src="https://s11.ax1x.com/2023/08/16/pPlAQdU.png" alt=""></p><p>等待进度条跑完，关闭即可</p><h3 id="切换国内源">切换国内源</h3><p>如果你是国内用户，从 npm 或 yarn 上下载依赖可能非常慢。因此，我们推荐你配置一下镜像源，以提升安装速度。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm config <span class="hljs-built_in">set</span> registry https://registry.npmmirror.com<br></code></pre></td></tr></table></figure><h3 id="配置Git账号">配置Git账号</h3><p>因为Koishi编写插件要用到git，所以要配置一下git，如果已经配置好的，请看下一步跳过这一步</p><p><strong>以下是安装Git + 配置</strong></p><p>点我这里<a href="https://github.com/git-for-windows/git/releases/download/v2.49.0.windows.1/Git-2.49.0-64-bit.exe">下载</a>，一直点击next就行了</p><p>安装完成后鼠标右键选择<code>open Git bash here</code>，输入如下命令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">git config --global user.name <span class="hljs-string">&quot;Your Name&quot;</span><br>git config --global user.email <span class="hljs-string">&quot;you@example.com&quot;</span><br></code></pre></td></tr></table></figure><p>其中<code>Your Name</code>是你的名字，<code>you@example.com</code>是你的邮箱，建议去注册一个<code>Github</code>账号</p><hr><h2 id="创建第一个Koishi项目">创建第一个Koishi项目</h2><p>首先找一处地方，存放你的项目，准备好了就按住你电脑键盘上的<code>Shift</code>+<code>鼠标右键</code>，选择打开一个命令窗口</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm init koishi@latest<br></code></pre></td></tr></table></figure><p>输入以上命令</p><p><img src="https://pic1.imgdb.cn/item/6813331258cb8da5c8d60b1a.png" alt=""></p><p>这里我们输入<code>y</code>回车</p><p><img src="https://pic1.imgdb.cn/item/6813334658cb8da5c8d60b36.png" alt=""></p><p>这里是输入一个项目的名字，你自己随便取一个吧，然后继续回车</p><p><img src="https://pic1.imgdb.cn/item/681333a858cb8da5c8d60b81.png" alt=""></p><p>输入y，按回车，你就拥有了一个<code>Koishi</code>控制台了</p><p><strong>注:这里要安装大量组件，需要时间可能久一些</strong></p><hr><h2 id="配置Koishi控制台">配置Koishi控制台</h2><p>如果不出意外，这里下图就代表启动成功了，输入画圈的链接就能进入控制台</p><p><img src="https://pic1.imgdb.cn/item/681334f358cb8da5c8d60c4d.png" alt=""></p><h3 id="配置公网环境-账号密码登录">配置公网环境+账号密码登录</h3><p>如果你是使用云服务器搭建，需要暴露在公网环境的话，请按如下设置</p><p><img src="https://pic1.imgdb.cn/item/681335b158cb8da5c8d60cb3.png" alt=""></p><p>从插件列表中，找到<code>server</code>插件，把这里的监听IP地址改成<code>0.0.0.0</code>，这样你就能在公网访问控制台了</p><p>同时为了安全性，我们还需要设置一下用户密码</p><p>然后我们找到<code>auth</code>这个插件，把用户名和密码改一下，并且启用插件，这样有人登录控制台的时候，就要输入账号密码了</p><p><img src="https://pic1.imgdb.cn/item/6813363d58cb8da5c8d60d14.png" alt=""></p><p><img src="https://pic1.imgdb.cn/item/6813368758cb8da5c8d60d42.png" alt=""></p><hr><h2 id="绑定框架">绑定框架</h2><p>我这里以<code>onebot</code>协议为展示，也就是QQ机器人</p><p>可选框架有</p><ul><li>Napcat （Linux推荐使用）</li><li>LiteloaderQQNT (有图形化的推荐用)</li><li>Lgr (开销小)</li></ul><p>我这里以第二个为展示，配置教程可以去<code>Github</code>上面看，我这里就省略一下吧</p><p><img src="https://pic1.imgdb.cn/item/6813378858cb8da5c8d60dde.png" alt=""></p><p>找到启用反向ws，启用，填写ws连接地址</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ws://127.0.0.1:5140/onebot<br></code></pre></td></tr></table></figure><p><img src="https://pic1.imgdb.cn/item/681337ec58cb8da5c8d60df3.png" alt=""></p><p><img src="https://pic1.imgdb.cn/item/681337ec58cb8da5c8d60df4.png" alt=""></p><p>返回到<code>Koishi</code>控制台，在插件市场下载<code>Onebot</code>适配器插件</p><p><img src="https://pic1.imgdb.cn/item/6813384c58cb8da5c8d60e27.png" alt=""></p><p>然后你就能在插件配置里面看到<code>onebot</code>的适配器了</p><p><img src="https://pic1.imgdb.cn/item/681338ab58cb8da5c8d60e4b.png" alt=""></p><p>填写你的QQ机器人的账号，启用插件，当你看到绿色的标志的时候，说明连接成功了</p><p><img src="https://pic1.imgdb.cn/item/6813390b58cb8da5c8d60e95.png" alt=""></p><hr><h2 id="下一篇-插件编写">下一篇 插件编写</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> Koishi </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> bot </tag>
+            
+            <tag> qq机器人 </tag>
+            
+            <tag> JavaScript </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Koishi机器人教程合集 分为五期</title>
+      <link href="/2025/05/01/koishi_jiao_cheng_ji_he/"/>
+      <url>/2025/05/01/koishi_jiao_cheng_ji_he/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Koishi简介">Koishi简介</h2><p>本节将介绍我们最推荐的 Koishi 开发方案——创建模板项目。相比直接从零搭建，模板项目的优势在于：</p><ul><li>创建完成即是拥有带完整控制台体验的项目，一键创建各种模板插件</li><li>支持直接加载 TypeScript，你可以尽情享受代码提示和类型检查带来的便利</li><li>支持插件热重载，你可以在不重启应用的情况下修改插件代码，并获得即时的反馈</li><li>支持二次开发，你可以将你自己的机器人与其他人的插件进行联合调试</li></ul><p>当然，模板项目也可以直接用于生产。虽然在操作上可能不如启动器方便，但它提供了更多的自由度，并能在启动器所覆盖不到的场景下顺利运行。</p><hr><h2 id="教程">教程</h2><p>我这里把教程分为了五集，以下是教程的名字，如果不出意外的话，基本能更新完</p><ul><li>Koishi从0入门 01 搭建环境与绑定框架</li><li>Koishi从0入门 02 编写插件</li><li>Koishi从0入门 03 写一个签到插件</li><li>Koishi从0入门 04 编写定时任务</li><li>Koishi从0入门 完结篇 调用api进行群管</li></ul><hr><h2 id="最后">最后</h2><p>如果你有任何疑问，可以点击博客上面的<code>关于</code>，进行联系</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Koishi </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> bot </tag>
+            
+            <tag> qq机器人 </tag>
+            
+            <tag> JavaScript </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>安卓逆向某某单词，反frida注入完美绕过</title>
       <link href="/2025/01/08/an_zhuo_ni_xiang_an_li_001/"/>
       <url>/2025/01/08/an_zhuo_ni_xiang_an_li_001/</url>
