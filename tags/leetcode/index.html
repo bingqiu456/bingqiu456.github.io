@@ -1,482 +1,849 @@
+<!doctype html>
+<html lang="zh"><head>
+<title>标签：leetcode - 冰月博客</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 
-
-<!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
-<head>
-  <meta charset="UTF-8">
-
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.ico">
-  <link rel="icon" href="/img/fluid.ico">
-  
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#36d984">
-  <meta name="author" content="bingyue">
-  <meta name="keywords" content="">
-  
-    <meta name="description" content="什么都教的博客">
+<link rel="shortcut icon" href="/img/favicon.png" type="image/png" />
+<meta name="description" content="什么都教的博客">
 <meta property="og:type" content="website">
-<meta property="og:title" content="标签 - leetcode">
+<meta property="og:title" content="冰月博客">
 <meta property="og:url" content="http://blog.bingyue.top/tags/leetcode/index.html">
 <meta property="og:site_name" content="冰月博客">
 <meta property="og:description" content="什么都教的博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="bingyue">
-<meta name="twitter:card" content="summary_large_image">
-  
-  
-    <meta name="referrer" content="no-referrer-when-downgrade">
-  
-  
-  <title>标签 - leetcode - 冰月博客</title>
+<meta name="twitter:card" content="summary">
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1794321904177">
 
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
+<link rel="stylesheet" href="/css/style.css?v=1794321904177">
 
 
 
 
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"blog.bingyue.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1499a4a6751739c3ee13784b8a5271e5","google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-  
-    <!-- Baidu Analytics -->
-    <script async>
-      if (!Fluid.ctx.dnt) {
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?1499a4a6751739c3ee13784b8a5271e5";
-          var s = document.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(hm, s);
-        })();
-      }
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
-
-
-  
-<meta name="generator" content="Hexo 5.4.2"></head>
-
-
-<body>
-  
-
-  <header>
+    
+        <link rel="stylesheet" href="/custom.css?v=1794321904177">
     
 
-<div class="header-inner" style="height: 80vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>bingyue</strong>
-    </a>
 
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
 
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
+<script src="/lib/mdui_043tiny/mdui.js" async></script>
+<script src="/lib/fancybox/fancybox.umd.js" async></script>
+<script src="/lib/lax.min.js" async></script>
+
+
+<script async src="/js/app.js?v=1794321904177"></script>
+
+
+    <script>var copyTip = "著作权归作者所有，商业转载请联系作者获得授权，非商业转载请注明出处。来源：%url"</script>
+ 
+
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?1499a4a6751739c3ee13784b8a5271e5";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+<link rel="stylesheet" href="https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.css">
+<script>
+  /* 封面图加载失败时（例如图床失效）回退到站点默认背景图，避免出现空白框 */
+  document.addEventListener("error", function (e) {
+    var el = e.target;
+    if (el && el.tagName === "IMG" && el.closest && el.closest(".nexmoe-post-cover") && !el.dataset.fallback) {
+      el.dataset.fallback = "1";
+      el.src = "/img/nexmoe-bg.jpg";
+    }
+  }, true);
+</script>
+
+
+<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+<meta name="generator" content="Hexo 6.3.0"></head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(/img/nexmoe-bg.jpg)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="bingyue"><img src="/img/456.png" alt="bingyue"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="bingyue">
+            <img src="/img/456.png" alt="bingyue" alt="bingyue">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>64</div>
+        <div><span>标签</span>42</div>
+        <div><span>分类</span>27</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                首页
+            </div>
+        </a>
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/" target="_self">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archives/" title="归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                归档
+            </div>
+        </a>
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/notes/" title="笔记">
+            <i class="mdui-list-item-icon nexmoefont icon-i-catalog"></i>
+            <div class="mdui-list-item-content">
+                笔记
+            </div>
+        </a>
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/donate/" title="赞助">
+            <i class="mdui-list-item-icon nexmoefont icon-coffee"></i>
+            <div class="mdui-list-item-content">
+                赞助
+            </div>
+        </a>
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about/" title="关于">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于
+            </div>
+        </a>
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/links/" target="_self">
-                <i class="iconfont icon-link-fill"></i>
-                <span>友链</span>
-              </a>
-            </li>
-          
+    </div>
+    
+    
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/donate/" target="_self">
-                <i class="iconfont icon-user-fill"></i>
-                <span>支持我</span>
-              </a>
-            </li>
-          
+        <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/notes/" target="_self">
-                <i class="iconfont icon-books"></i>
-                <span>notes</span>
-              </a>
-            </li>
-          
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+
+
+	<script async src="/js/search.js?v=1794321904177"></script>
+
+
+
+    
+        
+        <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://github.com/bingqiu456"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(56, 139, 253);
+				background-color: rgba(56, 139, 253, .12);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://twitter.com/binhe123"
+			target="_blank"
+			mdui-tooltip="{content: 'Twitter'}"
+			style="
+				color: rgb(29, 161, 242);
+				background-color: rgba(29, 161, 242, .12);
+			"
+		>
+			<i
+				class="nexmoefont icon-twitter"
+			></i> </a
+		>
+	</div>
+</div>
+
+    
         
         
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Git/">Git</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Koishi/">Koishi</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/app逆向/">app逆向</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/bootloader/">bootloader</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/code/">code</a>
+          <span class="category-list-count">6</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/dic/">dic</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/qq机器人/koishi分享/">koishi分享</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/leetcode/">leetcode</a>
+          <span class="category-list-count">17</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/nonebot/">nonebot</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/qq机器人/nonebot教程/">nonebot教程</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/nonebot项目/">nonebot项目</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/qq机器人/">qq机器人</a>
+          <span class="category-list-count">11</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/qq频道/">qq频道</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/telegram/">telegram</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/web逆向/">web逆向</a>
+          <span class="category-list-count">6</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/bootloader/刷机/">刷机</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/code/洛谷/">洛谷</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/生活/">生活</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/编程/">编程</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/web逆向/翻译类/">翻译类</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/解锁bl/">解锁bl</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/web逆向/通讯类/">通讯类</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/随身wifi/">随身wifi</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/web逆向/音乐类/">音乐类</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/9008/" style="font-size: 11.82px;">9008</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/JavaScript/" style="font-size: 12.73px;">JavaScript</a> <a href="/tags/QQNT/" style="font-size: 10px;">QQNT</a> <a href="/tags/bootloader/" style="font-size: 10.91px;">bootloader</a> <a href="/tags/bot/" style="font-size: 18.18px;">bot</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/chat/" style="font-size: 10px;">chat</a> <a href="/tags/code/" style="font-size: 20px;">code</a> <a href="/tags/cqhttp/" style="font-size: 10.91px;">cqhttp</a> <a href="/tags/debian/" style="font-size: 10.91px;">debian</a> <a href="/tags/dic/" style="font-size: 12.73px;">dic</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/ida/" style="font-size: 10px;">ida</a> <a href="/tags/js%E9%80%86%E5%90%91/" style="font-size: 13.64px;">js逆向</a> <a href="/tags/koishi/" style="font-size: 10px;">koishi</a> <a href="/tags/lcp/" style="font-size: 10.91px;">lcp</a> <a href="/tags/leetcode/" style="font-size: 17.27px;">leetcode</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/openwrt/" style="font-size: 10.91px;">openwrt</a> <a href="/tags/python/" style="font-size: 15.45px;">python</a> <a href="/tags/qq%E6%9C%BA%E5%99%A8%E4%BA%BA/" style="font-size: 19.09px;">qq机器人</a> <a href="/tags/root/" style="font-size: 10px;">root</a> <a href="/tags/telegram/" style="font-size: 10px;">telegram</a> <a href="/tags/typescript/" style="font-size: 10.91px;">typescript</a> <a href="/tags/%E5%88%86%E7%B1%BB%E8%AE%A8%E8%AE%BA/" style="font-size: 11.82px;">分类讨论</a> <a href="/tags/%E5%88%B7%E6%9C%BA/" style="font-size: 10.91px;">刷机</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 14.55px;">动态规划</a> <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" style="font-size: 10px;">哈希表</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 10px;">回溯</a> <a href="/tags/%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91/" style="font-size: 10px;">安卓逆向</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10.91px;">数学</a> <a href="/tags/%E6%97%A5%E5%B8%B8/" style="font-size: 10.91px;">日常</a> <a href="/tags/%E6%A0%88/" style="font-size: 10.91px;">栈</a> <a href="/tags/%E6%A8%A1%E6%8B%9F/" style="font-size: 10.91px;">模拟</a> <a href="/tags/%E6%B4%9B%E8%B0%B7/" style="font-size: 10.91px;">洛谷</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/" style="font-size: 10px;">深度优先搜索</a> <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" style="font-size: 10px;">滑动窗口</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 16.36px;">编程</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 10px;">贪心</a> <a href="/tags/%E9%9A%8F%E8%BA%ABwifi/" style="font-size: 11.82px;">随身wifi</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 10px;">音乐</a>
+    </div>
+    
+      <script>
+        var maxTagcloud = parseInt(20);
+        var tags_length = parseInt(42);
+        var tags_arr = [];
+        for(var i = 0; i < tags_length; i++){
+          tags_arr.push(i);
+        }
+        tags_arr.sort(function (l, r) {
+          return Math.random() > 0.5 ? -1 : 1;
+        });
+        tags_arr = tags_arr.slice(0, maxTagcloud < tags_length ? tags_length - maxTagcloud : 0);
+        for(var tag_i = 0; tag_i < tags_arr.length; tag_i++){
+          document.getElementById("randomtagcloud").children[tags_arr[tag_i]].style.display = 'none';
+        }
+      </script>
+    
+  </div>
+
+    
+        
+        
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/06/14/koishi_teach_03/">Koishi从0入门 03 编写签到插件</a>
           </li>
-          
         
+          <li>
+            <a href="/2025/05/31/koishi_02_teach/">Koishi从0入门 02 编写插件</a>
+          </li>
         
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
+          <li>
+            <a href="/2025/05/01/koishi_01_teach/">Koishi从0入门 01 搭建环境与绑定框架</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/01/koishi_jiao_cheng_ji_he/">Koishi机器人教程合集 分为五期</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/17/koishi_send_keyborad/">Koishi如何发送纯按钮消息</a>
           </li>
         
       </ul>
     </div>
   </div>
-</nav>
 
-  
-
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/7777.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="标签 - leetcode"></span>
-          
-        </div>
-
+    
         
-      </div>
-
-      
-        <div class="scroll-down-bar">
-          <i class="iconfont icon-arrowdown"></i>
-        </div>
-      
+        <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-link">
+		<ul>
+        
+            <li>
+                <a href="https://xyamzw.top" target="_blank" >
+                    <img src="/img/mojuexunxingblog.ico" alt="未觉寻星 Blog"></img>
+                    <p>未觉寻星 Blog</p>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://blog.candquarzy.top" target="_blank" >
+                    <img src="/img/candy_blog.ico" alt="Candy Blog"></img>
+                    <p>Candy Blog</p>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://blog.mcxiaochen.top" target="_blank" >
+                    <img src="/img/xiaochenblog.ico" alt="小尘 Blog"></img>
+                    <p>小尘 Blog</p>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://blog.moeworld.tech" target="_blank" >
+                    <img src="/img/kongyublog.png" alt="晓空 Blog"></img>
+                    <p>晓空 Blog</p>
+                </a>
+            </li>
+        
+		</ul>
     </div>
-  </div>
 </div>
-
-</div>
-
-  </header>
-
-  <main>
-    
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 17 篇文章</p>
-  <hr>
-  
-  
-    
-      
-      <p class="h5">2023</p>
-    
-    <a href="/2023/11/18/leetcode209/" class="list-group-item list-group-item-action">
-      <time>11-18</time>
-      <div class="list-group-item-title">Leetcode (滑动窗口基础)209.长度最小的子数组</div>
-    </a>
-  
-    
-    <a href="/2023/11/18/leetcode2656/" class="list-group-item list-group-item-action">
-      <time>11-18</time>
-      <div class="list-group-item-title">Leetcode 2965.K个元素的最大和</div>
-    </a>
-  
-    
-    <a href="/2023/11/05/leetcode2918/" class="list-group-item list-group-item-action">
-      <time>11-05</time>
-      <div class="list-group-item-title">Leetcode 2918.数组的最小和</div>
-    </a>
-  
-    
-    <a href="/2023/10/21/leetcode2873&amp;2874/" class="list-group-item list-group-item-action">
-      <time>10-21</time>
-      <div class="list-group-item-title">Leetcode 2673&amp;2674 有序三元组中的最大值</div>
-    </a>
-  
-    
-    <a href="/2023/07/03/leetcode445/" class="list-group-item list-group-item-action">
-      <time>07-03</time>
-      <div class="list-group-item-title">Leetcode 445.两数相加 II</div>
-    </a>
-  
-    
-    <a href="/2023/06/29/leetcode20/" class="list-group-item list-group-item-action">
-      <time>06-29</time>
-      <div class="list-group-item-title">Leetcode 20.有效的括号</div>
-    </a>
-  
-    
-    <a href="/2023/04/09/leetcode17/" class="list-group-item list-group-item-action">
-      <time>04-09</time>
-      <div class="list-group-item-title">Leetcode 17.电话号码的字母组合</div>
-    </a>
-  
-    
-    <a href="/2023/04/08/leetcode1014/" class="list-group-item list-group-item-action">
-      <time>04-08</time>
-      <div class="list-group-item-title">Leetcode 1014.最佳观光组合</div>
-    </a>
-  
-    
-    <a href="/2023/04/05/leetcode53/" class="list-group-item list-group-item-action">
-      <time>04-05</time>
-      <div class="list-group-item-title">Leetcode 53.最大子数组和题解</div>
-    </a>
-  
-    
-    <a href="/2023/04/04/leetcode62/" class="list-group-item list-group-item-action">
-      <time>04-04</time>
-      <div class="list-group-item-title">Leetcode 62.不同路径题解</div>
-    </a>
-  
-</div>
-
-
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/tags/leetcode/page/2/#board">2</a><a class="extend next" rel="next" href="/tags/leetcode/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
-
-
-
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    
+<style>
+.nexmoe-widget-wrap .nexmoe-link ul li a {
+    text-align : center;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a img {
+    max-width : 100%;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a p {
+    margin: 10px 0;
+}
+</style>
 
     
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
+   
+    <div class="nexmoe-copyright">
+        &copy; 2026 bingyue
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
     </div>
-  </div>
-</div>
+</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><section class="nexmoe-posts">
+    <div class="nexmoe-post">
+        <a href="/2023/11/18/leetcode209/">
+            
+                <div class="nexmoe-post-cover mdui-ripple absolute" style="padding-top: 56.25%;"> 
+                    <img src="/images/leetcode209/pCwQfkd.png" alt="Leetcode (滑动窗口基础)209.长度最小的子数组" loading="lazy">
+                    <h1>Leetcode (滑动窗口基础)209.长度最小的子数组</h1>
+                </div>
+            
+        </a>
 
-    
+        <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2023年11月18日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/leetcode/">leetcode</a>
+        
+        
+    <a><i class="nexmoefont icon-areachart"></i>约1.1k字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要5分钟</a>
 
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
     </div>
-  
-  
-  
+    
+    
+    
+    
+    
 </div>
 
-  </footer>
+        <article>
+            <h2 id="前言">前言</h2>
+<p>如果你是第一次做滑动窗口，本题是个很好的例子</p>
+<h2 id="题目描述">题目描述</h2>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-size-subarray-sum/description/">209.长度最小的子数组</a></p>
+<p>给定一个含有 <code>n</code> 个正整数的数组和一个正整数 <code>target</code> <strong>。</strong></p>
+<p>找出该数组中满足其总和大于等于 <code>target</code> 的长度最小的 <strong>连续子数组</strong> <code>[numsl, numsl+1, ..., numsr-1, numsr]</code> ，并返回其长度**。**如果不存在符合条件的子数组，返回 <code>0</code> 。</p>
+        </article>
+    </div>
 
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+    <div class="nexmoe-post">
+        <a href="/2023/11/18/leetcode2656/">
+            
+                <div class="nexmoe-post-cover mdui-ripple absolute" style="padding-top: 56.25%;"> 
+                    <img src="/images/leetcode2656/pCwQfkd.png" alt="Leetcode 2965.K个元素的最大和" loading="lazy">
+                    <h1>Leetcode 2965.K个元素的最大和</h1>
+                </div>
+            
+        </a>
 
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
+        <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2023年11月18日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/leetcode/">leetcode</a>
+        
+        
+    <a><i class="nexmoefont icon-areachart"></i>约1.1k字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要5分钟</a>
 
+    </div>
+    
+    
+    
+    
+    
+</div>
 
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
+        <article>
+            <h2 id="题目描述">题目描述</h2>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-sum-with-exactly-k-elements/description/">出处</a></p>
+<p>给你一个下标从 <strong>0</strong> 开始的整数数组 <code>nums</code> 和一个整数 <code>k</code> 。你需要执行以下操作 <strong>恰好</strong> <code>k</code> 次，最大化你的得分：</p>
+        </article>
+    </div>
 
+    <div class="nexmoe-post">
+        <a href="/2023/11/05/leetcode2918/">
+            
+                <div class="nexmoe-post-cover mdui-ripple absolute" style="padding-top: 56.25%;"> 
+                    <img src="/images/leetcode2918/pCwQfkd.png" alt="Leetcode 2918.数组的最小和" loading="lazy">
+                    <h1>Leetcode 2918.数组的最小和</h1>
+                </div>
+            
+        </a>
 
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
+        <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2023年11月05日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/leetcode/">leetcode</a>
+        
+        
+    <a><i class="nexmoefont icon-areachart"></i>约2.4k字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要11分钟</a>
 
+    </div>
+    
+    
+    
+    
+    
+</div>
 
+        <article>
+            <h2 id="前言">前言</h2>
+<p>本题出自<code>Leetcode</code><a target="_blank" rel="noopener" href="https://leetcode.cn/contest/weekly-contest-369/"><strong>周赛 369场</strong></a></p>
+<p>原题链接<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-equal-sum-of-two-arrays-after-replacing-zeros/">2918.数组的最小相等和</a></p>
+<p><s>本题不需要任何算法 一个纯分类讨论题目</s></p>
+<h2 id="题目描述">题目描述</h2>
+<p>给你两个由正整数和 <code>0</code> 组成的数组 <code>nums1</code> 和 <code>nums2</code> 。</p>
+        </article>
+    </div>
 
+    <div class="nexmoe-post">
+        <a href="/2023/10/21/leetcode2873&2874/">
+            
+                <div class="nexmoe-post-cover mdui-ripple absolute" style="padding-top: 56.25%;"> 
+                    <img src="/images/leetcode2873-2874/pCwQfkd.png" alt="Leetcode 2673&amp;2674 有序三元组中的最大值" loading="lazy">
+                    <h1>Leetcode 2673&amp;2674 有序三元组中的最大值</h1>
+                </div>
+            
+        </a>
 
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
+        <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2023年10月21日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/leetcode/">leetcode</a>
+        
+        
+    <a><i class="nexmoefont icon-areachart"></i>约1.2k字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要5分钟</a>
 
+    </div>
+    
+    
+    
+    
+    
+</div>
 
+        <article>
+            <h2 id="前言">前言</h2>
+<p>这次的两道题目出<code>leetcode</code>周赛<a target="_blank" rel="noopener" href="https://leetcode.cn/contest/weekly-contest-365/">第 365 场周赛</a></p>
+<p>由于<code>t1</code>和<code>t2</code>题目意思一样 这里就合并起来讲了</p>
+        </article>
+    </div>
 
+    <div class="nexmoe-post">
+        <a href="/2023/07/03/leetcode445/">
+            
+                <div class="nexmoe-post-cover mdui-ripple absolute" style="padding-top: 56.25%;"> 
+                    <img src="/images/leetcode445/pCwQfkd.png" alt="Leetcode 445.两数相加 II" loading="lazy">
+                    <h1>Leetcode 445.两数相加 II</h1>
+                </div>
+            
+        </a>
 
-  <script  src="/js/local-search.js" ></script>
+        <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2023年07月03日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/leetcode/">leetcode</a>
+        
+        
+    <a><i class="nexmoefont icon-areachart"></i>约1.1k字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要5分钟</a>
 
+    </div>
+    
+    
+    
+    
+    
+</div>
 
+        <article>
+            <h2 id="题目详情">题目详情</h2>
+<h4 id="两数相加-II"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/add-two-numbers-ii/">两数相加 II</a></h4>
+        </article>
+    </div>
 
+    <div class="nexmoe-post">
+        <a href="/2023/06/29/leetcode20/">
+            
+                <div class="nexmoe-post-cover mdui-ripple absolute" style="padding-top: 56.25%;"> 
+                    <img src="/images/leetcode20/pCwQfkd.png" alt="Leetcode 20.有效的括号" loading="lazy">
+                    <h1>Leetcode 20.有效的括号</h1>
+                </div>
+            
+        </a>
 
+        <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2023年06月29日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/leetcode/">leetcode</a>
+        
+        
+    <a><i class="nexmoefont icon-areachart"></i>约1.2k字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要5分钟</a>
 
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
+    </div>
+    
+    
+    
+    
+    
+</div>
 
+        <article>
+            <h2 id="题目详情">题目详情</h2>
+<p>原题链接<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-parentheses/">点我</a><br>
+给定一个只包括<code>'('，')'，'&#123;'，'&#125;'，'['，']'</code>的字符串 s ，判断字符串是否有效。</p>
+        </article>
+    </div>
 
-  
+    <div class="nexmoe-post">
+        <a href="/2023/04/09/leetcode17/">
+            
+                <div class="nexmoe-post-cover mdui-ripple absolute" style="padding-top: 56.25%;"> 
+                    <img src="/images/leetcode17/pCwQfkd.png" alt="Leetcode 17.电话号码的字母组合" loading="lazy">
+                    <h1>Leetcode 17.电话号码的字母组合</h1>
+                </div>
+            
+        </a>
 
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
-</body>
-</html>
+        <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2023年04月09日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/leetcode/">leetcode</a>
+        
+        
+    <a><i class="nexmoefont icon-areachart"></i>约691字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要3分钟</a>
+
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+        <article>
+            <h2 id="题目描述">题目描述</h2>
+<h4 id="17-电话号码的字母组合"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/letter-combinations-of-a-phone-number/">17. 电话号码的字母组合</a></h4>
+<p>给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。答案可以按 任意顺序 返回。</p>
+        </article>
+    </div>
+
+    <div class="nexmoe-post">
+        <a href="/2023/04/08/leetcode1014/">
+            
+                <div class="nexmoe-post-cover mdui-ripple absolute" style="padding-top: 56.25%;"> 
+                    <img src="/images/leetcode1014/pCwQfkd.png" alt="Leetcode 1014.最佳观光组合" loading="lazy">
+                    <h1>Leetcode 1014.最佳观光组合</h1>
+                </div>
+            
+        </a>
+
+        <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2023年04月08日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/leetcode/">leetcode</a>
+        
+        
+    <a><i class="nexmoefont icon-areachart"></i>约331字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要1分钟</a>
+
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+        <article>
+            <h2 id="题目描述">题目描述</h2>
+<h4 id="1014-最佳观光组合"><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-sightseeing-pair/">1014. 最佳观光组合</a></h4>
+<p>给你一个正整数数组 values，其中 values[i] 表示第 i 个观光景点的评分，并且两个景点 i 和 j 之间的 距离 为 j - i。</p>
+        </article>
+    </div>
+
+    <div class="nexmoe-post">
+        <a href="/2023/04/05/leetcode53/">
+            
+                <div class="nexmoe-post-cover mdui-ripple absolute" style="padding-top: 56.25%;"> 
+                    <img src="/images/leetcode53/pCwQfkd.png" alt="Leetcode 53.最大子数组和题解" loading="lazy">
+                    <h1>Leetcode 53.最大子数组和题解</h1>
+                </div>
+            
+        </a>
+
+        <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2023年04月05日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/leetcode/">leetcode</a>
+        
+        
+    <a><i class="nexmoefont icon-areachart"></i>约652字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要3分钟</a>
+
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+        <article>
+            <h2 id="题目描述">题目描述</h2>
+<p>题目:<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray/">最大子数组和</a></p>
+<p>给你一个整数数组 <code>nums</code> ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+        </article>
+    </div>
+
+    <div class="nexmoe-post">
+        <a href="/2023/04/04/leetcode62/">
+            
+                <div class="nexmoe-post-cover mdui-ripple absolute" style="padding-top: 56.25%;"> 
+                    <img src="/images/leetcode62/pCwQfkd.png" alt="Leetcode 62.不同路径题解" loading="lazy">
+                    <h1>Leetcode 62.不同路径题解</h1>
+                </div>
+            
+        </a>
+
+        <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2023年04月04日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/leetcode/">leetcode</a>
+        
+        
+    <a><i class="nexmoefont icon-areachart"></i>约840字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要4分钟</a>
+
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+        <article>
+            <h2 id="题目描述">题目描述</h2>
+<p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。</p>
+<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。</p>
+        </article>
+    </div>
+</section><nav class="nexmoe-page-nav"><span class="page-number current">1</span><a class="page-number" href="/tags/leetcode/page/2/">2</a><a class="extend next" rel="next" href="/tags/leetcode/page/2/"><i class="nexmoefont icon-right"></i></a></nav></div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
+        <div class="nexmoe-tool">
+
+            
+
+            
+            
+
+            
+
+            <a href="#nexmoe-content" class="backtop toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+        </div>
+    </div>
+</div></div><div id="nexmoe-footer"><!--!--></div><div id="nexmoe-search-space"><div class="search-container"><div class="search-header"><div class="search-input-container"><input class="search-input" type="text" placeholder="搜索" onInput="sinput();"></div><a class="search-close" onclick="sclose();">×</a></div><div class="search-body"></div></div></div><div></div></body></html>

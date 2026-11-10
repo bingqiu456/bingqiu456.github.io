@@ -1,818 +1,648 @@
+<!doctype html>
+<html lang="zh"><head>
+<title>Koishi从0入门 03 编写签到插件 - 冰月博客</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 
-
-<!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
-<head>
-  <meta charset="UTF-8">
-
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.ico">
-  <link rel="icon" href="/img/fluid.ico">
-  
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#36d984">
-  <meta name="author" content="bingyue">
-  <meta name="keywords" content="">
-  
-    <meta name="description" content="前言 在上一篇教程中，我们学习了如何调用api发送消息，以及发送不同的消息类型，那我们今天来实战写一个签到插件 签到插件的原理就是写入今天的时间，如果判断上一次签到时间和今天是一致的，那就签到失败，否则就是签到成功 指令匹配 在Koishi这个框架中，我们除了可以用ctx.on去判断消息外，我们可以直接使用最直接的ctx.command去判断消息">
+<link rel="shortcut icon" href="/img/favicon.png" type="image/png" />
+<meta name="description" content="前言 在上一篇教程中，我们学习了如何调用api发送消息，以及发送不同的消息类型，那我们今天来实战写一个签到插件 签到插件的原理就是写入今天的时间，如果判断上一次签到时间和今天是一致的，那就签到失败，否则就是签到成功 指令匹配 在Koishi这个框架中，我们除了可以用ctx.on去判断消息外，我们可以直接使用最直接的ctx.command去判断消息">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Koishi从0入门 03 编写签到插件">
 <meta property="og:url" content="http://blog.bingyue.top/2025/06/14/koishi_teach_03/index.html">
 <meta property="og:site_name" content="冰月博客">
 <meta property="og:description" content="前言 在上一篇教程中，我们学习了如何调用api发送消息，以及发送不同的消息类型，那我们今天来实战写一个签到插件 签到插件的原理就是写入今天的时间，如果判断上一次签到时间和今天是一致的，那就签到失败，否则就是签到成功 指令匹配 在Koishi这个框架中，我们除了可以用ctx.on去判断消息外，我们可以直接使用最直接的ctx.command去判断消息">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s21.ax1x.com/2025/05/01/pEHXiAf.png">
+<meta property="og:image" content="http://blog.bingyue.top/images/koishi_teach_03/684c34df58cb8da5c84af706.png">
+<meta property="og:image" content="http://blog.bingyue.top/images/koishi_teach_03/684c5b9d58cb8da5c84b0414.png">
 <meta property="article:published_time" content="2025-06-13T17:13:28.000Z">
-<meta property="article:modified_time" content="2025-06-13T17:13:28.026Z">
+<meta property="article:modified_time" content="2026-11-10T14:42:30.462Z">
 <meta property="article:author" content="bingyue">
 <meta property="article:tag" content="bot">
 <meta property="article:tag" content="qq机器人">
 <meta property="article:tag" content="JavaScript">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s21.ax1x.com/2025/05/01/pEHXiAf.png">
-  
-  
-    <meta name="referrer" content="no-referrer-when-downgrade">
-  
-  
-  <title>Koishi从0入门 03 编写签到插件 - 冰月博客</title>
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.bingyue.top/images/koishi_teach_03/684c34df58cb8da5c84af706.png">
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1794321903838">
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
+<link rel="stylesheet" href="/css/style.css?v=1794321903838">
 
 
 
 
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"blog.bingyue.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"1499a4a6751739c3ee13784b8a5271e5","google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-  
-    <!-- Baidu Analytics -->
-    <script async>
-      if (!Fluid.ctx.dnt) {
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?1499a4a6751739c3ee13784b8a5271e5";
-          var s = document.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(hm, s);
-        })();
-      }
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
-
-
-  
-<meta name="generator" content="Hexo 5.4.2"></head>
-
-
-<body>
-  
-
-  <header>
+    
+        <link rel="stylesheet" href="/custom.css?v=1794321903838">
     
 
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>bingyue</strong>
-    </a>
 
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
 
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
+<script src="/lib/mdui_043tiny/mdui.js" async></script>
+<script src="/lib/fancybox/fancybox.umd.js" async></script>
+<script src="/lib/lax.min.js" async></script>
+
+
+<script async src="/js/app.js?v=1794321903838"></script>
+
+
+    <script>var copyTip = "著作权归作者所有，商业转载请联系作者获得授权，非商业转载请注明出处。来源：%url"</script>
+ 
+
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?1499a4a6751739c3ee13784b8a5271e5";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+<link rel="stylesheet" href="https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.css">
+<script>
+  /* 封面图加载失败时（例如图床失效）回退到站点默认背景图，避免出现空白框 */
+  document.addEventListener("error", function (e) {
+    var el = e.target;
+    if (el && el.tagName === "IMG" && el.closest && el.closest(".nexmoe-post-cover") && !el.dataset.fallback) {
+      el.dataset.fallback = "1";
+      el.src = "/img/nexmoe-bg.jpg";
+    }
+  }, true);
+</script>
+
+
+<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+<meta name="generator" content="Hexo 6.3.0"></head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(/img/nexmoe-bg.jpg)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="bingyue"><img src="/img/456.png" alt="bingyue"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="bingyue">
+            <img src="/img/456.png" alt="bingyue" alt="bingyue">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>64</div>
+        <div><span>标签</span>42</div>
+        <div><span>分类</span>27</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/" target="_self">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                首页
+            </div>
+        </a>
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/" target="_self">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archives/" title="归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                归档
+            </div>
+        </a>
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/notes/" title="笔记">
+            <i class="mdui-list-item-icon nexmoefont icon-i-catalog"></i>
+            <div class="mdui-list-item-content">
+                笔记
+            </div>
+        </a>
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/donate/" title="赞助">
+            <i class="mdui-list-item-icon nexmoefont icon-coffee"></i>
+            <div class="mdui-list-item-content">
+                赞助
+            </div>
+        </a>
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about/" title="关于">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于
+            </div>
+        </a>
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/links/" target="_self">
-                <i class="iconfont icon-link-fill"></i>
-                <span>友链</span>
-              </a>
-            </li>
-          
+    </div>
+    
+    
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/donate/" target="_self">
-                <i class="iconfont icon-user-fill"></i>
-                <span>支持我</span>
-              </a>
-            </li>
-          
+        <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/notes/" target="_self">
-                <i class="iconfont icon-books"></i>
-                <span>notes</span>
-              </a>
-            </li>
-          
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+
+
+	<script async src="/js/search.js?v=1794321903838"></script>
+
+
+
+    
+        
+        <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://github.com/bingqiu456"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(56, 139, 253);
+				background-color: rgba(56, 139, 253, .12);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://twitter.com/binhe123"
+			target="_blank"
+			mdui-tooltip="{content: 'Twitter'}"
+			style="
+				color: rgb(29, 161, 242);
+				background-color: rgba(29, 161, 242, .12);
+			"
+		>
+			<i
+				class="nexmoefont icon-twitter"
+			></i> </a
+		>
+	</div>
+</div>
+
+    
         
         
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Git/">Git</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Koishi/">Koishi</a>
+          <span class="category-list-count">4</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/app逆向/">app逆向</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/bootloader/">bootloader</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/code/">code</a>
+          <span class="category-list-count">6</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/dic/">dic</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/qq机器人/koishi分享/">koishi分享</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/leetcode/">leetcode</a>
+          <span class="category-list-count">17</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/nonebot/">nonebot</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/qq机器人/nonebot教程/">nonebot教程</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/nonebot项目/">nonebot项目</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/qq机器人/">qq机器人</a>
+          <span class="category-list-count">11</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/qq频道/">qq频道</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/telegram/">telegram</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/web逆向/">web逆向</a>
+          <span class="category-list-count">6</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/bootloader/刷机/">刷机</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/code/洛谷/">洛谷</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/生活/">生活</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/编程/">编程</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/web逆向/翻译类/">翻译类</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/解锁bl/">解锁bl</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/web逆向/通讯类/">通讯类</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/随身wifi/">随身wifi</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/web逆向/音乐类/">音乐类</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/9008/" style="font-size: 11.82px;">9008</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/JavaScript/" style="font-size: 12.73px;">JavaScript</a> <a href="/tags/QQNT/" style="font-size: 10px;">QQNT</a> <a href="/tags/bootloader/" style="font-size: 10.91px;">bootloader</a> <a href="/tags/bot/" style="font-size: 18.18px;">bot</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/chat/" style="font-size: 10px;">chat</a> <a href="/tags/code/" style="font-size: 20px;">code</a> <a href="/tags/cqhttp/" style="font-size: 10.91px;">cqhttp</a> <a href="/tags/debian/" style="font-size: 10.91px;">debian</a> <a href="/tags/dic/" style="font-size: 12.73px;">dic</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/ida/" style="font-size: 10px;">ida</a> <a href="/tags/js%E9%80%86%E5%90%91/" style="font-size: 13.64px;">js逆向</a> <a href="/tags/koishi/" style="font-size: 10px;">koishi</a> <a href="/tags/lcp/" style="font-size: 10.91px;">lcp</a> <a href="/tags/leetcode/" style="font-size: 17.27px;">leetcode</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/openwrt/" style="font-size: 10.91px;">openwrt</a> <a href="/tags/python/" style="font-size: 15.45px;">python</a> <a href="/tags/qq%E6%9C%BA%E5%99%A8%E4%BA%BA/" style="font-size: 19.09px;">qq机器人</a> <a href="/tags/root/" style="font-size: 10px;">root</a> <a href="/tags/telegram/" style="font-size: 10px;">telegram</a> <a href="/tags/typescript/" style="font-size: 10.91px;">typescript</a> <a href="/tags/%E5%88%86%E7%B1%BB%E8%AE%A8%E8%AE%BA/" style="font-size: 11.82px;">分类讨论</a> <a href="/tags/%E5%88%B7%E6%9C%BA/" style="font-size: 10.91px;">刷机</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 14.55px;">动态规划</a> <a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" style="font-size: 10px;">哈希表</a> <a href="/tags/%E5%9B%9E%E6%BA%AF/" style="font-size: 10px;">回溯</a> <a href="/tags/%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91/" style="font-size: 10px;">安卓逆向</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 10.91px;">数学</a> <a href="/tags/%E6%97%A5%E5%B8%B8/" style="font-size: 10.91px;">日常</a> <a href="/tags/%E6%A0%88/" style="font-size: 10.91px;">栈</a> <a href="/tags/%E6%A8%A1%E6%8B%9F/" style="font-size: 10.91px;">模拟</a> <a href="/tags/%E6%B4%9B%E8%B0%B7/" style="font-size: 10.91px;">洛谷</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/" style="font-size: 10px;">深度优先搜索</a> <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/" style="font-size: 10px;">滑动窗口</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 16.36px;">编程</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 10px;">贪心</a> <a href="/tags/%E9%9A%8F%E8%BA%ABwifi/" style="font-size: 11.82px;">随身wifi</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 10px;">音乐</a>
+    </div>
+    
+      <script>
+        var maxTagcloud = parseInt(20);
+        var tags_length = parseInt(42);
+        var tags_arr = [];
+        for(var i = 0; i < tags_length; i++){
+          tags_arr.push(i);
+        }
+        tags_arr.sort(function (l, r) {
+          return Math.random() > 0.5 ? -1 : 1;
+        });
+        tags_arr = tags_arr.slice(0, maxTagcloud < tags_length ? tags_length - maxTagcloud : 0);
+        for(var tag_i = 0; tag_i < tags_arr.length; tag_i++){
+          document.getElementById("randomtagcloud").children[tags_arr[tag_i]].style.display = 'none';
+        }
+      </script>
+    
+  </div>
+
+    
+        
+        
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">最新文章</h3>
+    <div class="nexmoe-widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/06/14/koishi_teach_03/">Koishi从0入门 03 编写签到插件</a>
           </li>
-          
         
+          <li>
+            <a href="/2025/05/31/koishi_02_teach/">Koishi从0入门 02 编写插件</a>
+          </li>
         
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
+          <li>
+            <a href="/2025/05/01/koishi_01_teach/">Koishi从0入门 01 搭建环境与绑定框架</a>
+          </li>
+        
+          <li>
+            <a href="/2025/05/01/koishi_jiao_cheng_ji_he/">Koishi机器人教程合集 分为五期</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/17/koishi_send_keyborad/">Koishi如何发送纯按钮消息</a>
           </li>
         
       </ul>
     </div>
   </div>
-</nav>
 
-  
+    
+        
+        <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-link">
+		<ul>
+        
+            <li>
+                <a href="https://xyamzw.top" target="_blank" >
+                    <img src="/img/mojuexunxingblog.ico" alt="未觉寻星 Blog"></img>
+                    <p>未觉寻星 Blog</p>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://blog.candquarzy.top" target="_blank" >
+                    <img src="/img/candy_blog.ico" alt="Candy Blog"></img>
+                    <p>Candy Blog</p>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://blog.mcxiaochen.top" target="_blank" >
+                    <img src="/img/xiaochenblog.ico" alt="小尘 Blog"></img>
+                    <p>小尘 Blog</p>
+                </a>
+            </li>
+        
+            <li>
+                <a href="https://blog.moeworld.tech" target="_blank" >
+                    <img src="/img/kongyublog.png" alt="晓空 Blog"></img>
+                    <p>晓空 Blog</p>
+                </a>
+            </li>
+        
+		</ul>
+    </div>
+</div>
+<style>
+.nexmoe-widget-wrap .nexmoe-link ul li a {
+    text-align : center;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a img {
+    max-width : 100%;
+}
+.nexmoe-widget-wrap .nexmoe-link ul li a p {
+    margin: 10px 0;
+}
+</style>
 
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/7777.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="Koishi从0入门 03 编写签到插件"></span>
-          
+    
+   
+    <div class="nexmoe-copyright">
+        &copy; 2026 bingyue
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: 56.25%;"> 
+            <img src="/images/koishi_teach_03/pEHXiAf.png" alt="Koishi从0入门 03 编写签到插件" loading="lazy">
+            <h1>Koishi从0入门 03 编写签到插件</h1>
         </div>
-
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2025年06月14日</a>
         
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-06-14 01:13" pubdate>
-          2025年6月14日 凌晨
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          1.3k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/Koishi/">Koishi</a>
         
         
-        
-          11 分钟
-        
-      </span>
-    
-
-    
-    
-      
-        <span id="busuanzi_container_page_pv" style="display: none">
-          <i class="iconfont icon-eye" aria-hidden="true"></i>
-          <span id="busuanzi_value_page_pv"></span> 次
-        </span>
-        
-
-      
-    
-  </div>
-
-
-        
-      </div>
-
-      
-    </div>
-  </div>
-</div>
-
-</div>
-
-  </header>
-
-  <main>
-    
-      
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
+    <a><i class="nexmoefont icon-areachart"></i>约1.4k字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要6分钟</a>
 
     </div>
+    
+    
+    
+    
+    
+</div>
 
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <h1 id="seo-header">Koishi从0入门 03 编写签到插件</h1>
-            
-              <p id="updated-time" class="note note-info" style="">
-                
-                  
-                    本文最后更新于 2025年6月14日 凌晨
-                  
-                
-              </p>
-            
-            
-              <div class="markdown-body">
-                
-                <h2 id="前言">前言</h2>
+    <h2 id="前言">前言</h2>
 <p>在上一篇教程中，我们学习了如何调用api发送消息，以及发送不同的消息类型，那我们今天来实战写一个签到插件</p>
 <p>签到插件的原理就是写入今天的时间，如果判断上一次签到时间和今天是一致的，那就签到失败，否则就是签到成功</p>
 <h3 id="指令匹配">指令匹配</h3>
 <p>在<code>Koishi</code>这个框架中，我们除了可以用<code>ctx.on</code>去判断消息外，我们可以直接使用最直接的<code>ctx.command</code>去判断消息</p>
 <span id="more"></span>
 <p>示例代码如下</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs typescript">ctx.<span class="hljs-title function_">command</span>(<span class="hljs-string">&#x27;签到&#x27;</span>)<br>.<span class="hljs-title function_">action</span>(<span class="hljs-title function_">async</span>(&#123;session&#125;) =&gt; &#123;<br> <span class="hljs-keyword">await</span> session.<span class="hljs-title function_">send</span>(<span class="hljs-string">&quot;1&quot;</span>)<br>&#125;)<br></code></pre></td></tr></table></figure>
-<p><img src="https://pic1.imgdb.cn/item/684c34df58cb8da5c84af706.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ctx.<span class="title function_">command</span>(<span class="string">&#x27;签到&#x27;</span>)</span><br><span class="line">.<span class="title function_">action</span>(<span class="title function_">async</span>(&#123;session&#125;) =&gt; &#123;</span><br><span class="line"> <span class="keyword">await</span> session.<span class="title function_">send</span>(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/koishi_teach_03/684c34df58cb8da5c84af706.png" alt="" data-caption="" loading="lazy"></p>
 <hr>
 <h3 id="数据库基础使用">数据库基础使用</h3>
 <p>这里是<a target="_blank" rel="noopener" href="https://koishi.chat/zh-CN/api/database/database.html">点我</a>具体的文档，那么我们来写一个基础的，首先是声明数据类型</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> sign&#123;<br>  time : <span class="hljs-built_in">string</span> <span class="hljs-comment">// 这里是存储时间</span><br>  user_id : <span class="hljs-built_in">string</span> <span class="hljs-comment">// 这里是用户id</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> sign&#123;</span><br><span class="line">  time : <span class="built_in">string</span> <span class="comment">// 这里是存储时间</span></span><br><span class="line">  user_id : <span class="built_in">string</span> <span class="comment">// 这里是用户id</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>第二步声明使用了数据库插件，否则会出现黄色警告</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> inject = [<span class="hljs-string">&quot;database&quot;</span>]<br></code></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> inject = [<span class="string">&quot;database&quot;</span>]</span><br></pre></td></tr></table></figure>
 <p>在<code>Koishi</code>里面声明数据库</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">declare</span> <span class="hljs-variable language_">module</span> <span class="hljs-string">&#x27;koishi&#x27;</span> &#123;<br>  <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Tables</span> &#123;<br> 	sign : sign<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">declare</span> <span class="variable language_">module</span> <span class="string">&#x27;koishi&#x27;</span> &#123;</span><br><span class="line">  <span class="keyword">interface</span> <span class="title class_">Tables</span> &#123;</span><br><span class="line"> 	sign : sign</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>最后是创建数据库</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs typescript">ctx.<span class="hljs-property">model</span>.<span class="hljs-title function_">extend</span>(<span class="hljs-string">&#x27;sign&#x27;</span>,&#123;<br>    <span class="hljs-attr">time</span>: <span class="hljs-string">&#x27;string&#x27;</span>,<br>    <span class="hljs-attr">user_id</span>: <span class="hljs-string">&#x27;string&#x27;</span><br>&#125;)<br></code></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ctx.<span class="property">model</span>.<span class="title function_">extend</span>(<span class="string">&#x27;sign&#x27;</span>,&#123;</span><br><span class="line">    <span class="attr">time</span>: <span class="string">&#x27;string&#x27;</span>,</span><br><span class="line">    <span class="attr">user_id</span>: <span class="string">&#x27;string&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>数据库创建代码为</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">await</span> ctx.<span class="hljs-property">database</span>.<span class="hljs-title function_">create</span>(table_name, &#123;.....&#125;)<br></code></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> ctx.<span class="property">database</span>.<span class="title function_">create</span>(table_name, &#123;.....&#125;)</span><br></pre></td></tr></table></figure>
 <p>数据库更新代码为</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">await</span> ctx.<span class="hljs-property">database</span>.<span class="hljs-title function_">upsert</span>(table_name, [&#123;....&#125;])<br></code></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> ctx.<span class="property">database</span>.<span class="title function_">upsert</span>(table_name, [&#123;....&#125;])</span><br></pre></td></tr></table></figure>
 <p>数据库搜索代码为</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">await</span> ctx.<span class="hljs-property">database</span>.<span class="hljs-title function_">get</span>(table_name, &#123;....&#125;)<br></code></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> ctx.<span class="property">database</span>.<span class="title function_">get</span>(table_name, &#123;....&#125;)</span><br></pre></td></tr></table></figure>
 <hr>
 <h3 id="获取年月日">获取年月日</h3>
 <p>这里我们可以使用<code>js</code>的库获取</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">getCurrentDate</span>(<span class="hljs-params"></span>): <span class="hljs-built_in">string</span> &#123;<br>  <span class="hljs-keyword">const</span> date = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>();<br>  <span class="hljs-keyword">const</span> year = date.<span class="hljs-title function_">getFullYear</span>();<br>  <span class="hljs-keyword">const</span> month = <span class="hljs-title class_">String</span>(date.<span class="hljs-title function_">getMonth</span>() + <span class="hljs-number">1</span>).<span class="hljs-title function_">padStart</span>(<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;0&#x27;</span>);<br>  <span class="hljs-keyword">const</span> day = <span class="hljs-title class_">String</span>(date.<span class="hljs-title function_">getDate</span>()).<span class="hljs-title function_">padStart</span>(<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;0&#x27;</span>);<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">$&#123;year&#125;</span>-<span class="hljs-subst">$&#123;month&#125;</span>-<span class="hljs-subst">$&#123;day&#125;</span>`</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getCurrentDate</span>(<span class="params"></span>): <span class="built_in">string</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> date = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">  <span class="keyword">const</span> year = date.<span class="title function_">getFullYear</span>();</span><br><span class="line">  <span class="keyword">const</span> month = <span class="title class_">String</span>(date.<span class="title function_">getMonth</span>() + <span class="number">1</span>).<span class="title function_">padStart</span>(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">  <span class="keyword">const</span> day = <span class="title class_">String</span>(date.<span class="title function_">getDate</span>()).<span class="title function_">padStart</span>(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;year&#125;</span>-<span class="subst">$&#123;month&#125;</span>-<span class="subst">$&#123;day&#125;</span>`</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <h2 id="开始编写">开始编写</h2>
 <p>在我们前面了解完这些知识后，我们先创建一个存放签到数据的数据库</p>
 <p>根据上面的代码讲解，我们可以这样写</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Context</span>, <span class="hljs-title class_">Schema</span>, h &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;koishi&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> name = <span class="hljs-string">&#x27;test&#x27;</span> <span class="hljs-comment">// 插件名字</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Config</span> &#123;&#125; <span class="hljs-comment">// 插件的配置项</span><br><br><span class="hljs-keyword">declare</span> <span class="hljs-variable language_">module</span> <span class="hljs-string">&#x27;koishi&#x27;</span> &#123;<br>  <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Tables</span> &#123;<br>  sign_today : sign_today<br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> inject = [<span class="hljs-string">&quot;database&quot;</span>]<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title class_">Config</span>: <span class="hljs-title class_">Schema</span>&lt;<span class="hljs-title class_">Config</span>&gt; = <span class="hljs-title class_">Schema</span>.<span class="hljs-title function_">object</span>(&#123;&#125;)<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> sign_today &#123;<br>  id?: <span class="hljs-built_in">number</span>  <span class="hljs-comment">// 添加 id 字段（可选）</span><br>  <span class="hljs-attr">now_time</span>: <span class="hljs-built_in">string</span> <br>  <span class="hljs-attr">user_id</span>: <span class="hljs-built_in">string</span><br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">apply</span>(<span class="hljs-params">ctx: Context</span>) &#123;<br>  ctx.<span class="hljs-property">model</span>.<span class="hljs-title function_">extend</span>(<span class="hljs-string">&quot;sign_today&quot;</span>, &#123;<br>    <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;unsigned&#x27;</span>,<br>    <span class="hljs-attr">now_time</span>: <span class="hljs-string">&#x27;string&#x27;</span>,<br>    <span class="hljs-attr">user_id</span>: <span class="hljs-string">&#x27;string&#x27;</span><br>  &#125;, &#123;<br>    <span class="hljs-attr">primary</span>: <span class="hljs-string">&#x27;id&#x27;</span>, <br>    <span class="hljs-attr">autoInc</span>: <span class="hljs-literal">true</span> <br>  &#125;)<br>  <br>  ctx.<span class="hljs-title function_">command</span>(<span class="hljs-string">&#x27;签到&#x27;</span>)<br>    .<span class="hljs-title function_">action</span>(<span class="hljs-title function_">async</span>(&#123;session&#125;) =&gt; &#123;<br>      <span class="hljs-keyword">await</span> session.<span class="hljs-title function_">send</span>(<span class="hljs-string">&quot;1&quot;</span>)<br>    &#125;)<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Context</span>, <span class="title class_">Schema</span>, h &#125; <span class="keyword">from</span> <span class="string">&#x27;koishi&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> name = <span class="string">&#x27;test&#x27;</span> <span class="comment">// 插件名字</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> <span class="title class_">Config</span> &#123;&#125; <span class="comment">// 插件的配置项</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span> <span class="variable language_">module</span> <span class="string">&#x27;koishi&#x27;</span> &#123;</span><br><span class="line">  <span class="keyword">interface</span> <span class="title class_">Tables</span> &#123;</span><br><span class="line">  sign_today : sign_today</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> inject = [<span class="string">&quot;database&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">Config</span>: <span class="title class_">Schema</span>&lt;<span class="title class_">Config</span>&gt; = <span class="title class_">Schema</span>.<span class="title function_">object</span>(&#123;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> sign_today &#123;</span><br><span class="line">  id?: <span class="built_in">number</span>  <span class="comment">// 添加 id 字段（可选）</span></span><br><span class="line">  <span class="attr">now_time</span>: <span class="built_in">string</span> </span><br><span class="line">  <span class="attr">user_id</span>: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">apply</span>(<span class="params">ctx: Context</span>) &#123;</span><br><span class="line">  ctx.<span class="property">model</span>.<span class="title function_">extend</span>(<span class="string">&quot;sign_today&quot;</span>, &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="string">&#x27;unsigned&#x27;</span>,</span><br><span class="line">    <span class="attr">now_time</span>: <span class="string">&#x27;string&#x27;</span>,</span><br><span class="line">    <span class="attr">user_id</span>: <span class="string">&#x27;string&#x27;</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    <span class="attr">primary</span>: <span class="string">&#x27;id&#x27;</span>, </span><br><span class="line">    <span class="attr">autoInc</span>: <span class="literal">true</span> </span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line">  ctx.<span class="title function_">command</span>(<span class="string">&#x27;签到&#x27;</span>)</span><br><span class="line">    .<span class="title function_">action</span>(<span class="title function_">async</span>(&#123;session&#125;) =&gt; &#123;</span><br><span class="line">      <span class="keyword">await</span> session.<span class="title function_">send</span>(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们运行一下代码，如果日志出现了</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-number">2025</span>-<span class="hljs-number">06</span>-<span class="hljs-number">14</span> <span class="hljs-number">00</span>:<span class="hljs-number">57</span>:<span class="hljs-number">40</span> [I] hmr reload plugin at external\test\src\index.<span class="hljs-property">ts</span><br><span class="hljs-number">2025</span>-<span class="hljs-number">06</span>-<span class="hljs-number">14</span> <span class="hljs-number">00</span>:<span class="hljs-number">57</span>:<span class="hljs-number">40</span> [I] sqlite auto creating table sign_today<br></code></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2025</span>-<span class="number">06</span>-<span class="number">14</span> <span class="number">00</span>:<span class="number">57</span>:<span class="number">40</span> [I] hmr reload plugin at external\test\src\index.<span class="property">ts</span></span><br><span class="line"><span class="number">2025</span>-<span class="number">06</span>-<span class="number">14</span> <span class="number">00</span>:<span class="number">57</span>:<span class="number">40</span> [I] sqlite auto creating table sign_today</span><br></pre></td></tr></table></figure>
 <p>说明你的数据库已经初始化了，现在我们缺少读写数据库</p>
 <hr>
 <h2 id="读写内容">读写内容</h2>
 <p>对数据库进行搜索，然后数据库会返回数组</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs typescript">ctx.<span class="hljs-title function_">command</span>(<span class="hljs-string">&#x27;签到&#x27;</span>)<br>    .<span class="hljs-title function_">action</span>(<span class="hljs-title function_">async</span>(&#123;session&#125;) =&gt; &#123;<br>      <span class="hljs-keyword">var</span> get_user_sign_time = <span class="hljs-keyword">await</span> ctx.<span class="hljs-property">database</span>.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;sign_today&quot;</span>, &#123;<span class="hljs-attr">user_id</span>: session.<span class="hljs-property">userId</span>&#125;)<br>      <span class="hljs-keyword">if</span>(get_user_sign_time.<span class="hljs-property">length</span> == <span class="hljs-number">0</span>)&#123;<br><br>      &#125;<span class="hljs-keyword">else</span>&#123;<br>        <br>      &#125; <br>    &#125;)<br></code></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ctx.<span class="title function_">command</span>(<span class="string">&#x27;签到&#x27;</span>)</span><br><span class="line">    .<span class="title function_">action</span>(<span class="title function_">async</span>(&#123;session&#125;) =&gt; &#123;</span><br><span class="line">      <span class="keyword">var</span> get_user_sign_time = <span class="keyword">await</span> ctx.<span class="property">database</span>.<span class="title function_">get</span>(<span class="string">&quot;sign_today&quot;</span>, &#123;<span class="attr">user_id</span>: session.<span class="property">userId</span>&#125;)</span><br><span class="line">      <span class="keyword">if</span>(get_user_sign_time.<span class="property">length</span> == <span class="number">0</span>)&#123;</span><br><span class="line"></span><br><span class="line">      &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        </span><br><span class="line">      &#125; </span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
 <p>当返回长度为0的数组，说明这个人不存在，我们要创建数据，然后返回签到成功</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs typescript">ctx.<span class="hljs-title function_">command</span>(<span class="hljs-string">&#x27;签到&#x27;</span>)<br>   .<span class="hljs-title function_">action</span>(<span class="hljs-title function_">async</span>(&#123;session&#125;) =&gt; &#123;<br>     <span class="hljs-keyword">var</span> get_user_sign_time = <span class="hljs-keyword">await</span> ctx.<span class="hljs-property">database</span>.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;sign_today&quot;</span>, &#123;<span class="hljs-attr">user_id</span>: session.<span class="hljs-property">userId</span>&#125;)<br>     <span class="hljs-keyword">if</span>(get_user_sign_time.<span class="hljs-property">length</span> == <span class="hljs-number">0</span>)&#123;<br>       <span class="hljs-keyword">await</span> ctx.<span class="hljs-property">database</span>.<span class="hljs-title function_">create</span>(<span class="hljs-string">&quot;sign_today&quot;</span>, &#123;<br>           <span class="hljs-string">&quot;now_time&quot;</span>: <span class="hljs-title function_">getCurrentDate</span>(),<br>           <span class="hljs-string">&quot;user_id&quot;</span>: session.<span class="hljs-property">userId</span><br>       &#125;)<br>       <span class="hljs-keyword">await</span> session.<span class="hljs-title function_">send</span>(<span class="hljs-string">&quot;签到成功&quot;</span>)<br>     &#125;<span class="hljs-keyword">else</span>&#123;<br><br>     &#125; <br>   &#125;)<br></code></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ctx.<span class="title function_">command</span>(<span class="string">&#x27;签到&#x27;</span>)</span><br><span class="line">   .<span class="title function_">action</span>(<span class="title function_">async</span>(&#123;session&#125;) =&gt; &#123;</span><br><span class="line">     <span class="keyword">var</span> get_user_sign_time = <span class="keyword">await</span> ctx.<span class="property">database</span>.<span class="title function_">get</span>(<span class="string">&quot;sign_today&quot;</span>, &#123;<span class="attr">user_id</span>: session.<span class="property">userId</span>&#125;)</span><br><span class="line">     <span class="keyword">if</span>(get_user_sign_time.<span class="property">length</span> == <span class="number">0</span>)&#123;</span><br><span class="line">       <span class="keyword">await</span> ctx.<span class="property">database</span>.<span class="title function_">create</span>(<span class="string">&quot;sign_today&quot;</span>, &#123;</span><br><span class="line">           <span class="string">&quot;now_time&quot;</span>: <span class="title function_">getCurrentDate</span>(),</span><br><span class="line">           <span class="string">&quot;user_id&quot;</span>: session.<span class="property">userId</span></span><br><span class="line">       &#125;)</span><br><span class="line">       <span class="keyword">await</span> session.<span class="title function_">send</span>(<span class="string">&quot;签到成功&quot;</span>)</span><br><span class="line">     &#125;<span class="keyword">else</span>&#123;</span><br><span class="line"></span><br><span class="line">     &#125; </span><br><span class="line">   &#125;)</span><br></pre></td></tr></table></figure>
 <p>那么我们就要讨论另外一种情况了，如果这个人在数据库有记录的话，我们需要对比时间，如果时间恰好等于今天的时间，说明他已经签到了，否则就是失败</p>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs typescript">ctx.<span class="hljs-title function_">command</span>(<span class="hljs-string">&#x27;签到&#x27;</span>)<br>    .<span class="hljs-title function_">action</span>(<span class="hljs-title function_">async</span>(&#123;session&#125;) =&gt; &#123;<br>      <span class="hljs-keyword">var</span> get_user_sign_time = <span class="hljs-keyword">await</span> ctx.<span class="hljs-property">database</span>.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;sign_today&quot;</span>, &#123;<span class="hljs-attr">user_id</span>: session.<span class="hljs-property">userId</span>&#125;)<br>      <span class="hljs-keyword">if</span>(get_user_sign_time.<span class="hljs-property">length</span> == <span class="hljs-number">0</span>)&#123;<br>        <span class="hljs-keyword">await</span> ctx.<span class="hljs-property">database</span>.<span class="hljs-title function_">create</span>(<span class="hljs-string">&quot;sign_today&quot;</span>, &#123;<br>            <span class="hljs-string">&quot;now_time&quot;</span>: <span class="hljs-title function_">getCurrentDate</span>(),<br>            <span class="hljs-string">&quot;user_id&quot;</span>: session.<span class="hljs-property">userId</span><br>        &#125;)<br>        <span class="hljs-keyword">await</span> session.<span class="hljs-title function_">send</span>(<span class="hljs-string">&quot;签到成功&quot;</span>)<br>      &#125;<span class="hljs-keyword">else</span>&#123;<br>        <span class="hljs-keyword">if</span>(get_user_sign_time[<span class="hljs-number">0</span>][<span class="hljs-string">&#x27;now_time&#x27;</span>] == <span class="hljs-title function_">getCurrentDate</span>())&#123;<br>          <span class="hljs-keyword">await</span> session.<span class="hljs-title function_">send</span>(<span class="hljs-string">&quot;签到失败，你今天已经签到了&quot;</span>)<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-keyword">await</span> ctx.<span class="hljs-property">database</span>.<span class="hljs-title function_">upsert</span>(<span class="hljs-string">&quot;sign_today&quot;</span>, [&#123;<br>                  <span class="hljs-string">&quot;now_time&quot;</span> : <span class="hljs-title function_">getCurrentDate</span>(),<br>                  <span class="hljs-string">&quot;user_id&quot;</span> : session.<span class="hljs-property">userId</span>,<br>              &#125;])<br>            <span class="hljs-keyword">await</span> session.<span class="hljs-title function_">send</span>(<span class="hljs-string">&quot;签到成功&quot;</span>)<br>        &#125;<br>      &#125; <br>    &#125;)<br></code></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">ctx.<span class="title function_">command</span>(<span class="string">&#x27;签到&#x27;</span>)</span><br><span class="line">    .<span class="title function_">action</span>(<span class="title function_">async</span>(&#123;session&#125;) =&gt; &#123;</span><br><span class="line">      <span class="keyword">var</span> get_user_sign_time = <span class="keyword">await</span> ctx.<span class="property">database</span>.<span class="title function_">get</span>(<span class="string">&quot;sign_today&quot;</span>, &#123;<span class="attr">user_id</span>: session.<span class="property">userId</span>&#125;)</span><br><span class="line">      <span class="keyword">if</span>(get_user_sign_time.<span class="property">length</span> == <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">await</span> ctx.<span class="property">database</span>.<span class="title function_">create</span>(<span class="string">&quot;sign_today&quot;</span>, &#123;</span><br><span class="line">            <span class="string">&quot;now_time&quot;</span>: <span class="title function_">getCurrentDate</span>(),</span><br><span class="line">            <span class="string">&quot;user_id&quot;</span>: session.<span class="property">userId</span></span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="keyword">await</span> session.<span class="title function_">send</span>(<span class="string">&quot;签到成功&quot;</span>)</span><br><span class="line">      &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(get_user_sign_time[<span class="number">0</span>][<span class="string">&#x27;now_time&#x27;</span>] == <span class="title function_">getCurrentDate</span>())&#123;</span><br><span class="line">          <span class="keyword">await</span> session.<span class="title function_">send</span>(<span class="string">&quot;签到失败，你今天已经签到了&quot;</span>)</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">await</span> ctx.<span class="property">database</span>.<span class="title function_">upsert</span>(<span class="string">&quot;sign_today&quot;</span>, [&#123;</span><br><span class="line">                  <span class="string">&quot;now_time&quot;</span> : <span class="title function_">getCurrentDate</span>(),</span><br><span class="line">                  <span class="string">&quot;user_id&quot;</span> : session.<span class="property">userId</span>,</span><br><span class="line">              &#125;])</span><br><span class="line">            <span class="keyword">await</span> session.<span class="title function_">send</span>(<span class="string">&quot;签到成功&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; </span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
 <p>好了，这样就大功告成了</p>
-<p><img src="https://pic1.imgdb.cn/item/684c5b9d58cb8da5c84b0414.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/koishi_teach_03/684c5b9d58cb8da5c84b0414.png" alt="" data-caption="" loading="lazy"></p>
 <p>效果如上图</p>
 <hr>
 <h2 id="代码示例">代码示例</h2>
-<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123; <span class="hljs-title class_">Context</span>, <span class="hljs-title class_">Schema</span>, h &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;koishi&#x27;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> name = <span class="hljs-string">&#x27;test&#x27;</span> <span class="hljs-comment">// 插件名字</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Config</span> &#123;&#125; <span class="hljs-comment">// 插件的配置项</span><br><br><span class="hljs-keyword">declare</span> <span class="hljs-variable language_">module</span> <span class="hljs-string">&#x27;koishi&#x27;</span> &#123;<br>  <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Tables</span> &#123;<br>  sign_today : sign_today<br>  &#125;<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> inject = [<span class="hljs-string">&quot;database&quot;</span>]<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title class_">Config</span>: <span class="hljs-title class_">Schema</span>&lt;<span class="hljs-title class_">Config</span>&gt; = <span class="hljs-title class_">Schema</span>.<span class="hljs-title function_">object</span>(&#123;&#125;)<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> sign_today &#123;<br>  id?: <span class="hljs-built_in">number</span>  <span class="hljs-comment">// 添加 id 字段（可选）</span><br>  <span class="hljs-attr">now_time</span>: <span class="hljs-built_in">string</span> <br>  <span class="hljs-attr">user_id</span>: <span class="hljs-built_in">string</span><br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">apply</span>(<span class="hljs-params">ctx: Context</span>) &#123;<br>  ctx.<span class="hljs-property">model</span>.<span class="hljs-title function_">extend</span>(<span class="hljs-string">&quot;sign_today&quot;</span>, &#123;<br>    <span class="hljs-attr">id</span>: <span class="hljs-string">&#x27;unsigned&#x27;</span>,  <span class="hljs-comment">// 添加 id 字段定义</span><br>    <span class="hljs-attr">now_time</span>: <span class="hljs-string">&#x27;string&#x27;</span>,<br>    <span class="hljs-attr">user_id</span>: <span class="hljs-string">&#x27;string&#x27;</span>  <span class="hljs-comment">// 改为 string 类型以匹配接口定义</span><br>  &#125;, &#123;<br>    <span class="hljs-attr">primary</span>: <span class="hljs-string">&#x27;id&#x27;</span>,    <span class="hljs-comment">// 明确指定主键</span><br>    <span class="hljs-attr">autoInc</span>: <span class="hljs-literal">true</span>     <span class="hljs-comment">// 自增主键</span><br>  &#125;)<br>  <br>  ctx.<span class="hljs-title function_">command</span>(<span class="hljs-string">&#x27;签到&#x27;</span>)<br>    .<span class="hljs-title function_">action</span>(<span class="hljs-title function_">async</span>(&#123;session&#125;) =&gt; &#123;<br>      <span class="hljs-keyword">var</span> get_user_sign_time = <span class="hljs-keyword">await</span> ctx.<span class="hljs-property">database</span>.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;sign_today&quot;</span>, &#123;<span class="hljs-attr">user_id</span>: session.<span class="hljs-property">userId</span>&#125;)<br>      <span class="hljs-keyword">if</span>(get_user_sign_time.<span class="hljs-property">length</span> == <span class="hljs-number">0</span>)&#123;<br>        <span class="hljs-keyword">await</span> ctx.<span class="hljs-property">database</span>.<span class="hljs-title function_">create</span>(<span class="hljs-string">&quot;sign_today&quot;</span>, &#123;<br>            <span class="hljs-string">&quot;now_time&quot;</span>: <span class="hljs-title function_">getCurrentDate</span>(),<br>            <span class="hljs-string">&quot;user_id&quot;</span>: session.<span class="hljs-property">userId</span><br>        &#125;)<br>        <span class="hljs-keyword">await</span> session.<span class="hljs-title function_">send</span>(<span class="hljs-string">&quot;签到成功&quot;</span>)<br>      &#125;<span class="hljs-keyword">else</span>&#123;<br>        <span class="hljs-keyword">if</span>(get_user_sign_time[<span class="hljs-number">0</span>][<span class="hljs-string">&#x27;now_time&#x27;</span>] == <span class="hljs-title function_">getCurrentDate</span>())&#123;<br>          <span class="hljs-keyword">await</span> session.<span class="hljs-title function_">send</span>(<span class="hljs-string">&quot;签到失败，你今天已经签到了&quot;</span>)<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-keyword">await</span> ctx.<span class="hljs-property">database</span>.<span class="hljs-title function_">upsert</span>(<span class="hljs-string">&quot;sign_today&quot;</span>, [&#123;<br>                  <span class="hljs-string">&quot;now_time&quot;</span> : <span class="hljs-title function_">getCurrentDate</span>(),<br>                  <span class="hljs-string">&quot;user_id&quot;</span> : session.<span class="hljs-property">userId</span>,<br>              &#125;])<br>            <span class="hljs-keyword">await</span> session.<span class="hljs-title function_">send</span>(<span class="hljs-string">&quot;签到成功&quot;</span>)<br>        &#125;<br>      &#125; <br>    &#125;)<br>&#125;<br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">getCurrentDate</span>(<span class="hljs-params"></span>): <span class="hljs-built_in">string</span> &#123;<br>  <span class="hljs-keyword">const</span> date = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>();<br>  <span class="hljs-keyword">const</span> year = date.<span class="hljs-title function_">getFullYear</span>();<br>  <span class="hljs-keyword">const</span> month = <span class="hljs-title class_">String</span>(date.<span class="hljs-title function_">getMonth</span>() + <span class="hljs-number">1</span>).<span class="hljs-title function_">padStart</span>(<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;0&#x27;</span>); <span class="hljs-comment">// 月份从0开始</span><br>  <span class="hljs-keyword">const</span> day = <span class="hljs-title class_">String</span>(date.<span class="hljs-title function_">getDate</span>()).<span class="hljs-title function_">padStart</span>(<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;0&#x27;</span>);<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">$&#123;year&#125;</span>-<span class="hljs-subst">$&#123;month&#125;</span>-<span class="hljs-subst">$&#123;day&#125;</span>`</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Context</span>, <span class="title class_">Schema</span>, h &#125; <span class="keyword">from</span> <span class="string">&#x27;koishi&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> name = <span class="string">&#x27;test&#x27;</span> <span class="comment">// 插件名字</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> <span class="title class_">Config</span> &#123;&#125; <span class="comment">// 插件的配置项</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span> <span class="variable language_">module</span> <span class="string">&#x27;koishi&#x27;</span> &#123;</span><br><span class="line">  <span class="keyword">interface</span> <span class="title class_">Tables</span> &#123;</span><br><span class="line">  sign_today : sign_today</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> inject = [<span class="string">&quot;database&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">Config</span>: <span class="title class_">Schema</span>&lt;<span class="title class_">Config</span>&gt; = <span class="title class_">Schema</span>.<span class="title function_">object</span>(&#123;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">interface</span> sign_today &#123;</span><br><span class="line">  id?: <span class="built_in">number</span>  <span class="comment">// 添加 id 字段（可选）</span></span><br><span class="line">  <span class="attr">now_time</span>: <span class="built_in">string</span> </span><br><span class="line">  <span class="attr">user_id</span>: <span class="built_in">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">apply</span>(<span class="params">ctx: Context</span>) &#123;</span><br><span class="line">  ctx.<span class="property">model</span>.<span class="title function_">extend</span>(<span class="string">&quot;sign_today&quot;</span>, &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="string">&#x27;unsigned&#x27;</span>,  <span class="comment">// 添加 id 字段定义</span></span><br><span class="line">    <span class="attr">now_time</span>: <span class="string">&#x27;string&#x27;</span>,</span><br><span class="line">    <span class="attr">user_id</span>: <span class="string">&#x27;string&#x27;</span>  <span class="comment">// 改为 string 类型以匹配接口定义</span></span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    <span class="attr">primary</span>: <span class="string">&#x27;id&#x27;</span>,    <span class="comment">// 明确指定主键</span></span><br><span class="line">    <span class="attr">autoInc</span>: <span class="literal">true</span>     <span class="comment">// 自增主键</span></span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line">  ctx.<span class="title function_">command</span>(<span class="string">&#x27;签到&#x27;</span>)</span><br><span class="line">    .<span class="title function_">action</span>(<span class="title function_">async</span>(&#123;session&#125;) =&gt; &#123;</span><br><span class="line">      <span class="keyword">var</span> get_user_sign_time = <span class="keyword">await</span> ctx.<span class="property">database</span>.<span class="title function_">get</span>(<span class="string">&quot;sign_today&quot;</span>, &#123;<span class="attr">user_id</span>: session.<span class="property">userId</span>&#125;)</span><br><span class="line">      <span class="keyword">if</span>(get_user_sign_time.<span class="property">length</span> == <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">await</span> ctx.<span class="property">database</span>.<span class="title function_">create</span>(<span class="string">&quot;sign_today&quot;</span>, &#123;</span><br><span class="line">            <span class="string">&quot;now_time&quot;</span>: <span class="title function_">getCurrentDate</span>(),</span><br><span class="line">            <span class="string">&quot;user_id&quot;</span>: session.<span class="property">userId</span></span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="keyword">await</span> session.<span class="title function_">send</span>(<span class="string">&quot;签到成功&quot;</span>)</span><br><span class="line">      &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(get_user_sign_time[<span class="number">0</span>][<span class="string">&#x27;now_time&#x27;</span>] == <span class="title function_">getCurrentDate</span>())&#123;</span><br><span class="line">          <span class="keyword">await</span> session.<span class="title function_">send</span>(<span class="string">&quot;签到失败，你今天已经签到了&quot;</span>)</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">await</span> ctx.<span class="property">database</span>.<span class="title function_">upsert</span>(<span class="string">&quot;sign_today&quot;</span>, [&#123;</span><br><span class="line">                  <span class="string">&quot;now_time&quot;</span> : <span class="title function_">getCurrentDate</span>(),</span><br><span class="line">                  <span class="string">&quot;user_id&quot;</span> : session.<span class="property">userId</span>,</span><br><span class="line">              &#125;])</span><br><span class="line">            <span class="keyword">await</span> session.<span class="title function_">send</span>(<span class="string">&quot;签到成功&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; </span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getCurrentDate</span>(<span class="params"></span>): <span class="built_in">string</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> date = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line">  <span class="keyword">const</span> year = date.<span class="title function_">getFullYear</span>();</span><br><span class="line">  <span class="keyword">const</span> month = <span class="title class_">String</span>(date.<span class="title function_">getMonth</span>() + <span class="number">1</span>).<span class="title function_">padStart</span>(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>); <span class="comment">// 月份从0开始</span></span><br><span class="line">  <span class="keyword">const</span> day = <span class="title class_">String</span>(date.<span class="title function_">getDate</span>()).<span class="title function_">padStart</span>(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;year&#125;</span>-<span class="subst">$&#123;month&#125;</span>-<span class="subst">$&#123;day&#125;</span>`</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <h2 id="后记">后记</h2>
 <p>学习了如何通过数据库读写实现签到功能后，下期我们来写一个定时任务计划</p>
 
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
     
-      <span class="category-chain">
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>bingyue<br>
+        <strong>本文链接：</strong><a href="http://blog.bingyue.top/2025/06/14/koishi_teach_03/" title="http:&#x2F;&#x2F;blog.bingyue.top&#x2F;2025&#x2F;06&#x2F;14&#x2F;koishi_teach_03&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;blog.bingyue.top&#x2F;2025&#x2F;06&#x2F;14&#x2F;koishi_teach_03&#x2F;</a><br>
         
-  <a href="/categories/Koishi/" class="category-chain-item">Koishi</a>
-  
-  
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank" rel="noopener">CC BY-NC-SA 3.0 CN</a> 协议进行许可
 
-      </span>
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
     
-  
-</span>
-
-    </div>
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/bot/" class="print-no-link">#bot</a>
-      
-        <a href="/tags/qq%E6%9C%BA%E5%99%A8%E4%BA%BA/" class="print-no-link">#qq机器人</a>
-      
-        <a href="/tags/JavaScript/" class="print-no-link">#JavaScript</a>
-      
-    </div>
-  
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/JavaScript/" rel="tag">JavaScript</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/bot/" rel="tag">bot</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/qq%E6%9C%BA%E5%99%A8%E4%BA%BA/" rel="tag">qq机器人</a>
+    
 </div>
-
-
-              
+  
+  
+    <script async src="/js/copy-codeblock.js?v=1794321903310"></script>
   
 
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>Koishi从0入门 03 编写签到插件</div>
-      <div>http://blog.bingyue.top/2025/06/14/koishi_teach_03/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>bingyue</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2025年6月14日</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
+  
+      <div class="nexmoe-post-footer">
+          <div id="gitalk-container"></div>
+<script src="https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js"></script>
+<script>
+  (function () {
+    if (typeof Gitalk === 'undefined') {
+      return;
+    }
+    var gitalk = new Gitalk({
+      clientID: '0f4c0af04f4a74a28ef8',
+      clientSecret: '603e436965f1a09c74e485733b6b3593d6514a46',
+      repo: 'bingqiu456.github.io',
+      owner: 'bingqiu456',
+      admin: ['bingqiu456'],
+      id: decodeURI(location.pathname),
+      language: 'zh-CN',
+      labels: ['Gitalk'],
+      perPage: 10,
+      pagerDirection: 'last',
+      distractionFreeMode: false,
+      createIssueManually: true
+    });
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+      </div>
+  
+</div></div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
+        <div class="nexmoe-tool">
+
             
-              
-              
-                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-cc-by"></i>
-                  </span>
-                </a>
-              
+
             
-          </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
-
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2025/05/31/koishi_02_teach/" title="Koishi从0入门 02 编写插件">
-                        <span class="hidden-mobile">Koishi从0入门 02 编写插件</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
+            
+            <button class="mdui-fab catalog" style="overflow:unset;">
+                <i class="nexmoefont icon-i-catalog"></i>
+                <div class="nexmoe-toc">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E5%8C%B9%E9%85%8D"><span class="toc-number">1.1.</span> <span class="toc-text">指令匹配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">数据库基础使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%B9%B4%E6%9C%88%E6%97%A5"><span class="toc-number">1.3.</span> <span class="toc-text">获取年月日</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E7%BC%96%E5%86%99"><span class="toc-number">2.</span> <span class="toc-text">开始编写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB%E5%86%99%E5%86%85%E5%AE%B9"><span class="toc-number">3.</span> <span class="toc-text">读写内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="toc-number">4.</span> <span class="toc-text">代码示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E8%AE%B0"><span class="toc-number">5.</span> <span class="toc-text">后记</span></a></li></ol>
                 </div>
-              
-            </div>
+            </button>
+            
 
             
-  
-  
-    <article id="comments" lazyload>
-      
-  <div id="gitalk-container"></div>
-  <script type="text/javascript">
-    Fluid.utils.loadComments('#gitalk-container', function() {
-      Fluid.utils.createCssLink('/css/gitalk.css')
-      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.8.0/gitalk.min.js', function() {
-        var options = Object.assign(
-          {"clientID":"0f4c0af04f4a74a28ef8","clientSecret":"603e436965f1a09c74e485733b6b3593d6514a46","repo":"bingqiu456.github.io","owner":"bingqiu456","admin":["bingqiu456"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
-          {
-            id: '40682008d307c34f37efa9d8a8c0a5eb'
-          }
-        )
-        var gitalk = new Gitalk(options);
-        gitalk.render('gitalk-container');
-      });
-    });
-  </script>
-  <noscript>Please enable JavaScript to view the comments</noscript>
 
-
-    </article>
-  
-
-
-          </article>
+            <a href="#nexmoe-content" class="backtop toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
         </div>
-      </div>
     </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-
-
-  </aside>
-
-
-    </div>
-  </div>
-</div>
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-  
-  
-
-
-
-
-
-
-
-
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-  
-</div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
-
-
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
-
-  <script>Fluid.plugins.codeWidget();</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script  src="/js/local-search.js" ></script>
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
-
-
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
-</body>
-</html>
+</div></div><div id="nexmoe-footer"><!--!--></div><div id="nexmoe-search-space"><div class="search-container"><div class="search-header"><div class="search-input-container"><input class="search-input" type="text" placeholder="搜索" onInput="sinput();"></div><a class="search-close" onclick="sclose();">×</a></div><div class="search-body"></div></div></div><div></div></body></html>
