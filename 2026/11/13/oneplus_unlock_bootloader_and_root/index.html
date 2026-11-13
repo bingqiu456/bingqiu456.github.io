@@ -13,45 +13,45 @@
 <meta property="og:site_name" content="冰月博客">
 <meta property="og:description" content="前言 难得回来一次，就顺手记录一下一加手机解锁 Bootloader 并获取 Root 的过程，方便以后查阅，也希望能帮到有需要的同学。  警告：刷机有风险，操作需谨慎！解锁 Bootloader 会清空手机中的所有数据，请务必提前备份重要资料，确认无误后再继续操作。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://blog.bingyue.top/2026/11/13/oneplus_unlock_bootloader_and_root/images/oneplus_unlock_bootloader_and_root/7d93353d507e21ac58d0da2bf53acaca_720.jpg">
-<meta property="og:image" content="http://blog.bingyue.top/2026/11/13/oneplus_unlock_bootloader_and_root/images/oneplus_unlock_bootloader_and_root/eeb0f728701d1c30558b591a2ca9c8db_720.jpg">
-<meta property="og:image" content="http://blog.bingyue.top/2026/11/13/oneplus_unlock_bootloader_and_root/images/oneplus_unlock_bootloader_and_root/82fe5c02a899515a7e2633f83b8ec318_720.jpg">
-<meta property="og:image" content="http://blog.bingyue.top/2026/11/13/oneplus_unlock_bootloader_and_root/images/oneplus_unlock_bootloader_and_root/13591b49406ddb2b1675c7813898ee1c_0.jpg">
-<meta property="og:image" content="http://blog.bingyue.top/2026/11/13/oneplus_unlock_bootloader_and_root/images/oneplus_unlock_bootloader_and_root/QQ20261113-122820.png">
-<meta property="og:image" content="http://blog.bingyue.top/2026/11/13/oneplus_unlock_bootloader_and_root/images/oneplus_unlock_bootloader_and_root/v2-b5873db9b72bbc4cfd327ac512d799e1_1440w.jpg">
-<meta property="og:image" content="http://blog.bingyue.top/2026/11/13/oneplus_unlock_bootloader_and_root/images/oneplus_unlock_bootloader_and_root/477428df2b2ad02efcf2b4312984da18.png">
-<meta property="og:image" content="http://blog.bingyue.top/2026/11/13/oneplus_unlock_bootloader_and_root/images/oneplus_unlock_bootloader_and_root/QQ20261113-173728.png">
-<meta property="og:image" content="http://blog.bingyue.top/2026/11/13/oneplus_unlock_bootloader_and_root/images/oneplus_unlock_bootloader_and_root/QQ20261113-173832.png">
-<meta property="og:image" content="http://blog.bingyue.top/2026/11/13/oneplus_unlock_bootloader_and_root/images/oneplus_unlock_bootloader_and_root/QQ20261113-173843.png">
-<meta property="og:image" content="http://blog.bingyue.top/2026/11/13/oneplus_unlock_bootloader_and_root/images/oneplus_unlock_bootloader_and_root/QQ20261113-174311.png">
-<meta property="og:image" content="http://blog.bingyue.top/2026/11/13/oneplus_unlock_bootloader_and_root/images/oneplus_unlock_bootloader_and_root/QQ20261113-174535.png">
-<meta property="og:image" content="http://blog.bingyue.top/2026/11/13/oneplus_unlock_bootloader_and_root/images/oneplus_unlock_bootloader_and_root/IMG_20261113_174848.jpg">
-<meta property="og:image" content="http://blog.bingyue.top/2026/11/13/oneplus_unlock_bootloader_and_root/images/oneplus_unlock_bootloader_and_root/IMG_20261113_174919.jpg">
-<meta property="og:image" content="http://blog.bingyue.top/2026/11/13/oneplus_unlock_bootloader_and_root/images/oneplus_unlock_bootloader_and_root/QQ20261113-175212.png">
-<meta property="og:image" content="http://blog.bingyue.top/2026/11/13/oneplus_unlock_bootloader_and_root/images/oneplus_unlock_bootloader_and_root/QQ20261113-175638.png">
-<meta property="og:image" content="http://blog.bingyue.top/2026/11/13/oneplus_unlock_bootloader_and_root/images/oneplus_unlock_bootloader_and_root/Screenshot_2026-11-13-18-09-25-10_baaa51257c82a8b3f281ce09e6f2493f.jpg">
+<meta property="og:image" content="http://blog.bingyue.top/images/oneplus_unlock_bootloader_and_root/7d93353d507e21ac58d0da2bf53acaca_720.jpg">
+<meta property="og:image" content="http://blog.bingyue.top/images/oneplus_unlock_bootloader_and_root/eeb0f728701d1c30558b591a2ca9c8db_720.jpg">
+<meta property="og:image" content="http://blog.bingyue.top/images/oneplus_unlock_bootloader_and_root/82fe5c02a899515a7e2633f83b8ec318_720.jpg">
+<meta property="og:image" content="http://blog.bingyue.top/images/oneplus_unlock_bootloader_and_root/13591b49406ddb2b1675c7813898ee1c_0.jpg">
+<meta property="og:image" content="http://blog.bingyue.top/images/oneplus_unlock_bootloader_and_root/QQ20261113-122820.png">
+<meta property="og:image" content="http://blog.bingyue.top/images/oneplus_unlock_bootloader_and_root/v2-b5873db9b72bbc4cfd327ac512d799e1_1440w.jpg">
+<meta property="og:image" content="http://blog.bingyue.top/images/oneplus_unlock_bootloader_and_root/477428df2b2ad02efcf2b4312984da18.png">
+<meta property="og:image" content="http://blog.bingyue.top/images/oneplus_unlock_bootloader_and_root/QQ20261113-173728.png">
+<meta property="og:image" content="http://blog.bingyue.top/images/oneplus_unlock_bootloader_and_root/QQ20261113-173832.png">
+<meta property="og:image" content="http://blog.bingyue.top/images/oneplus_unlock_bootloader_and_root/QQ20261113-173843.png">
+<meta property="og:image" content="http://blog.bingyue.top/images/oneplus_unlock_bootloader_and_root/QQ20261113-174311.png">
+<meta property="og:image" content="http://blog.bingyue.top/images/oneplus_unlock_bootloader_and_root/QQ20261113-174535.png">
+<meta property="og:image" content="http://blog.bingyue.top/images/oneplus_unlock_bootloader_and_root/IMG_20261113_174848.jpg">
+<meta property="og:image" content="http://blog.bingyue.top/images/oneplus_unlock_bootloader_and_root/IMG_20261113_174919.jpg">
+<meta property="og:image" content="http://blog.bingyue.top/images/oneplus_unlock_bootloader_and_root/QQ20261113-175212.png">
+<meta property="og:image" content="http://blog.bingyue.top/images/oneplus_unlock_bootloader_and_root/QQ20261113-175638.png">
+<meta property="og:image" content="http://blog.bingyue.top/images/oneplus_unlock_bootloader_and_root/Screenshot_2026-11-13-18-09-25-10_baaa51257c82a8b3f281ce09e6f2493f.jpg">
 <meta property="article:published_time" content="2026-11-13T10:16:50.000Z">
-<meta property="article:modified_time" content="2026-11-13T10:21:18.629Z">
+<meta property="article:modified_time" content="2026-11-13T10:26:42.281Z">
 <meta property="article:author" content="bingyue">
 <meta property="article:tag" content="bootloader">
 <meta property="article:tag" content="刷机">
 <meta property="article:tag" content="root">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://blog.bingyue.top/2026/11/13/oneplus_unlock_bootloader_and_root/images/oneplus_unlock_bootloader_and_root/7d93353d507e21ac58d0da2bf53acaca_720.jpg">
+<meta name="twitter:image" content="http://blog.bingyue.top/images/oneplus_unlock_bootloader_and_root/7d93353d507e21ac58d0da2bf53acaca_720.jpg">
 
 <link rel="stylesheet" href="/lib/fancybox/fancybox.css">
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1794565285903">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1794565610018">
 
-<link rel="stylesheet" href="/css/style.css?v=1794565285903">
+<link rel="stylesheet" href="/css/style.css?v=1794565610018">
 
 
 
 
     
-        <link rel="stylesheet" href="/custom.css?v=1794565285903">
+        <link rel="stylesheet" href="/custom.css?v=1794565610018">
     
 
 
@@ -61,7 +61,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1794565285903"></script>
+<script async src="/js/app.js?v=1794565610018"></script>
 
 
     <script>var copyTip = "著作权归作者所有，商业转载请联系作者获得授权，非商业转载请注明出处。来源：%url"</script>
@@ -157,7 +157,7 @@
 </div>
 
 
-	<script async src="/js/search.js?v=1794565285903"></script>
+	<script async src="/js/search.js?v=1794565610018"></script>
 
 
 
@@ -584,12 +584,12 @@
 <h2 id="共同篇">共同篇</h2>
 <h3 id="开启开发者选项">开启开发者选项</h3>
 <p>打开手机上的<strong>设置</strong>，依次进入<strong>关于本机 → 版本信息</strong>，然后连续点击 5 次<strong>版本号</strong>，开启开发者模式。</p>
-<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="./images/oneplus_unlock_bootloader_and_root/7d93353d507e21ac58d0da2bf53acaca_720.jpg" alt="" data-caption="" loading="lazy"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/oneplus_unlock_bootloader_and_root/7d93353d507e21ac58d0da2bf53acaca_720.jpg" alt="" data-caption="" loading="lazy"></p>
 <p>看到“开发者选项已开启”的提示后，返回设置页面，依次进入<strong>系统与更新 → 开发者选项</strong>，打开 <strong>OEM 解锁</strong>。</p>
-<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="./images/oneplus_unlock_bootloader_and_root/eeb0f728701d1c30558b591a2ca9c8db_720.jpg" alt="" data-caption="" loading="lazy"></p>
-<img src="./images/oneplus_unlock_bootloader_and_root/82fe5c02a899515a7e2633f83b8ec318_720.jpg" style="zoom: 50%;" />
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/oneplus_unlock_bootloader_and_root/eeb0f728701d1c30558b591a2ca9c8db_720.jpg" alt="" data-caption="" loading="lazy"></p>
+<img src="/images/oneplus_unlock_bootloader_and_root/82fe5c02a899515a7e2633f83b8ec318_720.jpg" style="zoom: 50%;" />
 <p>接着打开下方的 <strong>USB 调试</strong>，再使用数据线将手机连接到电脑。</p>
-<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="./images/oneplus_unlock_bootloader_and_root/13591b49406ddb2b1675c7813898ee1c_0.jpg" alt="" data-caption="" loading="lazy"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/oneplus_unlock_bootloader_and_root/13591b49406ddb2b1675c7813898ee1c_0.jpg" alt="" data-caption="" loading="lazy"></p>
 <hr>
 <h2 id="重启至-Bootloader-模式">重启至 Bootloader 模式</h2>
 <p>前面提到，一加 Ace 6、一加 15 及更新机型需要先通过深度测试。这些机型可以在深度测试应用中点击<strong>进入深度测试</strong>，随后手机会自动重启至 <strong>Bootloader</strong> 模式，无需再执行下面的 ADB 重启命令。</p>
@@ -598,13 +598,13 @@
 <blockquote>
 <p>如果右键菜单中没有“在终端中打开”或“在此处打开 PowerShell 窗口”，可以按住 <code>Shift</code> 键并单击鼠标右键，再选择相应的打开方式。</p>
 </blockquote>
-<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="./images/oneplus_unlock_bootloader_and_root/QQ20261113-122820.png" alt="" data-caption="" loading="lazy"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/oneplus_unlock_bootloader_and_root/QQ20261113-122820.png" alt="" data-caption="" loading="lazy"></p>
 <p>输入以下命令，让手机重启至 Bootloader 模式：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./adb reboot bootloader</span><br></pre></td></tr></table></figure>
 <p>手机进入 Bootloader 模式后，继续输入以下命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./fastboot flashing unlock</span><br></pre></td></tr></table></figure>
 <p>按下回车键后，手机屏幕会出现解锁确认页面。使用<strong>音量下键</strong>选择 <code>Unlock the bootloader</code>，再按<strong>电源键</strong>确认。</p>
-<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="./images/oneplus_unlock_bootloader_and_root/v2-b5873db9b72bbc4cfd327ac512d799e1_1440w.jpg" alt="" data-caption="" loading="lazy"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/oneplus_unlock_bootloader_and_root/v2-b5873db9b72bbc4cfd327ac512d799e1_1440w.jpg" alt="" data-caption="" loading="lazy"></p>
 <p>解锁完成后，手机会清除数据并重新启动。完成系统初始化后，需要再次开启<strong>开发者选项</strong>和 <strong>USB 调试</strong>，然后继续进行下面的 Root 操作。</p>
 <hr>
 <h2 id="Root-篇">Root 篇</h2>
@@ -644,28 +644,28 @@
 <h3 id="下载官方刷机包">下载官方刷机包</h3>
 <p>这里推荐一个网站：<a target="_blank" rel="noopener" href="https://roms.lian86.top/">RomCloud - 多品牌官方 ROM 固件归档</a>，其中提供了大量官方刷机包可供下载。</p>
 <p>进入手机的<strong>设置 → 关于本机 → 版本信息</strong>，查看当前系统版本号，然后在网站中下载与之对应的官方刷机包。</p>
-<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="./images/oneplus_unlock_bootloader_and_root/477428df2b2ad02efcf2b4312984da18.png" alt="" data-caption="" loading="lazy"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/oneplus_unlock_bootloader_and_root/477428df2b2ad02efcf2b4312984da18.png" alt="" data-caption="" loading="lazy"></p>
 <hr>
 <h3 id="解压官方刷机包">解压官方刷机包</h3>
 <p>使用压缩软件解压下载好的刷机包，找到其中的 <code>payload.bin</code> 文件，将它复制到 <code>payload-dumper-go</code> 所在目录。</p>
 <p>双击目录中的 <code>.bat</code> 批处理文件，按照提示选择解压 <code>init_boot</code>。</p>
-<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="./images/oneplus_unlock_bootloader_and_root/QQ20261113-173728.png" alt="" data-caption="" loading="lazy"></p>
-<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="./images/oneplus_unlock_bootloader_and_root/QQ20261113-173832.png" alt="" data-caption="" loading="lazy"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/oneplus_unlock_bootloader_and_root/QQ20261113-173728.png" alt="" data-caption="" loading="lazy"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/oneplus_unlock_bootloader_and_root/QQ20261113-173832.png" alt="" data-caption="" loading="lazy"></p>
 <blockquote>
 <p>如果提示找不到 <code>init_boot</code>，请将提取目标改为 <code>boot</code>。</p>
 </blockquote>
-<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="./images/oneplus_unlock_bootloader_and_root/QQ20261113-173843.png" alt="" data-caption="" loading="lazy"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/oneplus_unlock_bootloader_and_root/QQ20261113-173843.png" alt="" data-caption="" loading="lazy"></p>
 <p>提取完成后，将手机连接到电脑并选择<strong>传输文件</strong>模式，再把提取出的 <code>init_boot.img</code> 复制到手机中。建议同时保留一份原厂镜像，以便出现问题时刷回。</p>
-<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="./images/oneplus_unlock_bootloader_and_root/QQ20261113-174311.png" alt="" data-caption="" loading="lazy"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/oneplus_unlock_bootloader_and_root/QQ20261113-174311.png" alt="" data-caption="" loading="lazy"></p>
 <hr>
 <h3 id="下载并安装-KernelSU">下载并安装 KernelSU</h3>
 <p>打开 <a target="_blank" rel="noopener" href="https://github.com/tiann/KernelSU/releases">KernelSU 官方仓库的 Releases 页面</a>，下载最新发布的 APK，并安装到手机上。</p>
-<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="./images/oneplus_unlock_bootloader_and_root/QQ20261113-174535.png" alt="" data-caption="" loading="lazy"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/oneplus_unlock_bootloader_and_root/QQ20261113-174535.png" alt="" data-caption="" loading="lazy"></p>
 <p>打开 KernelSU 管理器，依次点击<strong>安装 → 选择文件并修补</strong>，选中刚刚复制到手机中的 <code>init_boot.img</code>，然后确认修补。出现以下页面，说明镜像已经修补完成。</p>
-<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="./images/oneplus_unlock_bootloader_and_root/IMG_20261113_174848.jpg" alt="" data-caption="" loading="lazy"></p>
-<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="./images/oneplus_unlock_bootloader_and_root/IMG_20261113_174919.jpg" alt="" data-caption="" loading="lazy"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/oneplus_unlock_bootloader_and_root/IMG_20261113_174848.jpg" alt="" data-caption="" loading="lazy"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/oneplus_unlock_bootloader_and_root/IMG_20261113_174919.jpg" alt="" data-caption="" loading="lazy"></p>
 <p>再次将手机连接到电脑并选择<strong>传输文件</strong>模式，在手机的 <code>Download</code> 目录中找到修补后的镜像，将它复制到电脑上的 ADB 工具箱目录中。</p>
-<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="./images/oneplus_unlock_bootloader_and_root/QQ20261113-175212.png" alt="" data-caption="" loading="lazy"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/oneplus_unlock_bootloader_and_root/QQ20261113-175212.png" alt="" data-caption="" loading="lazy"></p>
 <p>在 ADB 工具箱目录下打开终端，输入以下命令，让手机重启至 Bootloader 模式：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./adb reboot bootloader</span><br></pre></td></tr></table></figure>
 <blockquote>
@@ -677,11 +677,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./fastboot flash boot xxxxxxx.img</span><br></pre></td></tr></table></figure>
 <p>如下图所示，命令行出现 <code>finished</code>，说明镜像已经刷入完成。此时可以长按电源键重启手机，也可以执行以下命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./fastboot reboot</span><br></pre></td></tr></table></figure>
-<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="./images/oneplus_unlock_bootloader_and_root/QQ20261113-175638.png" alt="" data-caption="" loading="lazy"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/oneplus_unlock_bootloader_and_root/QQ20261113-175638.png" alt="" data-caption="" loading="lazy"></p>
 <hr>
 <h2 id="最后">最后</h2>
 <p>手机重新启动后，打开 KernelSU 管理器。如果能够正常显示已安装状态，就说明 Root 成功了。</p>
-<img src="./images/oneplus_unlock_bootloader_and_root/Screenshot_2026-11-13-18-09-25-10_baaa51257c82a8b3f281ce09e6f2493f.jpg" style="zoom: 33%;" />
+<img src="/images/oneplus_unlock_bootloader_and_root/Screenshot_2026-11-13-18-09-25-10_baaa51257c82a8b3f281ce09e6f2493f.jpg" style="zoom: 33%;" />
 
     
   </article>
@@ -708,7 +708,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1794565285551"></script>
+    <script async src="/js/copy-codeblock.js?v=1794565609640"></script>
   
 
   
